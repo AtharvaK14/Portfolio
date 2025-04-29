@@ -90,27 +90,58 @@
       <div class="project-top">
         <h1 class="section-title"><span>Featured </span>Projects</h1>
       </div>
-
+  
+      <!-- Main project layout -->
       <div class="project-bottom">
-
+        <!-- Existing Projects -->
         <div class="project-item">
           <h2>VR Carnival Experience</h2><br>
           <p>Developed an interactive VR carnival with physics-based mini-games using Unreal Engine 5.</p>
+          <button class="button-small" onclick="openVideo()">Watch Demo</button>
         </div>
-    
+  
+        <!-- Modal for Video -->
+        <div id="videoModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeVideo()">&times;</span>
+            <video id="demoVideo" controls>
+              <source src="files/your-video.mp4" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+        </div>
+  
         <div class="project-item">
           <h2>Post-Fire Assessment App</h2><br>
           <p>Created a mobile application for logging and managing post-fire ash data, improving assessment efficiency.</p>
         </div>
-        
+  
         <div class="project-item">
           <h2>Rubber Ducky Chatbot</h2><br>
           <p>Created a mobile application for logging and managing post-fire ash data, improving assessment efficiency.</p>
         </div>
-
+  
+        <!-- Show More Button (aligned below the last project) -->
+        <div style="flex-basis: 100%; text-align: center;">
+          <button class="button-small" onclick="toggleProjects()">Show More Projects</button>
+        </div>
+      </div>
+  
+      <!-- Hidden Additional Projects (same layout) -->
+      <div id="moreProjects" style="display: none;" class="project-bottom">
+        <div class="project-item">
+          <h2>AR Sandbox</h2><br>
+          <p>Designed an AR sandbox using Unity to visualize topographical changes in real-time.</p>
+        </div>
+  
+        <div class="project-item">
+          <h2>AI Chatbot Companion</h2><br>
+          <p>Built an AI-powered chatbot for mental health support using Python and Flask.</p>
+        </div>
       </div>
     </div>
   </section>
+  
 
   <section id="contact">
     <div class="contact container">
@@ -139,6 +170,27 @@
         </div>
     </div>
   </section>
+
+  <script>
+    function openVideo() {
+      document.getElementById("videoModal").style.display = "block";
+    }
+    function closeVideo() {
+      document.getElementById("videoModal").style.display = "none";
+    }
+    function toggleProjects() {
+      var moreProjects = document.getElementById("moreProjects");
+      var btn = event.target;
+      if (moreProjects.style.display === "none") {
+        moreProjects.style.display = "flex";
+        moreProjects.style.animation = "fadeIn 0.5s";
+        btn.textContent = "Show Less Projects";
+      } else {
+        moreProjects.style.display = "none";
+        btn.textContent = "Show More Projects";
+      }
+    }
+  </script>
 
 </body>
 </html>

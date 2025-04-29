@@ -239,6 +239,7 @@ p {
 	background-position: top center;
 	position: relative;
 	z-index: 1;
+	height: 40vh;
 }
 
 #indiek::after {
@@ -701,6 +702,67 @@ p {
 	font-size: 1.3rem;
 }
 
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 2000;
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.8);
+  }
+  
+  .modal-content {
+	margin: auto;
+	padding: 20px;
+	width: 80%;
+	max-width: 700px;
+	background-color: white;
+	border-radius: 10px;
+	text-align: center;
+  }
+  
+  .modal-content video {
+	width: 100%;
+	height: auto;
+  }
+  
+  .close {
+	color: black;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	cursor: pointer;
+  }
+
+.button-small {
+    display: inline-block;
+    padding: 8px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem; /* Smaller text */
+    background-color: transparent;
+    color: rgb(255, 175, 4);
+    border: 2px solid rgb(255, 175, 4);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    border-radius: 5px;
+    transition: 0.3s ease all;
+    cursor: pointer;
+}
+
+.button-small:hover {
+    background-color: black;
+    color: white;
+}
+
+.button-small:active {
+	transform: scale(0.95);
+	transition: transform 0.1s ease;
+}
+
 @keyframes indie_puls {
 	0% {
 		opacity: 1;
@@ -734,6 +796,11 @@ p {
 		color: rgb(255, 175, 4);
 		font-weight: 500;
 	}
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 @media only screen and (min-width: 768px) {
