@@ -104,12 +104,16 @@
         <div id="videoModal" class="modal">
           <div class="modal-content">
             <span class="close" onclick="closeVideo()">&times;</span>
-            <video id="demoVideo" controls>
-              <source src="files/your-video.mp4" type="video/mp4">
-              Your browser does not support HTML5 video.
-            </video>
+            <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+              <iframe id="youtubeFrame"
+                      frameborder="0"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      style="position:absolute; top:0; left:0; width:100%; height:100%;">
+              </iframe>
+            </div>
           </div>
-        </div>
+        </div>                
   
         <div class="project-item">
           <h2>Post-Fire Assessment App</h2><br>
@@ -173,9 +177,14 @@
 
   <script>
     function openVideo() {
+      const videoId = "DsuzHmdVO_s";
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      document.getElementById("youtubeFrame").src = embedUrl;
       document.getElementById("videoModal").style.display = "block";
     }
+
     function closeVideo() {
+      document.getElementById("youtubeFrame").src = ""; // Stop video
       document.getElementById("videoModal").style.display = "none";
     }
     function toggleProjects() {
