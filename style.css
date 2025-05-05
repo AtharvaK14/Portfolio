@@ -234,12 +234,12 @@ p {
 }
 
 #indiek {
-	background-image: url(files/background.png);
+	background-image: url(files/background2.png);
 	background-size: cover;
 	background-position: top center;
 	position: relative;
 	z-index: 1;
-	height: 40vh;
+	height: 50vh;
 }
 
 #indiek::after {
