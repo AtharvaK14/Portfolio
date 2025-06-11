@@ -66,7 +66,7 @@
       </div>
 
       <div class="Experience-bottom">
-        <div class="Experience-item">
+        <div class="Experience-item" onclick="toggleDetails(this)">
           <div class="job-summary">
             <h2>TEACHING ASSISTANT</h2>
             <h1>Michigan Technological University</h1>
@@ -83,7 +83,7 @@
           </div>
         </div>
 
-        <div class="Experience-item">
+        <div class="Experience-item" onclick="toggleDetails(this)">
           <div class="job-summary">
             <h2>QA - Junior Game Tester</h2>
             <h1>Ubisoft Entertainment</h1>
@@ -104,7 +104,7 @@
           </div>
         </div>
 
-        <div class="Experience-item">
+        <div class="Experience-item" onclick="toggleDetails(this)">
           <div class="job-summary">
             <h2>QA - Game Tester</h2>
             <h1>Expleo India Infosystem Pvt ltd</h1>
@@ -135,7 +135,7 @@
       <!-- Main project layout -->
       <div class="project-bottom">
         <!-- Existing Projects -->
-        <div class="project-item">
+        <div class="project-item" onclick="toggleDetails(this)">
           <div class="project-summary">
             <h2>VR Carnival Experience</h2><br>
             <p>Created an immersive VR carnival with interactive mini-games using physics-based mechanics and Blueprint
@@ -165,7 +165,7 @@
           </div>
         </div>
 
-        <div class="project-item">
+        <div class="project-item" onclick="toggleDetails(this)">
           <div class="project-summary">
             <h2>Post-Fire Assessment App</h2><br>
             <p>Built a mobile web app to help field teams log wildfire ash data with an intuitive UI and real-time
@@ -224,7 +224,7 @@
     </div>
   </section>
 
-<!--
+  <!--
   <section id="contact">
     <div class="contact container">
       <div>
@@ -273,6 +273,23 @@
 
 
   <script>
+    // Detect touch support and add a class to body
+    document.addEventListener("DOMContentLoaded", function () {
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add("touch-device");
+
+        // Handle tap-to-toggle for project and experience items
+        document.querySelectorAll('.Experience-item, .project-item').forEach(item => {
+          item.addEventListener('click', function (e) {
+            // Only toggle if the click is not on a link or button inside the item
+            if (!e.target.closest('a') && !e.target.closest('button')) {
+              this.classList.toggle('active');
+            }
+          });
+        });
+      }
+    });
+
     function openVideo() {
       const videoId = "DsuzHmdVO_s";
       const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;

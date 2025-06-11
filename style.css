@@ -490,10 +490,10 @@ p {
 	transition: max-height 0.5s ease, padding 0.5s ease;
 }
 
-.Experience-item:hover .job-details {
-	max-height: 500px;
-	/* Enough to fit full text */
-	padding-top: 15px;
+.Experience-item:hover .job-details,
+.Experience-item.active .job-details {
+  max-height: 500px;
+  padding-top: 15px;
 }
 
 .job-details ul {
@@ -509,7 +509,27 @@ p {
 	margin-bottom: 8px;
 }
 
+.job-details,
+.project-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
 
+/* Optional: smooth hover/tap scaling */
+.Experience-item,
+.project-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.Experience-item:hover,
+.Experience-item.active,
+.project-item:hover,
+.project-item.active {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
 #project .project {
 	flex-direction: column;
 	text-align: center;
@@ -615,9 +635,10 @@ p {
 	transition: max-height 0.5s ease, padding 0.5s ease;
 }
 
-.project-item:hover .project-details {
-	max-height: 500px;
-	padding-top: 15px;
+.project-item:hover .project-details,
+.project-item.active .project-details {
+  max-height: 500px;
+  padding-top: 15px;
 }
 
 .project-details ul {
