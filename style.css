@@ -605,6 +605,14 @@ p {
 
 #project .project-item h2 {
 	font-size: 2rem;
+	color: white;
+	margin-bottom: 2px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#project .project-item h1 {
+	font-size: 1.7rem;
 	color: rgb(255, 175, 4);
 	margin-bottom: 10px;
 	text-transform: uppercase;
@@ -685,6 +693,7 @@ p {
 #about .col-right p {
 	font-size: 2rem;
 	margin-bottom: 20px;
+	text-align: justify;
 }
 
 #about .col-right .cta {
