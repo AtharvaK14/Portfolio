@@ -517,10 +517,54 @@ p {
 }
 
 /* Optional: smooth hover/tap scaling */
-.Experience-item,
+/* .Experience-item,
 .project-item {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+} */
+
+.Experience-item,
+.project-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    min-height: 0;
+}
+
+/* Keep summaries from forcing a fixed layout */
+.Experience-item .job-summary,
+.project-item .project-summary {
+    flex: 0 0 auto;
+}
+
+.Experience-item:hover .job-details,
+.Experience-item.active .job-details,
+.project-item:hover .project-details,
+.project-item.active .project-details {
+    max-height: 1000px; /* large enough for content; adjust if needed */
+    padding-top: 15px;
+    padding-bottom: 1rem;
+}
+
+
+/* Make lists render cleanly */
+.job-details ul,
+.project-details ul {
+    margin: 0 0 0.5rem 1.2rem;
+    padding-left: 1.2rem;
+    list-style-type: disc;
+    list-style-position: outside; /* changed from inside to outside */
+    color: white;
+}
+
+.job-details ul li,
+.project-details ul li {
+    margin: 0;
+    padding-left: 0.5rem; /* adds space between bullet and text */
+    line-height: 1.5;
+    text-align: left;
+    padding-bottom: 0.5rem; /* space between list items */
 }
 
 .Experience-item:hover,
@@ -719,6 +763,33 @@ p {
 	width: 98%;
 	border: 7px solid rgb(255, 175, 4);
 	z-index: -1;
+}
+
+.about-heading {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 20px 0;
+    color: rgb(0, 0, 0);
+}
+
+.about-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.about-list li {
+    color: rgb(0, 0, 0);
+    font-size: 1.8rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+/* Update existing h2 elements in about section */
+#about .col-right h2:not(.about-heading) {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
 
 #skills .skills {
