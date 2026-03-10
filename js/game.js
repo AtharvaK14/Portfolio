@@ -156,7 +156,7 @@
     score   = 0;
     lives   = 3;
     frameN  = 0;
-    shootCD = 0;
+    shootCD      = 0;
     enemyShootTimer = 60;
     ufoTimer = 900 + (Math.random() * 400) | 0;
     hitFlash = 0;
@@ -194,16 +194,28 @@
     phase   = 'playing';
   }
 
+  // ── Dynamic enemy sizing (set each game, used across update+render) ────
+  // These are recalculated in initEnemies() to fit any screen width.
+  let dynECW   = E_CW;
+  let dynECH   = E_CH;
+  let dynEScale = E_SCALE;
+
   function initEnemies() {
     const w = GW();
+    // Fit the grid to screen width — fixes instant-death on narrow mobile screens
+    // where a fixed 460px grid (10 * 46) overflows a 412px viewport.
+    dynECW    = Math.min(E_CW, Math.floor((w - 32) / E_COLS));
+    dynECH    = Math.round(dynECW * (E_CH / E_CW)); // keep ~0.83 aspect ratio
+    dynEScale = dynECW >= 38 ? 3 : 2;               // drop to scale-2 sprite on tiny screens
+
     enemies = [];
-    const startX = (w - E_COLS * E_CW) * 0.5 + E_CW * 0.5;
+    const startX = (w - E_COLS * dynECW) * 0.5 + dynECW * 0.5;
     const startY = HUD_H + 70;
     for (let r = 0; r < E_ROWS; r++) {
       for (let c = 0; c < E_COLS; c++) {
         enemies.push({
-          x: startX + c * E_CW,
-          y: startY + r * E_CH,
+          x: startX + c * dynECW,
+          y: startY + r * dynECH,
           type:  r < 2 ? 'A' : 'B',
           frame: 0,
           alive: true,
@@ -214,12 +226,13 @@
   }
 
   function initPositions() {
+    // Only reposition the player — do NOT reinit enemies or bullets.
+    // Resetting enemies mid-game (e.g. when mobile address bar hides/shows)
+    // caused the grid to be rebuilt at the wrong size, triggering instant hitEdge
+    // loops and immediate game-over on narrow screens.
     const w = GW(), h = GH();
     player.x = w * 0.5;
     player.y = h - P_OFFSET_Y;
-    initEnemies();
-    pBullets = [];
-    eBullets = [];
   }
 
   // ── Update ────────────────────────────────────────────────────────────────
@@ -236,10 +249,13 @@
     if (leftDown)  player.x = Math.max(P_HALF + 8,     player.x - 5);
     if (rightDown) player.x = Math.min(w - P_HALF - 8, player.x + 5);
 
-    // Fire — hold space for continuous fire, rate-limited by shootCD
+    // ── Shooting — hold Space to fire continuously, move freely ──────────
+    // No burst/cover logic. fireDown held = fire every FIRE_CD frames.
+    // prevFireDown is gone — movement keys never affect shooting state.
+    const FIRE_CD = 10;
     if (fireDown && shootCD <= 0 && pBullets.length < 3) {
       pBullets.push({ x: player.x, y: player.y - 22 });
-      shootCD = 10;
+      shootCD = FIRE_CD;
     }
     if (shootCD > 0) shootCD--;
     if (player.invincible > 0) player.invincible--;
@@ -262,9 +278,9 @@
     let minX = Infinity, maxX = -Infinity;
     alive.forEach(e => { if (e.x < minX) minX = e.x; if (e.x > maxX) maxX = e.x; });
 
-    const pad = E_CW * 0.5 + 12;
-    let hitEdge = (enemyDX > 0 && maxX + E_CW * 0.5 + speed > w - pad) ||
-                  (enemyDX < 0 && minX - E_CW * 0.5 - speed < pad);
+    const pad = dynECW * 0.5 + 12;
+    let hitEdge = (enemyDX > 0 && maxX + dynECW * 0.5 + speed > w - pad) ||
+                  (enemyDX < 0 && minX - dynECW * 0.5 - speed < pad);
 
     if (hitEdge) {
       enemyDX *= -1;
@@ -312,8 +328,8 @@
       // vs enemies
       for (const e of enemies) {
         if (!e.alive) continue;
-        if (Math.abs(b.x - e.x) < E_CW * 0.5 - 3 &&
-            Math.abs(b.y - e.y) < E_CH * 0.5 - 2) {
+        if (Math.abs(b.x - e.x) < dynECW * 0.5 - 3 &&
+            Math.abs(b.y - e.y) < dynECH * 0.5 - 2) {
           e.alive = false;
           score  += e.pts;
           hit     = true;
@@ -422,12 +438,12 @@
     ctx.textAlign = 'left';
     ctx.fillText('SCORE: ' + String(score).padStart(5, '0'), 20, 38);
 
-    // Lives
-    ctx.font      = '13px "Press Start 2P"';
+    // Lives — larger hearts so health is clearly visible
+    ctx.font      = '22px "Press Start 2P"';
     ctx.textAlign = 'center';
     for (let i = 0; i < 3; i++) {
       ctx.fillStyle = i < lives ? '#ff2d78' : 'rgba(255,45,120,0.2)';
-      ctx.fillText(i < lives ? '♥' : '♡', w * 0.5 - 30 + i * 34, 38);
+      ctx.fillText(i < lives ? '♥' : '♡', w * 0.5 - 40 + i * 44, 40);
     }
 
     // EXIT button
@@ -461,7 +477,7 @@
       ctx.save();
       ctx.shadowColor = color;
       ctx.shadowBlur  = 6;
-      drawSprite(spr, e.x | 0, e.y | 0, E_SCALE, color);
+      drawSprite(spr, e.x | 0, e.y | 0, dynEScale, color);
       ctx.restore();
     });
 

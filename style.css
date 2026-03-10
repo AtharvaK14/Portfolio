@@ -81,7 +81,7 @@ nav#main-nav {
 .nav-controls { display: flex; gap: 10px; flex-shrink: 0; }
 
 .nav-btn {
-  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  font-family: 'Press Start 2P', monospace; font-size: 11px;
   background: transparent; border: 1px solid var(--green);
   color: var(--green); padding: 9px 14px; cursor: pointer;
   transition: all 0.2s; white-space: nowrap;
@@ -92,7 +92,7 @@ nav#main-nav {
 }
 .nav-btn.track-btn {
   border-color: rgba(0,255,159,0.4);
-  color: rgba(0,255,159,0.6); font-size: 8px;
+  color: rgba(0,255,159,0.7); font-size: 11px;
 }
 .nav-btn.track-btn:hover { border-color: var(--green); color: var(--bg); }
 
@@ -476,70 +476,135 @@ section {
 @keyframes bounce   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 @keyframes blink    { 50% { opacity: 0; } }
 
-/* ── Responsive ───────────────────────────────────────── */
+/* ── Burger button (hidden on desktop) ──────────────────── */
+.burger-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-size: 20px;
+  line-height: 1;
+  padding: 7px 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.burger-btn:hover,
+.burger-btn.open {
+  background: var(--green);
+  color: var(--bg);
+  box-shadow: 0 0 14px rgba(0,255,159,0.4);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
   .char-sheet         { grid-template-columns: 1fr; }
   .char-portrait-col  { max-width: 220px; margin: 0 auto; }
   .skills-grid        { grid-template-columns: 1fr; }
+  .achievement-grid   { grid-template-columns: 1fr; }
 }
-@media (max-width: 640px) {
-  section     { padding: 80px 18px 50px; }
-  nav#main-nav { padding: 10px 14px; }
+
+@media (max-width: 768px) {
+  /* Show burger, hide inline links */
+  .burger-btn { display: block; }
   .nav-links  { display: none; }
-  .hero-name  { font-size: 22px; }
-  .ach-btn    { font-size: 6px; padding: 7px 9px; }
+
+  /* Shrink brand so it fits alongside music controls + burger */
+  .nav-brand  { font-size: 10px; }
+
+  /* Dropdown panel rendered below the nav bar */
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0; right: 0;
+    top: var(--burger-top, 58px);
+    background: rgba(5,5,16,0.98);
+    border-bottom: 2px solid var(--green);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    padding: 0;
+    gap: 0;
+  }
+  .nav-links.open li  { width: 100%; }
+  .nav-links.open a {
+    display: block;
+    padding: 16px 28px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(0,255,159,0.1);
+    color: var(--white);
+  }
+  .nav-links.open a:hover { color: var(--green); background: rgba(0,255,159,0.06); }
+  .nav-links.open a:hover::before { content: "> "; }
 }
 
-/* ── Rift portal — bottom-right corner of education section ── */
+@media (max-width: 640px) {
+  section      { padding: 80px 16px 50px; }
+  nav#main-nav { padding: 10px 12px; }
+  .hero-name   { font-size: 22px; }
+  .nav-btn     { font-size: 8px; padding: 6px 8px; }
+  .nav-btn.track-btn { font-size: 8px; }
 
-/* Education section needs relative positioning for the absolute portal */
-#education {
-  position: relative;
+  /* Force achievement grid to single column — prevents 300px minmax overflowing
+     narrow screens (e.g. 320px viewport with 16px padding = 288px content) */
+  .achievement-grid { grid-template-columns: 1fr; }
+
+  /* Prevent date strings from breaking layout */
+  .q-date      { white-space: normal; font-size: 15px; }
+  .q-head      { flex-direction: column; gap: 4px; }
+
+  /* Stack attr grid to single column on small screens */
+  .attr-grid   { grid-template-columns: 1fr; }
+  .char-class  { font-size: 18px; }
+
+  /* Contact cards vertical stack */
+  .contact-row  { flex-direction: column; align-items: center; }
+  .contact-card { width: 100%; max-width: 320px; }
+
+  .hero-tags   { gap: 8px; }
+  .tag         { font-size: 7px; padding: 7px 10px; }
 }
+
+/* On very small phones (320-360px), the nav can still overflow if both music
+   buttons + burger don't fit. Hide the secondary NEXT/track button at this size. */
+@media (max-width: 420px) {
+  .nav-btn.track-btn { display: none; }
+  .nav-brand         { font-size: 9px; }
+}
+
+/* ── Rift portal ─────────────────────────────────────────── */
+#education { position: relative; }
 
 .edu-rift-row {
-  /* Desktop: float in bottom-right corner of the section */
   position: absolute;
   bottom: 48px;
   right: clamp(32px, 5vw, 80px);
   display: flex;
   align-items: center;
   gap: 28px;
-  /* Don't affect section height */
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
 }
 
 .rift-instruction {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 14px;
 }
-
 .rift-instr-text {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
-  color: rgba(0,255,159,0.55);
-  line-height: 2.2;
-  text-align: right;
-  letter-spacing: 1px;
+  font-size: 9px; color: rgba(0,255,159,0.55);
+  line-height: 2.2; text-align: right; letter-spacing: 1px;
 }
 
-/* Show/hide based on device type */
 .touch-only { display: none; }
 .touch-device .touch-only { display: inline-block; }
 .touch-device .rift-instr-text { display: none; }
 
 .rift-mobile-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
-  color: var(--bg);
-  background: var(--green);
-  border: none;
-  padding: 11px 20px;
-  cursor: pointer;
-  letter-spacing: 1px;
+  font-size: 9px; color: var(--bg);
+  background: var(--green); border: none;
+  padding: 11px 20px; cursor: pointer; letter-spacing: 1px;
   box-shadow: 0 0 16px rgba(0,255,159,0.4);
 }
 .rift-mobile-btn:hover {
@@ -548,10 +613,8 @@ section {
 }
 
 #rift-gate {
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  cursor: pointer;
-  flex-shrink: 0;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+  cursor: pointer; flex-shrink: 0;
   filter: drop-shadow(0 0 12px rgba(0,170,238,0.7))
           drop-shadow(0 0 28px rgba(0,100,200,0.4));
   animation: portal-glow 2.4s ease-in-out infinite;
@@ -572,16 +635,11 @@ section {
   }
 }
 
-/* On mobile / tablet: revert to inline flow so portal isn't hidden */
 @media (max-width: 900px) {
   .edu-rift-row {
-    position: relative;
-    bottom: auto;
-    right: auto;
+    position: relative; bottom: auto; right: auto;
     justify-content: flex-end;
-    width: 100%;
-    max-width: 900px;
-    margin-top: 36px;
-    padding-right: 8px;
+    width: 100%; max-width: 900px;
+    margin-top: 36px; padding-right: 8px;
   }
 }

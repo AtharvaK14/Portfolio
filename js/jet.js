@@ -174,12 +174,34 @@
     }
   }
 
-  // ── Physics update ────────────────────────────────────────────────────
-  const ACCEL      = 0.70;
-  const FRICTION   = 0.83;
-  const MAX_SPEED  = 8;
-  const SCROLL_SPD = 90;
-  const JET_SCALE  = 5;
+  // ── Scroll ────────────────────────────────────────────────────────────
+  // Completely decoupled from jet.vy so scroll speed isn't limited by
+  // sprite physics. Ramps up independently, reaches full speed fast.
+  let cachedNavBottom = 88;
+  function refreshNavBottom() {
+    const nav = document.getElementById('main-nav');
+    cachedNavBottom = nav ? nav.offsetHeight + 14 : 88;
+  }
+  refreshNavBottom();
+  window.addEventListener('resize', refreshNavBottom);
+
+  let scrollV   = 0;
+  // ── SCROLL SPEED — tune these three constants ─────────────────────────
+  // S_ACCEL : px added to scroll velocity per frame while key is held.
+  //           Higher = snappier start.  Range: 8–20.
+  // S_MAX   : terminal scroll velocity (px/frame at 60 fps).
+  //           120 ≈ 7200 px/sec — crosses a section (~900 px) in ~0.13 s.
+  //           Raise to 180–240 if you want even faster sweep.
+  // S_FRIC  : bleed-off multiplier each frame after key release (0–1).
+  //           Lower = stops faster.  0.70 = nearly instant stop.
+  const S_ACCEL = 500;   // ← tune here
+  const S_MAX   = 500;  // ← tune here
+  const S_FRIC  = 0.72; // ← tune here
+
+  const ACCEL     = 1;
+  const FRICTION  = 0.83;
+  const MAX_SPEED = 8;
+  const JET_SCALE = 5;
 
   function update() {
     if (!jet.visible || window.gameActive) return;
@@ -197,19 +219,21 @@
     jet.x += jet.vx;
     jet.y += jet.vy;
 
-    // Smooth banking based on horizontal velocity
     const targetAngle = jet.vx * 0.09;
     jet.angle += (targetAngle - jet.angle) * 0.14;
 
-    // Edge-triggered page scroll
-    if (jet.y < H * 0.22 && keys['ArrowUp'])   window.scrollBy({ top: -SCROLL_SPD, behavior: 'auto' });
-    if (jet.y > H * 0.78 && keys['ArrowDown'])  window.scrollBy({ top:  SCROLL_SPD, behavior: 'auto' });
+    // Dedicated scroll — ramps independently of sprite physics
+    if (keys['ArrowUp'])   scrollV = Math.max(-S_MAX, scrollV - S_ACCEL);
+    else if (keys['ArrowDown']) scrollV = Math.min(S_MAX, scrollV + S_ACCEL);
+    else scrollV *= S_FRIC;
 
-    // Clamp to viewport (half-sprite at scale 5 ≈ 22px)
-    jet.x = Math.max(30, Math.min(W - 30, jet.x));
-    jet.y = Math.max(30, Math.min(H - 30, jet.y));
+    if (Math.abs(scrollV) > 0.5) window.scrollBy(0, scrollV);
 
-    // Particles
+    // Clamp jet inside viewport, never behind nav
+    const TOP_CLAMP = cachedNavBottom;
+    jet.x = Math.max(30,        Math.min(W - 30, jet.x));
+    jet.y = Math.max(TOP_CLAMP, Math.min(H - 30, jet.y));
+
     if (thrusting || Math.abs(jet.vx) + Math.abs(jet.vy) > 0.6) addParticle();
     jet.particles.forEach(p => {
       p.x += p.vx; p.y += p.vy; p.life -= p.decay;
