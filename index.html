@@ -33,9 +33,9 @@
 <section id="hero">
   <div class="hero-boot">// PLAYER PROFILE LOADED -- PRESS START //</div>
   <h1 class="hero-name">ATHARVA<br>KADAM</h1>
-  <div class="hero-subtitle">QA ENGINEER &amp; TEST AUTOMATION SPECIALIST</div>
+  <div class="hero-subtitle">Software QA Tester &amp; Aspiring Software Engineer</div>
   <div class="hero-tags">
-    <span class="tag">2 YRS EXPERIENCE</span>
+    <span class="tag">~2 YRS EXPERIENCE</span>
     <span class="tag">EX-UBISOFT</span>
     <span class="tag">SYRACUSE, NY</span>
     <span class="tag">M.S. COMPUTER SCIENCE</span>
@@ -170,7 +170,7 @@
 
     <div class="ach-card reveal">
       <div class="ach-content">
-        <span class="ach-icon">&#129428;</span>
+        <span class="ach-icon">&#129414;</span>
         <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
         <div class="ach-tech">Python, JavaScript, Node.js</div>
         <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and duck-themed personality.</p>
@@ -316,23 +316,19 @@
       <div class="edu-date">JUN 2021 -- MAY 2023</div>
     </div>
   </div>
-</section>
 
-<section id="rift-section">
-  <div class="section-header">
-    <h2 class="section-title" style="color:var(--green)">SECTOR BREACH</h2>
-    <span class="section-subtitle">// BONUS STAGE</span>
-  </div>
-  <div class="rift-container">
-    <div id="rift-gate" onclick="window.startGame && window.startGame()">
-      <div class="rift-scan"></div>
-      <div class="rift-text-inner">
-        <div class="rift-main-text">ENTER</div>
-        <div class="rift-sub-text">Fly your jet into<br>the rift to play</div>
-        <button class="rift-mobile-btn" onclick="window.startGame && window.startGame()">TAP TO PLAY</button>
-      </div>
+  <!-- Rift portal — desktop: fly jet in; mobile: tap button -->
+  <div class="edu-rift-row reveal">
+    <div class="rift-instruction">
+      <div class="rift-instr-text">&#9658; FLY YOUR JET<br>INTO THE PORTAL<br>TO START THE<br>MINI-GAME</div>
+      <button class="rift-mobile-btn touch-only" onclick="window.startGame && window.startGame()">
+        &#9658; TAP TO PLAY
+      </button>
     </div>
-    <div class="rift-warning">&#9658; Use arrow keys to fly your jet into the portal above</div>
+    <!-- canvas acts as the collision target for the jet AND renders the portal animation -->
+    <canvas id="rift-gate" width="128" height="176"
+            onclick="window.startGame && window.startGame()"
+            title="Enter the rift"></canvas>
   </div>
 </section>
 
@@ -349,11 +345,6 @@
       <span class="c-icon">&#128231;</span>
       <span class="c-label">EMAIL</span>
       <span class="c-val">kadam.atharva14@gmail.com</span>
-    </a>
-    <a class="contact-card" href="tel:+19067678852">
-      <span class="c-icon">&#128222;</span>
-      <span class="c-label">PHONE</span>
-      <span class="c-val">(906) 767-8852</span>
     </a>
     <a class="contact-card" href="files/Atharva_Kadam_Resume.pdf" target="_blank">
       <span class="c-icon">&#128196;</span>
@@ -379,5 +370,6 @@
 <script src="js/main.js"></script>
 <script src="js/jet.js"></script>
 <script src="js/game.js"></script>
+<script src="js/portal.js"></script>
 </body>
 </html>

@@ -50,40 +50,40 @@ nav#main-nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 1000;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 36px;
+  padding: 16px 44px;
   background: rgba(5,5,16,0.88);
   border-bottom: 2px solid var(--green);
   backdrop-filter: blur(8px);
-  gap: 14px;
+  gap: 18px;
   transition: background 0.3s;
 }
 
 .nav-brand {
   font-family: 'Press Start 2P', monospace;
-  font-size: 12px; color: var(--green);
+  font-size: 15px; color: var(--green);
   text-shadow: 0 0 12px var(--green);
   white-space: nowrap; flex-shrink: 0;
 }
 .nav-brand span { color: var(--gold); }
 
 .nav-links {
-  display: flex; gap: 18px; list-style: none; flex-wrap: wrap;
+  display: flex; gap: 22px; list-style: none; flex-wrap: wrap;
 }
 .nav-links a {
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px; color: var(--white);
+  font-size: 10px; color: var(--white);
   text-decoration: none; letter-spacing: 1px;
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--green); }
 .nav-links a:hover::before { content: '> '; }
 
-.nav-controls { display: flex; gap: 8px; flex-shrink: 0; }
+.nav-controls { display: flex; gap: 10px; flex-shrink: 0; }
 
 .nav-btn {
-  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
   background: transparent; border: 1px solid var(--green);
-  color: var(--green); padding: 7px 11px; cursor: pointer;
+  color: var(--green); padding: 9px 14px; cursor: pointer;
   transition: all 0.2s; white-space: nowrap;
 }
 .nav-btn:hover, .nav-btn.on {
@@ -92,7 +92,7 @@ nav#main-nav {
 }
 .nav-btn.track-btn {
   border-color: rgba(0,255,159,0.4);
-  color: rgba(0,255,159,0.6); font-size: 6px;
+  color: rgba(0,255,159,0.6); font-size: 8px;
 }
 .nav-btn.track-btn:hover { border-color: var(--green); color: var(--bg); }
 
@@ -490,76 +490,98 @@ section {
   .ach-btn    { font-size: 6px; padding: 7px 9px; }
 }
 
-/* ── Rift portal section ──────────────────────────────────── */
-#rift-section {
-  min-height: 55vh;
-  background: radial-gradient(ellipse at center, rgba(0,255,159,0.06) 0%, transparent 65%);
+/* ── Rift portal — bottom-right corner of education section ── */
+
+/* Education section needs relative positioning for the absolute portal */
+#education {
+  position: relative;
 }
-.rift-container {
-  display: flex; flex-direction: column; align-items: center; gap: 28px;
+
+.edu-rift-row {
+  /* Desktop: float in bottom-right corner of the section */
+  position: absolute;
+  bottom: 48px;
+  right: clamp(32px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  /* Don't affect section height */
+  margin: 0;
+  padding: 0;
 }
+
+.rift-instruction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.rift-instr-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: rgba(0,255,159,0.55);
+  line-height: 2.2;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* Show/hide based on device type */
+.touch-only { display: none; }
+.touch-device .touch-only { display: inline-block; }
+.touch-device .rift-instr-text { display: none; }
+
+.rift-mobile-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--bg);
+  background: var(--green);
+  border: none;
+  padding: 11px 20px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 16px rgba(0,255,159,0.4);
+}
+.rift-mobile-btn:hover {
+  background: var(--blue);
+  box-shadow: 0 0 22px rgba(0,200,255,0.5);
+}
+
 #rift-gate {
-  width: 260px; height: 170px;
-  border: 3px solid var(--green);
-  border-radius: 50%; position: relative;
-  overflow: hidden; cursor: pointer;
-  animation: rift-pulse 2.2s ease-in-out infinite;
-  box-shadow:
-    0 0 50px rgba(0,255,159,0.45),
-    0 0 100px rgba(0,255,159,0.2),
-    inset 0 0 50px rgba(0,255,159,0.12);
-  transition: box-shadow 0.3s;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(0,170,238,0.7))
+          drop-shadow(0 0 28px rgba(0,100,200,0.4));
+  animation: portal-glow 2.4s ease-in-out infinite;
 }
 #rift-gate:hover {
-  box-shadow:
-    0 0 80px rgba(0,255,159,0.7),
-    0 0 140px rgba(0,255,159,0.35),
-    inset 0 0 70px rgba(0,255,159,0.22);
+  filter: drop-shadow(0 0 22px rgba(0,200,255,0.95))
+          drop-shadow(0 0 50px rgba(0,140,220,0.6));
 }
-.rift-scan {
-  position: absolute; top: -80%; left: 0; right: 0; height: 70%;
-  background: linear-gradient(180deg, transparent, rgba(0,255,159,0.18), transparent);
-  animation: rift-scan 3s linear infinite;
-  pointer-events: none;
-}
-.rift-text-inner {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center;
-  padding: 18px;
-  background: radial-gradient(ellipse, rgba(0,200,255,0.1) 0%, rgba(0,255,159,0.04) 55%, transparent 100%);
-}
-.rift-main-text {
-  font-family: 'Press Start 2P', monospace; font-size: 18px;
-  color: var(--green); text-shadow: 0 0 20px var(--green);
-  animation: blink 1.3s step-end infinite;
-  letter-spacing: 4px;
-}
-.rift-sub-text {
-  font-size: 18px; color: rgba(0,255,159,0.6);
-  line-height: 1.65; margin-top: 10px;
-}
-.rift-mobile-btn {
-  display: none;
-  margin-top: 14px;
-  font-family: 'Press Start 2P', monospace; font-size: 9px;
-  color: var(--bg); background: var(--green);
-  border: none; padding: 10px 18px;
-  cursor: pointer; letter-spacing: 1px;
-}
-.rift-warning {
-  font-size: 18px; color: rgba(0,255,159,0.38);
-  text-align: center; max-width: 520px; line-height: 1.65;
-}
-/* Touch device overrides */
-.touch-device .rift-mobile-btn { display: inline-block; }
-.touch-device .rift-warning    { display: none; }
 
-@keyframes rift-pulse {
-  0%,100% { box-shadow: 0 0 50px rgba(0,255,159,0.45), 0 0 100px rgba(0,255,159,0.2), inset 0 0 50px rgba(0,255,159,0.12); }
-  50%     { box-shadow: 0 0 80px rgba(0,255,159,0.75), 0 0 150px rgba(0,255,159,0.38), inset 0 0 75px rgba(0,255,159,0.22); }
+@keyframes portal-glow {
+  0%,100% {
+    filter: drop-shadow(0 0 10px rgba(0,170,238,0.65))
+            drop-shadow(0 0 24px rgba(0,100,200,0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(0,200,255,0.9))
+            drop-shadow(0 0 48px rgba(0,140,220,0.55));
+  }
 }
-@keyframes rift-scan {
-  0%   { top: -80%; }
-  100% { top: 130%; }
+
+/* On mobile / tablet: revert to inline flow so portal isn't hidden */
+@media (max-width: 900px) {
+  .edu-rift-row {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 36px;
+    padding-right: 8px;
+  }
 }

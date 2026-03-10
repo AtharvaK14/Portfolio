@@ -82,8 +82,12 @@
   });
 
   // ── Jet state ─────────────────────────────────────────────────────────
+  // Spawn bottom-right corner of hero viewport — well clear of centred name
+  const SPAWN_X = () => W * 0.82;
+  const SPAWN_Y = () => H * 0.78;
+
   const jet = {
-    x: W * 0.5, y: H * 0.5,
+    x: W * 0.82, y: H * 0.78,
     vx: 0, vy: 0,
     angle: 0,       // banking tilt (radians)
     particles: [],
@@ -93,8 +97,8 @@
   window.hideJet = () => { jet.visible = false; };
   window.showJet = () => {
     jet.visible = true;
-    jet.x = W * 0.5;
-    jet.y = H * 0.5;
+    jet.x = SPAWN_X();
+    jet.y = SPAWN_Y();
     jet.vx = jet.vy = 0;
   };
 
@@ -142,7 +146,7 @@
       ctx.save();
       ctx.shadowColor = '#00ff9f';
       ctx.shadowBlur = 20 + alpha * 40;
-      window.drawJetAt(ctx, jet.x | 0, jet.y | 0, jet.angle, 3);
+      window.drawJetAt(ctx, jet.x | 0, jet.y | 0, jet.angle, JET_SCALE);
       ctx.restore();
       ctx.fillStyle = `rgba(0,255,159,${alpha * 0.55})`;
       ctx.fillRect(0, 0, W, H);
@@ -171,10 +175,11 @@
   }
 
   // ── Physics update ────────────────────────────────────────────────────
-  const ACCEL      = 0.55;
+  const ACCEL      = 0.70;
   const FRICTION   = 0.83;
   const MAX_SPEED  = 8;
-  const SCROLL_SPD = 10;
+  const SCROLL_SPD = 90;
+  const JET_SCALE  = 5;
 
   function update() {
     if (!jet.visible || window.gameActive) return;
@@ -200,9 +205,9 @@
     if (jet.y < H * 0.22 && keys['ArrowUp'])   window.scrollBy({ top: -SCROLL_SPD, behavior: 'auto' });
     if (jet.y > H * 0.78 && keys['ArrowDown'])  window.scrollBy({ top:  SCROLL_SPD, behavior: 'auto' });
 
-    // Clamp to viewport
-    jet.x = Math.max(26, Math.min(W - 26, jet.x));
-    jet.y = Math.max(26, Math.min(H - 26, jet.y));
+    // Clamp to viewport (half-sprite at scale 5 ≈ 22px)
+    jet.x = Math.max(30, Math.min(W - 30, jet.x));
+    jet.y = Math.max(30, Math.min(H - 30, jet.y));
 
     // Particles
     if (thrusting || Math.abs(jet.vx) + Math.abs(jet.vy) > 0.6) addParticle();
@@ -239,7 +244,7 @@
     ctx.save();
     ctx.shadowColor = '#00c8ff';
     ctx.shadowBlur  = 16;
-    window.drawJetAt(ctx, jet.x | 0, jet.y | 0, jet.angle, 3);
+    window.drawJetAt(ctx, jet.x | 0, jet.y | 0, jet.angle, JET_SCALE);
     ctx.restore();
 
     // Control hint

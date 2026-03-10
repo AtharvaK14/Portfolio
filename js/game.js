@@ -101,7 +101,7 @@
   let score, lives, frameN, raf;
   let player, enemies, pBullets, eBullets, barriers, ufo;
   let enemyDX, enemyShootTimer, ufoTimer, explosions;
-  let shootCD, shootHeld;
+  let shootCD;
   let hitFlash;  // frames remaining for screen flash
 
   // ── Input ─────────────────────────────────────────────────────────────────
@@ -157,7 +157,6 @@
     lives   = 3;
     frameN  = 0;
     shootCD = 0;
-    shootHeld = false;
     enemyShootTimer = 60;
     ufoTimer = 900 + (Math.random() * 400) | 0;
     hitFlash = 0;
@@ -237,12 +236,11 @@
     if (leftDown)  player.x = Math.max(P_HALF + 8,     player.x - 5);
     if (rightDown) player.x = Math.min(w - P_HALF - 8, player.x + 5);
 
-    // Fire (trigger on press, not hold)
-    if (fireDown && !shootHeld && shootCD <= 0 && pBullets.length < 3) {
+    // Fire — hold space for continuous fire, rate-limited by shootCD
+    if (fireDown && shootCD <= 0 && pBullets.length < 3) {
       pBullets.push({ x: player.x, y: player.y - 22 });
       shootCD = 10;
     }
-    shootHeld = fireDown;
     if (shootCD > 0) shootCD--;
     if (player.invincible > 0) player.invincible--;
     if (hitFlash > 0) hitFlash--;
