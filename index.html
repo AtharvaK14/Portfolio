@@ -129,18 +129,21 @@
         <!-- Featured Projects -->
         <div class="project-item" onclick="toggleDetails(this)">
           <div class="project-summary">
-            <h2>Rubber Duck Debugging Assistant</h2><br>
-            <h1>Python | NLP | PyTest</h1>
-            <p>Intelligent chatbot that understands your code struggles. Using NLP and pattern matching, it identifies 50+ Python error types and offers debugging solutions, like having a patient coding mentor available 24/7.</p>
+            <h2><a href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/">Rubber Duck Debugging Assistant<img
+                src="https://img.icons8.com/?size=100&id=16139&format=png&color=000000" alt="website icon"
+                style="width: 25px; height: 25px; margin-top: 10px;"></a> </h2><br>
+            <h1>JavaScript | Node.js | Python | HTML/CSS</h1>
+            <p>Started as a CS4811 (Intro to AI) course project and continued independently. A conversational debugging assistant that uses regex pattern matching to identify error types and walk developers through solutions; like explaining your bug to a rubber duck, except it talks back.</p>
             <a href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot"> <img
                 src="https://img.icons8.com/?size=100&id=16318&format=png&color=000000" alt="github icon"
                 style="width: 60px; height: 60px; margin-top: 10px;"> </a>
           </div>
           <div class="project-details">
             <ul>
-              <li>Created intelligent chatbot using <b>NLP and pattern matching</b> to identify <b>50+ Python error types</b> and provide automated debugging solutions, achieving <b>90% success rate</b> through automated testing framework</li>
-              <li>Built comprehensive test suite with <b>100+ unit tests using PyTest</b> and integrated continuous testing via <b>GitHub Actions</b>, ensuring reliability and accuracy of debugging recommendations</li>
-              <li>Implemented conversational interface with context-aware responses, helping developers understand not just what's wrong, but why turning frustrating error messages into learning opportunities</li>
+              <li>Built a rule engine with 107 rules covering Python, JavaScript/Node.js, and C/C++ errors; including TypeError, segfaults, CORS, unhandled promise rejections, memory leaks, and more</li>
+              <li>Designed a shared rule file architecture: the same four rule files power both the browser web app and a Node.js CLI with zero duplication; add one rule, both interfaces get it on next load</li>
+              <li>Implemented a language filter and dual-tone system (Quacky 🦆 / Professional) in the web UI, with matching mid-session lang and tone commands in the CLI</li>
+              <li>CLI runs with no npm dependencies; Node.js stdlib only; web app is pure HTML/CSS/JS with no framework</li>
             </ul>
           </div>
         </div>
