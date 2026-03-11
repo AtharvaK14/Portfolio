@@ -108,6 +108,10 @@
   let shootCD;
   let hitFlash;  // frames remaining for screen flash
 
+  // Retry/exit button rects for end screens — set each render frame,
+  // read by handleTouchPt and handleClick. Single source of truth.
+  const endBtns = { retry: null, exit: null };
+
   // ── Frozen game-space dimensions ─────────────────────────────────────────
   // Captured ONCE at initGame(). All game logic (hitEdge, player movement,
   // bullet bounds) uses these — never live GW()/GH().
@@ -139,18 +143,26 @@
 
   function handleTouchPt(tx, ty) {
     const w = GW(), h = GH();
-    // Exit button
+    // Exit button (top-right HUD)
     if (tx > w - 140 && ty < HUD_H) { window.exitGame(); return; }
-    // Gameover / victory: tap to exit
-    if (phase === 'gameover' || phase === 'victory') { window.exitGame(); return; }
-    // Intro: tap to skip wait
+    // Gameover / victory — check RETRY and EXIT zones
+    if (phase === 'gameover' || phase === 'victory') {
+      if (endBtns.retry &&
+          tx >= endBtns.retry.x && tx <= endBtns.retry.x + endBtns.retry.w &&
+          ty >= endBtns.retry.y && ty <= endBtns.retry.y + endBtns.retry.h) {
+        retryGame(); return;
+      }
+      window.exitGame(); return;
+    }
+    // Intro: ignore taps
     if (phase === 'intro') return;
-    // Touch zones at bottom
+    // Touch control zones at bottom
+    // Layout: [FIRE | ◄ | ►]  — fire on left for thumb comfort
     if (ty > h - 110) {
       const t3 = w / 3;
-      if (tx < t3)          { touch.left  = true; }
-      else if (tx > t3 * 2) { touch.right = true; }
-      else                  { touch.fire  = true; }
+      if      (tx < t3)          { touch.fire  = true; }   // left zone  → FIRE
+      else if (tx > t3 * 2)      { touch.right = true; }   // right zone → ►
+      else                       { touch.left  = true; }   // center zone → ◄
     }
   }
 
@@ -159,7 +171,14 @@
     const mx = e.clientX - r.left;
     const my = e.clientY - r.top;
     if (mx > GW() - 140 && my < HUD_H) { window.exitGame(); return; }
-    if (phase === 'gameover' || phase === 'victory') { window.exitGame(); }
+    if (phase === 'gameover' || phase === 'victory') {
+      if (endBtns.retry &&
+          mx >= endBtns.retry.x && mx <= endBtns.retry.x + endBtns.retry.w &&
+          my >= endBtns.retry.y && my <= endBtns.retry.y + endBtns.retry.h) {
+        retryGame(); return;
+      }
+      window.exitGame();
+    }
   }
 
   // ── Init ──────────────────────────────────────────────────────────────────
@@ -248,6 +267,13 @@
     const w = GW(), h = GH();
     player.x = w * 0.5;
     player.y = h - P_OFFSET_Y;
+  }
+
+  function retryGame() {
+    // Reset touch/key state so held inputs don't carry over
+    touch.left = touch.right = touch.fire = false;
+    gKeys[' '] = gKeys['ArrowLeft'] = gKeys['ArrowRight'] = false;
+    initGame();  // sets phase = 'playing', freezes new gameW/gameH
   }
 
   // ── Update ────────────────────────────────────────────────────────────────
@@ -591,6 +617,7 @@
     const w = GW(), h = GH();
     ctx.fillStyle = 'rgba(5,5,16,0.78)';
     ctx.fillRect(0, HUD_H, w, h - HUD_H);
+
     ctx.save();
     ctx.shadowColor = '#ff2d78';
     ctx.shadowBlur  = 28;
@@ -599,19 +626,45 @@
     ctx.textAlign   = 'center';
     ctx.fillText('GAME OVER', w * 0.5, h * 0.5 - 44);
     ctx.restore();
+
     ctx.fillStyle = '#ffd700';
     ctx.font      = '12px "Press Start 2P"';
     ctx.textAlign = 'center';
     ctx.fillText('SCORE: ' + String(score).padStart(5, '0'), w * 0.5, h * 0.5 + 8);
-    ctx.fillStyle = 'rgba(232,232,255,0.45)';
-    ctx.font      = '8px "Press Start 2P"';
-    ctx.fillText(IS_TOUCH ? 'TAP TO EXIT' : 'CLICK OR PRESS ESC TO EXIT', w * 0.5, h * 0.5 + 50);
+
+    // RETRY and EXIT buttons
+    const bW = 120, bH = 44, gap = 16;
+    const totalW = bW * 2 + gap;
+    const bY = h * 0.5 + 38;
+    const retryX = w * 0.5 - totalW * 0.5;
+    const exitX  = retryX + bW + gap;
+
+    // RETRY
+    ctx.strokeStyle = '#00ff9f'; ctx.lineWidth = 2;
+    ctx.strokeRect(retryX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(0,255,159,0.12)';
+    ctx.fillRect(retryX, bY, bW, bH);
+    ctx.fillStyle = '#00ff9f'; ctx.font = '8px "Press Start 2P"'; ctx.textAlign = 'center';
+    ctx.fillText('RETRY', retryX + bW * 0.5, bY + bH * 0.5 + 4);
+
+    // EXIT
+    ctx.strokeStyle = '#ff2d78'; ctx.lineWidth = 1;
+    ctx.strokeRect(exitX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(255,45,120,0.08)';
+    ctx.fillRect(exitX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(232,232,255,0.55)'; ctx.font = '8px "Press Start 2P"';
+    ctx.fillText('EXIT', exitX + bW * 0.5, bY + bH * 0.5 + 4);
+
+    // Store coords for touch/click hit-testing
+    endBtns.retry = { x: retryX, y: bY, w: bW, h: bH };
+    endBtns.exit  = { x: exitX,  y: bY, w: bW, h: bH };
   }
 
   function renderVictory() {
     const w = GW(), h = GH();
     ctx.fillStyle = 'rgba(5,5,16,0.78)';
     ctx.fillRect(0, HUD_H, w, h - HUD_H);
+
     ctx.save();
     ctx.shadowColor = '#ffd700';
     ctx.shadowBlur  = 28;
@@ -620,34 +673,61 @@
     ctx.textAlign   = 'center';
     ctx.fillText('SECTOR CLEARED!', w * 0.5, h * 0.5 - 44);
     ctx.restore();
+
     ctx.fillStyle = '#00ff9f';
     ctx.font      = '12px "Press Start 2P"';
     ctx.textAlign = 'center';
     ctx.fillText('SCORE: ' + String(score).padStart(5, '0'), w * 0.5, h * 0.5 + 8);
-    ctx.fillStyle = 'rgba(232,232,255,0.45)';
-    ctx.font      = '8px "Press Start 2P"';
-    ctx.fillText(IS_TOUCH ? 'TAP TO EXIT' : 'CLICK OR PRESS ESC TO EXIT', w * 0.5, h * 0.5 + 50);
+
+    // RETRY and EXIT buttons — same layout as game over
+    const bW = 120, bH = 44, gap = 16;
+    const totalW = bW * 2 + gap;
+    const bY = h * 0.5 + 38;
+    const retryX = w * 0.5 - totalW * 0.5;
+    const exitX  = retryX + bW + gap;
+
+    // RETRY
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2;
+    ctx.strokeRect(retryX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(255,215,0,0.12)';
+    ctx.fillRect(retryX, bY, bW, bH);
+    ctx.fillStyle = '#ffd700'; ctx.font = '8px "Press Start 2P"'; ctx.textAlign = 'center';
+    ctx.fillText('RETRY', retryX + bW * 0.5, bY + bH * 0.5 + 4);
+
+    // EXIT
+    ctx.strokeStyle = 'rgba(232,232,255,0.3)'; ctx.lineWidth = 1;
+    ctx.strokeRect(exitX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(232,232,255,0.04)';
+    ctx.fillRect(exitX, bY, bW, bH);
+    ctx.fillStyle = 'rgba(232,232,255,0.55)'; ctx.font = '8px "Press Start 2P"';
+    ctx.fillText('EXIT', exitX + bW * 0.5, bY + bH * 0.5 + 4);
+
+    endBtns.retry = { x: retryX, y: bY, w: bW, h: bH };
+    endBtns.exit  = { x: exitX,  y: bY, w: bW, h: bH };
   }
 
   function renderTouchControls() {
     const w = GW(), h = GH();
-    const bH   = 100;
-    const bY   = h - bH;
+    const bH    = 100;
+    const bY    = h - bH;
     const third = w / 3;
-    const labels = ['◄', 'FIRE', '►'];
-    const states = [touch.left, touch.fire, touch.right];
-    const colors = ['#00c8ff', '#00ff9f', '#00c8ff'];
+    // New layout: [FIRE | ◄ | ►]
+    const labels = ['FIRE', '◄', '►'];
+    const states = [touch.fire, touch.left, touch.right];
+    const colors = ['#00ff9f', '#00c8ff', '#00c8ff'];
     labels.forEach((lbl, i) => {
-      const bx = i * third;
-      ctx.fillStyle   = states[i] ? `rgba(${i===1?'0,255,159':'0,200,255'},0.28)` : `rgba(${i===1?'0,255,159':'0,200,255'},0.09)`;
+      const bx      = i * third;
+      const isGreen = i === 0;   // FIRE button is green
+      const rgb     = isGreen ? '0,255,159' : '0,200,255';
+      ctx.fillStyle   = states[i] ? `rgba(${rgb},0.28)` : `rgba(${rgb},0.09)`;
       ctx.fillRect(bx, bY, third, bH);
       ctx.strokeStyle = colors[i];
       ctx.lineWidth   = 1;
       ctx.strokeRect(bx, bY, third, bH);
       ctx.fillStyle   = colors[i];
-      ctx.font        = i === 1 ? '9px "Press Start 2P"' : '18px "Press Start 2P"';
+      ctx.font        = i === 0 ? '9px "Press Start 2P"' : '18px "Press Start 2P"';
       ctx.textAlign   = 'center';
-      ctx.fillText(lbl, bx + third * 0.5, bY + bH * 0.5 + (i === 1 ? 4 : 8));
+      ctx.fillText(lbl, bx + third * 0.5, bY + bH * 0.5 + (i === 0 ? 4 : 8));
     });
   }
 
@@ -686,6 +766,7 @@
     if (raf) { cancelAnimationFrame(raf); raf = null; }
     gKeys[' '] = gKeys['ArrowLeft'] = gKeys['ArrowRight'] = false;
     touch.left = touch.right = touch.fire = false;
+    endBtns.retry = null; endBtns.exit = null;
     window.gameActive = false;
     cvs.style.display = 'none';
     phase = 'idle';
