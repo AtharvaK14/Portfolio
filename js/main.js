@@ -82,3 +82,34 @@ window.addEventListener('scroll', () => {
       : 'rgba(5,5,16,0.88)';
   }
 });
+
+// ── Burger menu ───────────────────────────────────────────
+function toggleBurger() {
+  const nav   = document.getElementById('main-nav');
+  const links = document.getElementById('navLinks');
+  const btn   = document.getElementById('burgerBtn');
+  if (!links || !btn) return;
+
+  const isOpen = links.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+
+  // Position dropdown exactly below the nav bar
+  if (isOpen && nav) {
+    document.documentElement.style.setProperty('--burger-top', nav.offsetHeight + 'px');
+  }
+}
+
+function closeBurger() {
+  const links = document.getElementById('navLinks');
+  const btn   = document.getElementById('burgerBtn');
+  if (!links) return;
+  links.classList.remove('open');
+  if (btn) { btn.classList.remove('open'); btn.innerHTML = '&#9776;'; }
+}
+
+// Close burger when tapping anywhere outside the nav
+document.addEventListener('click', e => {
+  const nav = document.getElementById('main-nav');
+  if (nav && !nav.contains(e.target)) closeBurger();
+});
