@@ -78,7 +78,25 @@ nav#main-nav {
 .nav-links a:hover { color: var(--green); }
 .nav-links a:hover::before { content: '> '; }
 
-.nav-controls { display: flex; gap: 10px; flex-shrink: 0; }
+.nav-controls { display: flex; gap: 8px; flex-shrink: 0; }
+
+/* nav-right groups burger + controls — always stays together */
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* Icon / text split inside music buttons */
+.btn-icon { flex-shrink: 0; }
+.btn-text { white-space: nowrap; }
+
+/* ── Burger button (hidden on desktop) ───────────────────── */
+.burger-btn {
+  display: none;
+  font-family: 'Press Start 2P', monospace; font-size: 14px;
+  background: transparent; border: 1px solid var(--green);
+  color: var(--green); padding: 7px 11px; cursor: pointer;
+  line-height: 1; flex-shrink: 0; transition: all 0.2s;
+}
+.burger-btn:hover,
+.burger-btn.open { background: var(--green); color: var(--bg); box-shadow: 0 0 14px rgba(0,255,159,0.4); }
 
 .nav-btn {
   font-family: 'Press Start 2P', monospace; font-size: 11px;
@@ -95,6 +113,20 @@ nav#main-nav {
   color: rgba(0,255,159,0.7); font-size: 11px;
 }
 .nav-btn.track-btn:hover { border-color: var(--green); color: var(--bg); }
+
+/* .flash — timed glow used by JS after a touch tap on the NEXT button.
+   Fades out via transition so it doesn't cut off abruptly. */
+.nav-btn.flash {
+  background: var(--green); color: var(--bg);
+  box-shadow: 0 0 14px rgba(0,255,159,0.4);
+}
+
+/* On true touch devices, disable sticky :hover so buttons don't stay
+   glowing after a tap. JS .flash handles tap feedback instead. */
+@media (hover: none) {
+  .nav-btn:hover { background: transparent; color: var(--green); box-shadow: none; }
+  .nav-btn.track-btn:hover { border-color: rgba(0,255,159,0.4); color: rgba(0,255,159,0.7); background: transparent; }
+}
 
 /* ── Sections ─────────────────────────────────────────── */
 section {
@@ -476,26 +508,6 @@ section {
 @keyframes bounce   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
 @keyframes blink    { 50% { opacity: 0; } }
 
-/* ── Burger button (hidden on desktop) ──────────────────── */
-.burger-btn {
-  display: none;
-  background: transparent;
-  border: 1px solid var(--green);
-  color: var(--green);
-  font-size: 20px;
-  line-height: 1;
-  padding: 7px 13px;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-.burger-btn:hover,
-.burger-btn.open {
-  background: var(--green);
-  color: var(--bg);
-  box-shadow: 0 0 14px rgba(0,255,159,0.4);
-}
-
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
   .char-sheet         { grid-template-columns: 1fr; }
@@ -505,60 +517,57 @@ section {
 }
 
 @media (max-width: 768px) {
-  /* Show burger, hide inline links */
+  /* Show burger, hide desktop inline links */
   .burger-btn { display: block; }
   .nav-links  { display: none; }
-
-  /* Shrink brand so it fits alongside music controls + burger */
   .nav-brand  { font-size: 10px; }
 
-  /* Dropdown panel rendered below the nav bar */
+  /* Icons only on mobile — hide button text */
+  .btn-text   { display: none; }
+
+  /* Compact dropdown: right-aligned, NOT full screen */
   .nav-links.open {
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     position: fixed;
-    left: 0; right: 0;
-    top: var(--burger-top, 58px);
+    right: 8px;
+    top: var(--burger-top, 60px);
+    min-width: 190px; max-width: 230px;
     background: rgba(5,5,16,0.98);
-    border-bottom: 2px solid var(--green);
-    backdrop-filter: blur(12px);
+    border: 1px solid var(--green);
+    box-shadow: 0 0 24px rgba(0,255,159,0.18);
+    backdrop-filter: blur(14px);
     z-index: 999;
-    padding: 0;
-    gap: 0;
+    padding: 0; gap: 0;
   }
   .nav-links.open li  { width: 100%; }
   .nav-links.open a {
     display: block;
-    padding: 16px 28px;
-    font-size: 9px;
-    letter-spacing: 2px;
+    padding: 14px 22px;
+    font-family: 'Press Start 2P', monospace; font-size: 9px;
+    letter-spacing: 2px; color: var(--white);
+    text-decoration: none;
     border-bottom: 1px solid rgba(0,255,159,0.1);
-    color: var(--white);
+    transition: color 0.15s, background 0.15s;
   }
-  .nav-links.open a:hover { color: var(--green); background: rgba(0,255,159,0.06); }
-  .nav-links.open a:hover::before { content: "> "; }
+  .nav-links.open li:last-child a { border-bottom: none; }
+  .nav-links.open a:hover  { color: var(--green); background: rgba(0,255,159,0.07); }
+  .nav-links.open a:hover::before { content: '> '; }
 }
 
 @media (max-width: 640px) {
   section      { padding: 80px 16px 50px; }
   nav#main-nav { padding: 10px 12px; }
   .hero-name   { font-size: 22px; }
-  .nav-btn     { font-size: 8px; padding: 6px 8px; }
-  .nav-btn.track-btn { font-size: 8px; }
+  .nav-btn     { font-size: 9px; padding: 7px 10px; }
 
-  /* Force achievement grid to single column — prevents 300px minmax overflowing
-     narrow screens (e.g. 320px viewport with 16px padding = 288px content) */
+  /* 300px minmax overflows a 288px content area on narrow screens */
   .achievement-grid { grid-template-columns: 1fr; }
 
-  /* Prevent date strings from breaking layout */
   .q-date      { white-space: normal; font-size: 15px; }
   .q-head      { flex-direction: column; gap: 4px; }
-
-  /* Stack attr grid to single column on small screens */
   .attr-grid   { grid-template-columns: 1fr; }
   .char-class  { font-size: 18px; }
 
-  /* Contact cards vertical stack */
   .contact-row  { flex-direction: column; align-items: center; }
   .contact-card { width: 100%; max-width: 320px; }
 
@@ -566,9 +575,8 @@ section {
   .tag         { font-size: 7px; padding: 7px 10px; }
 }
 
-/* On very small phones (320-360px), the nav can still overflow if both music
-   buttons + burger don't fit. Hide the secondary NEXT/track button at this size. */
-@media (max-width: 420px) {
+/* Very narrow phones: hide NEXT icon button, keep only BGM icon + burger */
+@media (max-width: 380px) {
   .nav-btn.track-btn { display: none; }
   .nav-brand         { font-size: 9px; }
 }

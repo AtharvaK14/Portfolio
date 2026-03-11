@@ -144,18 +144,19 @@ function stopPlayback() {
 
 function toggleMusic() {
   ensureContext();
-  const btn = document.getElementById('musicBtn');
+  const btn    = document.getElementById('musicBtn');
+  const textEl = document.getElementById('musicText');
 
   if (!musicOn) {
     musicOn = true;
     noteIdx = 0;
-    btn.classList.add('on');
+    if (btn) btn.classList.add('on');
     updateMusicLabel();
     playStep();
   } else {
     stopPlayback();
-    btn.classList.remove('on');
-    btn.textContent = '♪ BGM: OFF';
+    if (btn) btn.classList.remove('on');
+    if (textEl) textEl.textContent = ' BGM: OFF';
   }
 }
 
@@ -167,15 +168,27 @@ function cycleTrack() {
   noteIdx  = 0;
   if (wasOn) {
     musicOn = true;
-    document.getElementById('musicBtn').classList.add('on');
+    const btn = document.getElementById('musicBtn');
+    if (btn) btn.classList.add('on');
     playStep();
   }
   updateMusicLabel();
+
+  // Brief flash on the NEXT button so it acknowledges the tap, then clears.
+  // On desktop CSS :hover handles feedback; on mobile :hover sticks forever.
+  const trackBtn = document.querySelector('.track-btn');
+  if (trackBtn) {
+    trackBtn.classList.add('flash');
+    clearTimeout(trackBtn._flashTimer);
+    trackBtn._flashTimer = setTimeout(() => {
+      trackBtn.classList.remove('flash');
+    }, 1200);
+  }
 }
 
 function updateMusicLabel() {
-  const btn = document.getElementById('musicBtn');
-  btn.textContent = musicOn
-    ? `♪ ${TRACKS[trackIdx].name}`
-    : `♪ BGM: OFF`;
+  const textEl = document.getElementById('musicText');
+  if (textEl) {
+    textEl.textContent = musicOn ? ` ${TRACKS[trackIdx].name}` : ' BGM: OFF';
+  }
 }

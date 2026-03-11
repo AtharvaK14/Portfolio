@@ -27,7 +27,11 @@
     cvs.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', () => { resize(); if (phase === 'playing') initPositions(); });
+  window.addEventListener('resize', () => {
+    resize();
+    // Do NOT call initPositions during gameplay — a mobile address-bar
+    // hide/show fires resize and would teleport the player mid-game.
+  });
 
   const GW = () => cvs.width;
   const GH = () => cvs.height;
@@ -104,6 +108,14 @@
   let shootCD;
   let hitFlash;  // frames remaining for screen flash
 
+  // ── Frozen game-space dimensions ─────────────────────────────────────────
+  // Captured ONCE at initGame(). All game logic (hitEdge, player movement,
+  // bullet bounds) uses these — never live GW()/GH().
+  // Root cause of mobile instant-death: mobile browsers fire resize when the
+  // address bar hides/shows. If update() used live GW(), a 10px width shrink
+  // makes hitEdge true every frame → enemies drop 16px/frame → game over in <1s.
+  let gameW = 0, gameH = 0;
+
   // ── Input ─────────────────────────────────────────────────────────────────
   const gKeys = {};
   document.addEventListener('keydown', e => {
@@ -152,7 +164,10 @@
 
   // ── Init ──────────────────────────────────────────────────────────────────
   function initGame() {
-    const w = GW(), h = GH();
+    // Freeze dimensions NOW — never read GW()/GH() in update() after this.
+    gameW = GW();
+    gameH = GH();
+    const w = gameW, h = gameH;
     score   = 0;
     lives   = 3;
     frameN  = 0;
@@ -240,7 +255,8 @@
     if (phase !== 'playing') return;
     frameN++;
 
-    const w = GW(), h = GH();
+    // Use FROZEN dimensions — see gameW/gameH declaration.
+    const w = gameW, h = gameH;
     const leftDown  = gKeys['ArrowLeft']  || gKeys['a'] || touch.left;
     const rightDown = gKeys['ArrowRight'] || gKeys['d'] || touch.right;
     const fireDown  = gKeys[' '] || gKeys['z'] || touch.fire;
@@ -278,15 +294,26 @@
     let minX = Infinity, maxX = -Infinity;
     alive.forEach(e => { if (e.x < minX) minX = e.x; if (e.x > maxX) maxX = e.x; });
 
-    const pad = dynECW * 0.5 + 12;
+    // Wall margin: flat 10px. maxX is already the enemy CENTRE, so adding
+    // dynECW*0.5 gives the right edge — do NOT also add it to pad (double-count
+    // was the original cause of hitEdge firing on frame 1 on mobile screens).
+    const pad = 10;
     let hitEdge = (enemyDX > 0 && maxX + dynECW * 0.5 + speed > w - pad) ||
                   (enemyDX < 0 && minX - dynECW * 0.5 - speed < pad);
 
     if (hitEdge) {
       enemyDX *= -1;
-      enemies.forEach(e => { if (e.alive) e.y += 16; });
+      // On mobile the grid is narrower (sometimes only ~12px wider than the
+      // enemy block), so hitEdge fires every ~8 frames at any speed.
+      // dropPx=4 (vs desktop 16) and a lower movePx cap together reduce
+      // the rate at which enemies descend to a playable pace.
+      const dropPx = IS_TOUCH ? 4 : 16;
+      enemies.forEach(e => { if (e.alive) e.y += dropPx; });
     } else {
-      enemies.forEach(e => { if (e.alive) e.x += enemyDX * speed; });
+      // Cap horizontal speed lower on mobile so enemies take longer to
+      // traverse the narrow grid and hitEdge fires less frequently.
+      const movePx = IS_TOUCH ? Math.min(speed, 0.7) : speed;
+      enemies.forEach(e => { if (e.alive) e.x += enemyDX * movePx; });
     }
 
     // Animate enemy sprites every 22 frames
@@ -438,12 +465,12 @@
     ctx.textAlign = 'left';
     ctx.fillText('SCORE: ' + String(score).padStart(5, '0'), 20, 38);
 
-    // Lives — larger hearts so health is clearly visible
+    // Lives — large hearts, tight spacing so they don't crowd score/exit
     ctx.font      = '22px "Press Start 2P"';
     ctx.textAlign = 'center';
     for (let i = 0; i < 3; i++) {
       ctx.fillStyle = i < lives ? '#ff2d78' : 'rgba(255,45,120,0.2)';
-      ctx.fillText(i < lives ? '♥' : '♡', w * 0.5 - 40 + i * 44, 40);
+      ctx.fillText(i < lives ? '♥' : '♡', w * 0.5 - 26 + i * 26, 40);
     }
 
     // EXIT button
