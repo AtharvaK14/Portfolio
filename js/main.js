@@ -132,7 +132,7 @@ const PROJECT_DATA = {
       'Two-stage <b>GitHub Actions</b> pipeline (smoke on push, parallel regression nightly via pytest-xdist) with Allure reports on <b>GitHub Pages</b>',
     ],
     actions: [
-      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/API-Test-Automation-Framework' },
+      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/api-quality-gate' },
     ],
   },
 
@@ -215,6 +215,7 @@ const PROJECT_DATA = {
     ],
     actions: [
       { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/College-ERP-System' },
+      { label: 'LIVE SITE', cls: 'ach-btn-website', href: 'https://college-erp-system-one.vercel.app/login' },
     ],
   },
 };
