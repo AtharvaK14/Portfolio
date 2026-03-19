@@ -147,3 +147,24 @@ document.addEventListener('click', e => {
     }
   });
 })();
+
+// ── Equalize project card base heights per row ───────────
+function equalizeAchCards() {
+  const cards = [...document.querySelectorAll('.ach-card')];
+  cards.forEach(c => c.style.minHeight = '');
+
+  const rows = new Map();
+  cards.forEach(card => {
+    const key = Math.round(card.getBoundingClientRect().top);
+    if (!rows.has(key)) rows.set(key, []);
+    rows.get(key).push(card);
+  });
+
+  rows.forEach(row => {
+    const maxH = Math.max(...row.map(c => c.offsetHeight));
+    row.forEach(c => c.style.minHeight = maxH + 'px');
+  });
+}
+
+window.addEventListener('load', equalizeAchCards);
+window.addEventListener('resize', equalizeAchCards);

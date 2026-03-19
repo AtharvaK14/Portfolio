@@ -327,9 +327,10 @@ section {
 
 .ach-card {
   border: 2px solid rgba(255,215,0,0.28); background: rgba(5,5,16,0.94);
-  padding: 26px; position: relative; overflow: hidden;
-  transition: all 0.3s;
-  cursor: pointer;
+  padding: 26px; position: relative;
+  transition: border-color 0.3s, box-shadow 0.3s; cursor: pointer;
+  display: flex; flex-direction: column;
+  /* no overflow:hidden -- expand must grow the card downward */
 }
 .ach-card::before {
   content: 'ACHIEVEMENT UNLOCKED';
@@ -347,15 +348,31 @@ section {
 .ach-card:hover::after,
 .ach-card.expanded::after { opacity: 1; }
 
-/* Base content -- always visible */
-.ach-content { display: flex; flex-direction: column; gap: 6px; }
+.ach-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
 
 .ach-icon  { font-size: 32px; margin-bottom: 4px; display: block; }
 .ach-name  { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); line-height: 1.75; }
 .ach-tech  { font-size: 21px; color: var(--gold); letter-spacing: 1px; }
 .ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; }
 
-/* Expandable bullet section */
+.ach-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  padding-top: 16px; margin-top: auto;
+}
+.ach-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  padding: 9px 13px; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; background: transparent; border: none;
+}
+.ach-btn-github  { color: var(--blue);  border: 1px solid rgba(0,200,255,0.4); }
+.ach-btn-github:hover  { background: var(--blue);  color: var(--bg); box-shadow: 0 0 12px rgba(0,200,255,0.3); }
+.ach-btn-website { color: var(--green); border: 1px solid rgba(0,255,159,0.4); }
+.ach-btn-website:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 12px rgba(0,255,159,0.3); }
+.ach-btn-video   { color: var(--pink);  border: 1px solid rgba(255,45,120,0.4); }
+.ach-btn-video:hover   { background: var(--pink);  color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.3); }
+
+/* Smooth grid-template-rows animation -- static position pushes row below down */
 .ach-expand {
   display: grid;
   grid-template-rows: 0fr;
@@ -367,8 +384,11 @@ section {
   margin-top: 0;
 }
 .ach-expand-inner { overflow: hidden; }
+.ach-expand-inner .ach-bullets {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,215,0,0.15);
+}
 
-/* Desktop hover expansion -- short entry delay prevents accidental triggers */
 @media (hover: hover) {
   .ach-card:hover .ach-expand {
     grid-template-rows: 1fr;
@@ -377,8 +397,6 @@ section {
     transition-delay: 0.12s;
   }
 }
-
-/* Touch/click expansion via JS .expanded class */
 .ach-card.expanded .ach-expand {
   grid-template-rows: 1fr;
   opacity: 1;
@@ -394,14 +412,18 @@ section {
 .ach-bullets b { color: var(--gold); }
 
 /* Divider between base and bullets */
+.ach-expand-inner {
+  padding: 14px 26px 18px;
+}
+
 .ach-expand-inner .ach-bullets {
-  padding-top: 14px;
   border-top: 1px solid rgba(255,215,0,0.15);
+  padding-top: 14px;
 }
 
 .ach-actions {
   display: flex; gap: 10px; flex-wrap: wrap;
-  padding-top: 16px;
+  padding-top: 16px; margin-top: auto;
 }
 .ach-btn {
   display: inline-flex; align-items: center; gap: 6px;
