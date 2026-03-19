@@ -80,14 +80,12 @@ nav#main-nav {
 
 .nav-controls { display: flex; gap: 8px; flex-shrink: 0; }
 
-/* nav-right groups burger + controls — always stays together */
 .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-/* Icon / text split inside music buttons */
 .btn-icon { flex-shrink: 0; }
 .btn-text { white-space: nowrap; }
 
-/* ── Burger button (hidden on desktop) ───────────────────── */
+/* ── Burger button ───────────────────────────────────── */
 .burger-btn {
   display: none;
   font-family: 'Press Start 2P', monospace; font-size: 14px;
@@ -114,15 +112,11 @@ nav#main-nav {
 }
 .nav-btn.track-btn:hover { border-color: var(--green); color: var(--bg); }
 
-/* .flash — timed glow used by JS after a touch tap on the NEXT button.
-   Fades out via transition so it doesn't cut off abruptly. */
 .nav-btn.flash {
   background: var(--green); color: var(--bg);
   box-shadow: 0 0 14px rgba(0,255,159,0.4);
 }
 
-/* On true touch devices, disable sticky :hover so buttons don't stay
-   glowing after a tap. JS .flash handles tap feedback instead. */
 @media (hover: none) {
   .nav-btn:hover { background: transparent; color: var(--green); box-shadow: none; }
   .nav-btn.track-btn:hover { border-color: rgba(0,255,159,0.4); color: rgba(0,255,159,0.7); background: transparent; }
@@ -136,7 +130,6 @@ section {
   align-items: center; justify-content: center;
 }
 
-/* Section title block */
 .section-header {
   text-align: center; margin-bottom: 48px; width: 100%;
 }
@@ -276,16 +269,59 @@ section {
 
 .q-body {
   border: 1px solid rgba(255,45,120,0.28); background: rgba(255,45,120,0.04);
-  padding: 22px 26px; transition: border-color 0.3s, box-shadow 0.3s;
+  padding: 22px 26px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  position: relative;
 }
 .q-body:hover { border-color: var(--pink); box-shadow: 0 0 24px rgba(255,45,120,0.14); }
+.q-body.expanded { border-color: var(--pink); box-shadow: 0 0 24px rgba(255,45,120,0.18); }
 
 .q-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
 .q-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--white); }
 .q-date  { font-size: 20px; color: rgba(232,232,255,0.42); white-space: nowrap; }
 .q-company { font-size: 24px; color: var(--pink); letter-spacing: 1px; margin-bottom: 10px; }
+
+/* Summary — always visible */
+.q-summary {
+  font-size: 21px; color: rgba(232,232,255,0.72); line-height: 1.65;
+}
+
+/* Expand hint */
+.q-expand-hint {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Press Start 2P', monospace; font-size: 7px;
+  color: rgba(255,45,120,0.5); margin-top: 12px;
+  transition: opacity 0.25s, max-height 0.25s;
+  user-select: none;
+  max-height: 30px; overflow: hidden;
+}
+.q-expand-hint::before { content: '▼'; font-size: 8px; }
+
+/* Details panel: collapsed by default */
+.q-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease;
+  opacity: 0;
+}
+/* Desktop: hover expands */
+@media (hover: hover) {
+  .q-body:hover .q-details { max-height: 700px; opacity: 1; }
+  .q-body:hover .q-expand-hint { opacity: 0; max-height: 0; margin-top: 0; }
+}
+/* Always respond to .expanded class (used by JS for touch + desktop click) */
+.q-body.expanded .q-details { max-height: 700px; opacity: 1; }
+.q-body.expanded .q-expand-hint { opacity: 0; max-height: 0; margin-top: 0; }
+
+.q-details-inner {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,45,120,0.15);
+  margin-top: 14px;
+}
+
 .q-context { font-size: 18px; color: rgba(232,232,255,0.35); margin-bottom: 10px; font-style: italic; }
-.q-summary { font-size: 21px; color: rgba(232,232,255,0.78); margin-bottom: 14px; line-height: 1.65; }
 
 .q-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .q-bullets li {
@@ -300,21 +336,22 @@ section {
 
 .achievement-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 22px; max-width: 1200px; width: 100%;
+  gap: 28px; max-width: 1200px; width: 100%;
 }
 
 .ach-card {
   border: 2px solid rgba(255,215,0,0.28); background: rgba(5,5,16,0.94);
   padding: 26px; position: relative; overflow: hidden;
   transition: all 0.3s;
-  /* KEY FIX: flex column so button row always stays at bottom */
   display: flex; flex-direction: column;
+  cursor: pointer;
 }
 .ach-card::before {
   content: 'ACHIEVEMENT UNLOCKED';
   position: absolute; top: 8px; right: 10px;
   font-family: 'Press Start 2P', monospace; font-size: 5px;
   color: var(--gold); opacity: 0.4; letter-spacing: 1px;
+  pointer-events: none;
 }
 .ach-card::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
@@ -324,26 +361,17 @@ section {
 .ach-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,215,0,0.18); }
 .ach-card:hover::after { opacity: 1; }
 
-/* Card content area grows, pushes buttons down */
 .ach-content { flex: 1; display: flex; flex-direction: column; }
 
 .ach-icon  { font-size: 32px; margin-bottom: 10px; display: block; }
 .ach-name  { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); margin-bottom: 4px; line-height: 1.75; }
 .ach-tech  { font-size: 21px; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; }
-.ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; margin-bottom: 12px; }
+.ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; flex: 1; }
 
-.ach-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; flex: 1; }
-.ach-bullets li {
-  font-size: 19px; color: rgba(232,232,255,0.62); padding-left: 14px;
-  position: relative; line-height: 1.5;
-}
-.ach-bullets li::before { content: '•'; position: absolute; left: 0; color: var(--gold); }
-.ach-bullets b { color: var(--gold); }
-
-/* Button row always pinned to bottom via margin-top: auto */
+/* Button row pinned to bottom */
 .ach-actions {
   display: flex; gap: 10px; flex-wrap: wrap;
-  margin-top: auto; padding-top: 18px;
+  margin-top: 18px;
 }
 .ach-btn {
   display: inline-flex; align-items: center; gap: 6px;
@@ -357,11 +385,162 @@ section {
 .ach-btn-website:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 12px rgba(0,255,159,0.3); }
 .ach-btn-video  { color: var(--pink);  border: 1px solid rgba(255,45,120,0.4); }
 .ach-btn-video:hover   { background: var(--pink);  color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.3); }
+.ach-btn-details { color: var(--gold); border: 1px solid rgba(255,215,0,0.4); }
+.ach-btn-details:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+
+/* ── Project Detail Modal (retro OS window) ──────────────── */
+.proj-modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9100;
+  background: rgba(0, 0, 0, 0.82);
+  align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.proj-modal-overlay.open { display: flex; }
+
+.proj-modal-window {
+  background: var(--bg2);
+  border: 2px solid var(--green);
+  box-shadow:
+    0 0 0 1px rgba(0,255,159,0.12),
+    0 0 40px rgba(0,255,159,0.2),
+    0 0 80px rgba(0,255,159,0.08);
+  width: 90%; max-width: 680px;
+  max-height: 82vh;
+  display: flex; flex-direction: column;
+  position: relative;
+  transform: scale(0.88) translateY(24px);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.34, 1.26, 0.64, 1),
+              opacity 0.28s ease;
+}
+.proj-modal-overlay.open .proj-modal-window {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Title bar */
+.proj-modal-titlebar {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(0,255,159,0.07);
+  border-bottom: 2px solid var(--green);
+  padding: 10px 16px;
+  flex-shrink: 0;
+}
+
+.proj-modal-dots { display: flex; gap: 7px; flex-shrink: 0; }
+.proj-modal-dot {
+  width: 12px; height: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.proj-modal-dot:hover { opacity: 0.75; }
+.dot-min    { background: var(--gold);  border: 1px solid rgba(255,215,0,0.6); }
+.dot-max    { background: rgba(0,255,159,0.3); border: 1px solid rgba(0,255,159,0.4); }
+
+.proj-modal-titletext {
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  color: var(--green); letter-spacing: 1px;
+  flex: 1; text-align: center;
+  text-shadow: 0 0 10px rgba(0,255,159,0.4);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.proj-modal-close {
+  background: transparent; border: 1px solid rgba(255,45,120,0.4);
+  color: var(--pink); font-family: 'Press Start 2P', monospace; font-size: 9px;
+  padding: 5px 9px; cursor: pointer; flex-shrink: 0;
+  transition: all 0.2s; line-height: 1;
+}
+.proj-modal-close:hover { background: var(--pink); color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.4); }
+
+/* Address bar */
+.proj-modal-addressbar {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(0,0,0,0.45);
+  border-bottom: 1px solid rgba(0,255,159,0.12);
+  padding: 7px 16px;
+  flex-shrink: 0;
+}
+.proj-modal-url-icon { font-size: 15px; opacity: 0.45; flex-shrink: 0; }
+.proj-modal-url {
+  font-family: 'VT323', monospace; font-size: 19px;
+  color: rgba(0,255,159,0.5); letter-spacing: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Scrollable content */
+.proj-modal-content {
+  overflow-y: auto;
+  padding: 28px 28px 24px;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,255,159,0.3) transparent;
+}
+.proj-modal-content::-webkit-scrollbar { width: 6px; }
+.proj-modal-content::-webkit-scrollbar-track { background: transparent; }
+.proj-modal-content::-webkit-scrollbar-thumb { background: rgba(0,255,159,0.3); }
+
+/* Content elements */
+.pmod-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.pmod-icon { font-size: 38px; flex-shrink: 0; line-height: 1; }
+.pmod-header-text { display: flex; flex-direction: column; gap: 4px; }
+.pmod-title {
+  font-family: 'Press Start 2P', monospace; font-size: 12px;
+  color: var(--white); line-height: 1.7;
+}
+.pmod-tech { font-size: 21px; color: var(--gold); letter-spacing: 1px; line-height: 1.5; }
+
+.pmod-divider {
+  height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, rgba(0,255,159,0.3), transparent);
+  margin: 18px 0;
+}
+
+.pmod-desc {
+  font-size: 22px; color: rgba(232,232,255,0.82); line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.pmod-bullets-label {
+  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  color: rgba(0,255,159,0.55); letter-spacing: 2px;
+  margin-bottom: 12px; display: block;
+}
+
+.pmod-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 22px;
+}
+.pmod-bullets li {
+  font-size: 20px; color: rgba(232,232,255,0.75);
+  padding-left: 20px; position: relative; line-height: 1.55;
+}
+.pmod-bullets li::before {
+  content: '▶'; position: absolute; left: 0;
+  color: var(--green); font-size: 9px; top: 4px;
+}
+.pmod-bullets b { color: var(--gold); }
+
+.pmod-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* CRT scanlines inside modal */
+.proj-modal-window::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none; z-index: 1;
+}
+.proj-modal-titlebar,
+.proj-modal-addressbar,
+.proj-modal-content { position: relative; z-index: 2; }
 
 /* ── Skills / Character Stats ─────────────────────────── */
 #skills { background: linear-gradient(180deg, rgba(0,255,159,0.018), transparent 100%); }
 
-/* Proficiency legend */
 .proficiency-legend {
   display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
   margin-bottom: 36px; max-width: 1000px; width: 100%;
@@ -400,7 +579,6 @@ section {
 .skill-tier {
   font-family: 'Press Start 2P', monospace; font-size: 8px;
   color: var(--green); letter-spacing: 1px;
-  /* starts empty, filled by JS after animation */
 }
 
 .skill-bar {
@@ -408,7 +586,6 @@ section {
   border: 1px solid rgba(0,255,159,0.15); overflow: hidden; position: relative;
 }
 
-/* Tier tick marks */
 .skill-bar::before {
   content: '';
   position: absolute; top: 0; bottom: 0;
@@ -517,15 +694,11 @@ section {
 }
 
 @media (max-width: 768px) {
-  /* Show burger, hide desktop inline links */
   .burger-btn { display: block; }
   .nav-links  { display: none; }
   .nav-brand  { font-size: 10px; }
-
-  /* Icons only on mobile — hide button text */
   .btn-text   { display: none; }
 
-  /* Compact dropdown: right-aligned, NOT full screen */
   .nav-links.open {
     display: flex; flex-direction: column;
     position: fixed;
@@ -552,6 +725,9 @@ section {
   .nav-links.open li:last-child a { border-bottom: none; }
   .nav-links.open a:hover  { color: var(--green); background: rgba(0,255,159,0.07); }
   .nav-links.open a:hover::before { content: '> '; }
+
+  /* Modal full-width on mobile */
+  .proj-modal-window { width: 96%; max-height: 88vh; }
 }
 
 @media (max-width: 640px) {
@@ -560,7 +736,6 @@ section {
   .hero-name   { font-size: 22px; }
   .nav-btn     { font-size: 9px; padding: 7px 10px; }
 
-  /* 300px minmax overflows a 288px content area on narrow screens */
   .achievement-grid { grid-template-columns: 1fr; }
 
   .q-date      { white-space: normal; font-size: 15px; }
@@ -573,9 +748,12 @@ section {
 
   .hero-tags   { gap: 8px; }
   .tag         { font-size: 7px; padding: 7px 10px; }
+
+  .proj-modal-content { padding: 18px 16px; }
+  .pmod-title { font-size: 10px; }
+  .proj-modal-titletext { font-size: 7px; }
 }
 
-/* Very narrow phones: hide NEXT icon button, keep only BGM icon + burger */
 @media (max-width: 380px) {
   .nav-btn.track-btn { display: none; }
   .nav-brand         { font-size: 9px; }

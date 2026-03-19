@@ -95,6 +95,7 @@
     </div>
   </section>
 
+  <!-- ── Experience: base always visible, details expand on hover / tap ── -->
   <section id="experience">
     <div class="section-header">
       <h2 class="section-title">QUEST LOG</h2>
@@ -104,73 +105,102 @@
 
       <div class="quest-item reveal">
         <div class="q-line"></div>
-        <div class="q-body">
+        <div class="q-body" onclick="toggleQuest(this)">
           <div class="q-head">
             <span class="q-title">SOFTWARE QA TESTER</span>
             <span class="q-date">MAR 2020 -- MAR 2021</span>
           </div>
           <div class="q-company">UBISOFT ENTERTAINMENT | Pune, India</div>
-          <div class="q-context">Global video game publisher serving millions of players across PC, console, and mobile
+          <p class="q-summary">Built the team's Selenium/PyTest framework from scratch, taking test coverage from 60% to
+            82% and cutting manual effort by 40%. Owned smoke testing for PC releases and kept build stability above 95%
+            through BitBucket CI/CD integration.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Global video game publisher serving millions of players across PC, console, and
+                mobile</div>
+              <ul class="q-bullets">
+                <li>Designed and executed comprehensive test plans for functional, regression, and smoke testing across
+                  desktop and console platforms, ensuring <b>100% feature coverage</b></li>
+                <li>Architected test automation framework using <b>Selenium WebDriver and PyTest</b>, increasing test
+                  coverage from <b>60% to 82%</b>, improving execution efficiency by <b>30%</b>, and reducing manual
+                  testing
+                  effort by <b>40%</b></li>
+                <li>Drove quality assurance for <b>15+ features</b>, reducing critical defects from <b>35% to 29%</b>
+                  and
+                  preventing production incidents affecting thousands of users</li>
+                <li>Led smoke testing for PC and collaborated with Mobile and Console QA teams, reducing inter-platform
+                  bugs
+                  by <b>35%</b></li>
+                <li>Integrated automated test suites with <b>BitBucket CI/CD pipelines</b>, maintaining build stability
+                  above <b>95%</b> and reducing post-release incidents from <b>25% to 15%</b></li>
+                <li>Participated in <b>Agile/Scrum ceremonies</b> -- daily standups, sprint planning, retrospectives
+                </li>
+              </ul>
+            </div>
           </div>
-          <ul class="q-bullets">
-            <li>Designed and executed comprehensive test plans for functional, regression, and smoke testing across
-              desktop and console platforms, ensuring <b>100% feature coverage</b></li>
-            <li>Architected test automation framework using <b>Selenium WebDriver and PyTest</b>, increasing test
-              coverage from <b>60% to 82%</b>, improving execution efficiency by <b>30%</b>, and reducing manual testing
-              effort by <b>40%</b></li>
-            <li>Drove quality assurance for <b>15+ features</b>, reducing critical defects from <b>35% to 29%</b> and
-              preventing production incidents affecting thousands of users</li>
-            <li>Led smoke testing for PC and collaborated with Mobile and Console QA teams, reducing inter-platform bugs
-              by <b>35%</b></li>
-            <li>Integrated automated test suites with <b>BitBucket CI/CD pipelines</b>, maintaining build stability
-              above <b>95%</b> and reducing post-release incidents from <b>25% to 15%</b></li>
-            <li>Participated in <b>Agile/Scrum ceremonies</b> -- daily standups, sprint planning, retrospectives</li>
-          </ul>
         </div>
       </div>
 
       <div class="quest-item reveal">
         <div class="q-line"></div>
-        <div class="q-body">
+        <div class="q-body" onclick="toggleQuest(this)">
           <div class="q-head">
             <span class="q-title">SOFTWARE QA TESTER</span>
             <span class="q-date">OCT 2019 -- FEB 2020</span>
           </div>
           <div class="q-company">EXPLEO INDIA INFOSYSTEM | Pune, India</div>
-          <div class="q-context">Global quality engineering company for enterprise mobile applications serving 100K+
-            users</div>
-          <ul class="q-bullets">
-            <li>Delivered <b>zero critical production bugs</b> through 300+ test cases across <b>15+ iOS device
-                models</b>, ensuring 100% device coverage</li>
-            <li>Orchestrated smoke and regression testing cycles, reducing defect escape rate from <b>12% to 3%</b></li>
-            <li>Managed test execution using <b>Xcode and TestFlight</b>; performed root cause analysis reducing bug
-              resolution from <b>8 to 6 hours (25% faster)</b></li>
-            <li>Designed test coverage plans for <b>8 new features</b>, ensuring on-time delivery</li>
-          </ul>
+          <p class="q-summary">Tested a consumer iOS app across 15+ physical devices with 300+ test cases and zero
+            critical production bugs shipped. Cut the defect escape rate from 12% to 3% through structured smoke and
+            regression cycles.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Global quality engineering company for enterprise mobile applications serving 100K+
+                users</div>
+              <ul class="q-bullets">
+                <li>Delivered <b>zero critical production bugs</b> through 300+ test cases across <b>15+ iOS device
+                    models</b>, ensuring 100% device coverage</li>
+                <li>Orchestrated smoke and regression testing cycles, reducing defect escape rate from <b>12% to 3%</b>
+                </li>
+                <li>Managed test execution using <b>Xcode and TestFlight</b>; performed root cause analysis reducing bug
+                  resolution from <b>8 to 6 hours (25% faster)</b></li>
+                <li>Designed test coverage plans for <b>8 new features</b>, ensuring on-time delivery</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="quest-item reveal">
         <div class="q-line"></div>
-        <div class="q-body">
+        <div class="q-body" onclick="toggleQuest(this)">
           <div class="q-head">
             <span class="q-title">WEB DEV &amp; DESIGN INTERN</span>
             <span class="q-date">FEB 2022 -- MAR 2022</span>
           </div>
           <div class="q-company">OASIS INFOBYTE | Pune, India</div>
-          <div class="q-context">Digital solutions company specializing in web development and UI/UX for SMBs</div>
-          <ul class="q-bullets">
-            <li>Performed API testing using <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code
-                coverage</b> via Jest automation</li>
-            <li>Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b></li>
-            <li>Documented the full technology stack, enabling faster onboarding and consistent build processes</li>
-          </ul>
+          <p class="q-summary">Built and API-tested three web apps using Postman and Jest automation inside GitHub
+            Actions pipelines, hitting 85% code coverage by end of internship.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Digital solutions company specializing in web development and UI/UX for SMBs</div>
+              <ul class="q-bullets">
+                <li>Performed API testing using <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code
+                    coverage</b> via Jest automation</li>
+                <li>Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b></li>
+                <li>Documented the full technology stack, enabling faster onboarding and consistent build processes</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
+  <!-- ── Projects: simplified cards — click opens detail modal ── -->
   <section id="project">
     <div class="section-header">
       <h2 class="section-title">ACHIEVEMENTS UNLOCKED</h2>
@@ -178,131 +208,101 @@
     </div>
     <div class="achievement-grid">
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('api-framework')">
         <div class="ach-content">
           <span class="ach-icon">&#9881;</span>
           <div class="ach-name">API TEST AUTOMATION FRAMEWORK</div>
-          <div class="ach-tech">Python, PyTest, Pydantic v2, GitHub Actions, Allure</div>
+          <div class="ach-tech">Python · PyTest · GitHub Actions · Allure</div>
           <p class="ach-desc">Production-grade API test framework targeting the GitHub REST API with contract
             validation, SLA enforcement, and live report deployment.</p>
-          <ul class="ach-bullets">
-            <li><b>53 test cases</b> across functional, error handling, and performance with modular fixture
-              architecture and centralized test data</li>
-            <li><b>Pydantic v2 schema validation</b> and per-endpoint SLAs (800ms / 1200ms) via custom <b>perf_timer</b>
-              fixture -- beyond status code checks</li>
-            <li>Adversarial coverage: <b>404, 401</b>, and auth contrast tests confirming authenticated vs. anonymous
-              client behavior</li>
-            <li>Two-stage <b>GitHub Actions</b> pipeline (smoke on push, parallel regression nightly via pytest-xdist)
-              with Allure reports on <b>GitHub Pages</b></li>
-          </ul>
         </div>
         <div class="ach-actions">
           <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/API-Test-Automation-Framework"
-            target="_blank">GITHUB</a>
+            target="_blank" onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('api-framework')">DETAILS</button>
         </div>
       </div>
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('vr-carnival')">
         <div class="ach-content">
           <span class="ach-icon">&#127918;</span>
           <div class="ach-name">VR CARNIVAL EXPERIENCE</div>
-          <div class="ach-tech">Unreal Engine 5, Blueprint, C++</div>
+          <div class="ach-tech">Unreal Engine 5 · Blueprint · C++</div>
           <p class="ach-desc">Immersive VR carnival with interactive mini-games using physics-based mechanics and
             Blueprint scripting.</p>
-          <ul class="ach-bullets">
-            <li>Led development of immersive VR environment with physics-based gameplay, collision detection, and
-              spatial audio</li>
-            <li>Implemented 2 interactive mini-games with real-time score tracking; <b>95% user engagement</b></li>
-            <li>Created Blueprint scripting for game logic and player movement, reducing development time by <b>40%</b>
-            </li>
-            <li>Identified and resolved stability issues through structured gameplay and performance testing</li>
-          </ul>
         </div>
         <div class="ach-actions">
-          <button class="ach-btn ach-btn-video" onclick="openVideo()">WATCH DEMO</button>
+          <button class="ach-btn ach-btn-video" onclick="event.stopPropagation(); openVideo()">WATCH DEMO</button>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('vr-carnival')">DETAILS</button>
         </div>
       </div>
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('rubber-ducky')">
         <div class="ach-content">
           <span class="ach-icon">&#129414;</span>
           <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
-          <div class="ach-tech">Python, JavaScript, Node.js</div>
+          <div class="ach-tech">Python · JavaScript · Node.js</div>
           <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and
             duck-themed personality.</p>
-          <ul class="ach-bullets">
-            <li>Built a regex-based rule engine with <b>100+ debugging rules</b> across Python, JavaScript/Node.js, and
-              C/C++</li>
-            <li>Deployed as both web app and Node.js CLI sharing one rule file -- updates propagate instantly with no
-              duplication</li>
-            <li>Automated testing achieves <b>90% success rate</b> in error detection across 50+ error types</li>
-          </ul>
         </div>
         <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot"
-            target="_blank">GITHUB</a>
-          <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/"
-            target="_blank">LIVE SITE</a>
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/" target="_blank"
+            onclick="event.stopPropagation()">LIVE SITE</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('rubber-ducky')">DETAILS</button>
         </div>
       </div>
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('post-fire')">
         <div class="ach-content">
           <span class="ach-icon">&#128293;</span>
           <div class="ach-name">POST-FIRE ASSESSMENT APP</div>
-          <div class="ach-tech">HTML, CSS, JavaScript</div>
+          <div class="ach-tech">HTML · CSS · JavaScript</div>
           <p class="ach-desc">Mobile web app helping field teams log wildfire ash data with real-time storage for
             scientific assessments.</p>
-          <ul class="ach-bullets">
-            <li>Built responsive web app for real-time wildfire environmental data capture by field teams</li>
-            <li>Designed UI with form validation and local storage, improving data accuracy by <b>60%</b></li>
-            <li>Implemented JSON parsing and offline persistence via browser storage APIs</li>
-          </ul>
         </div>
         <div class="ach-actions">
           <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App"
-            target="_blank">GITHUB</a>
+            target="_blank" onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('post-fire')">DETAILS</button>
         </div>
       </div>
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('pneumonia')">
         <div class="ach-content">
           <span class="ach-icon">&#129753;</span>
           <div class="ach-name">PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING</div>
-          <div class="ach-tech">Python, TensorFlow, Keras</div>
+          <div class="ach-tech">Python · TensorFlow · Keras</div>
           <p class="ach-desc">Deep learning model detecting pneumonia in chest X-ray images to aid early clinical
             diagnosis.</p>
-          <ul class="ach-bullets">
-            <li>Trained CNN with batch normalization, ReLU activation, and max pooling on chest X-ray datasets</li>
-            <li>Applied transfer learning with pre-trained models to improve performance on limited medical data</li>
-            <li>Designed to reduce diagnostic workload and improve early detection accuracy for clinicians</li>
-          </ul>
         </div>
         <div class="ach-actions">
           <a class="ach-btn ach-btn-github"
-            href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning"
-            target="_blank">GITHUB</a>
+            href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('pneumonia')">DETAILS</button>
         </div>
       </div>
 
-      <div class="ach-card reveal">
+      <div class="ach-card reveal" onclick="openProjectModal('college-erp')">
         <div class="ach-content">
           <span class="ach-icon">&#127979;</span>
           <div class="ach-name">COLLEGE ERP SYSTEM</div>
-          <div class="ach-tech">FastAPI, Next.js 14, PostgreSQL, Docker</div>
+          <div class="ach-tech">FastAPI · Next.js 14 · PostgreSQL · Docker</div>
           <p class="ach-desc">Full-stack ERP with role-based portals for Admins, Teachers, and Students across 57 REST
             API endpoints.</p>
-          <ul class="ach-bullets">
-            <li>Built role-based portals with <b>JWT auth, OAuth2 refresh tokens</b>, bcrypt hashing, and CORS-protected
-              API</li>
-            <li>Implemented attendance calendar, CIE/SEE marks entry, and <b>automated CGPA</b> with 75% threshold
-              alerts</li>
-            <li>Deployed on <b>Vercel + Render + Neon PostgreSQL</b> with Docker Compose and async SQLAlchemy</li>
-          </ul>
         </div>
         <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System"
-            target="_blank">GITHUB</a>
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('college-erp')">DETAILS</button>
         </div>
       </div>
 
@@ -513,7 +513,6 @@
       </div>
     </div>
 
-    <!-- Rift portal — desktop: fly jet in; mobile: tap button -->
     <div class="edu-rift-row reveal">
       <div class="rift-instruction">
         <div class="rift-instr-text">&#9658; FLY YOUR JET<br>INTO THE PORTAL<br>TO START THE<br>MINI-GAME</div>
@@ -521,7 +520,6 @@
           &#9658; TAP TO PLAY
         </button>
       </div>
-      <!-- canvas acts as the collision target for the jet AND renders the portal animation -->
       <canvas id="rift-gate" width="128" height="176" onclick="window.startGame && window.startGame()"
         title="Enter the rift"></canvas>
     </div>
@@ -537,12 +535,11 @@
         <span class="c-label">LINKEDIN</span>
         <span class="c-val">atharva-kadam2</span>
       </a>
-      <a class="contact-card" href="mailto:[kadam.atharva14@gmail.com]" target="_blank">
+      <a class="contact-card" href="mailto:kadam.atharva14@gmail.com" target="_blank">
         <span class="c-icon"><img src="https://img.icons8.com/?size=100&id=q8RMbBhNTUXD&format=png&color=000000"
             alt="Email"></span>
         <span class="c-label">EMAIL</span>
-        <span class="c-val"><span class="__cf_email__"
-            data-cfemail="c4afa5a0a5a9eaa5b0aca5b6b2a5f5f084a3a9a5ada8eaa7aba9">kadam.atharva14@gmail.com</span></span>
+        <span class="c-val">kadam.atharva14@gmail.com</span>
       </a>
       <a class="contact-card" href="files/Atharva_Kadam_Resume.pdf" target="_blank">
         <span class="c-icon"><img src="https://img.icons8.com/?size=100&id=IuAKaYeWFFmm&format=png&color=000000"
@@ -554,6 +551,7 @@
     <div class="copyright">2025 ATHARVA KADAM -- ALL RIGHTS RESERVED</div>
   </section>
 
+  <!-- ── Video Modal ───────────────────────────────────────── -->
   <div class="modal-overlay" id="videoModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeVideo()">X CLOSE</button>
@@ -564,7 +562,28 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email"></script>
+  <!-- ── Project Detail Modal (retro OS window) ────────────── -->
+  <div class="proj-modal-overlay" id="projectModal" onclick="handleProjOverlayClick(event)">
+    <div class="proj-modal-window" id="projModalWindow">
+      <div class="proj-modal-titlebar">
+        <div class="proj-modal-dots">
+          <div class="proj-modal-dot dot-min"></div>
+          <div class="proj-modal-dot dot-max"></div>
+        </div>
+        <span class="proj-modal-titletext" id="projModalTitle">PROJECT DETAILS</span>
+        <button class="proj-modal-close" onclick="closeProjectModal()">&#10005; CLOSE</button>
+      </div>
+      <div class="proj-modal-addressbar">
+        <span class="proj-modal-url-icon">&#9733;</span>
+        <span class="proj-modal-url" id="projModalUrl">portfolio://projects/</span>
+      </div>
+      <div class="proj-modal-content" id="projModalContent">
+        <!-- Populated dynamically by main.js -->
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
   <script src="js/canvas.js"></script>
   <script src="js/music.js"></script>
