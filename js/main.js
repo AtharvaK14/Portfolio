@@ -113,3 +113,31 @@ document.addEventListener('click', e => {
   const nav = document.getElementById('main-nav');
   if (nav && !nav.contains(e.target)) closeBurger();
 });
+
+// ── Project card touch/click expand ─────────────────────
+(function () {
+  // Only wire click-to-expand on non-hover devices
+  // On hover devices the CSS :hover handles it; clicks still work as bonus
+  document.querySelectorAll('.ach-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      // Don't collapse when clicking a button/link inside the card
+      if (e.target.closest('.ach-btn')) return;
+
+      const isExpanded = card.classList.contains('expanded');
+
+      // Collapse any other open card first
+      document.querySelectorAll('.ach-card.expanded').forEach(c => {
+        if (c !== card) c.classList.remove('expanded');
+      });
+
+      card.classList.toggle('expanded', !isExpanded);
+    });
+  });
+
+  // Tap outside collapses all
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.ach-card')) {
+      document.querySelectorAll('.ach-card.expanded').forEach(c => c.classList.remove('expanded'));
+    }
+  });
+})();

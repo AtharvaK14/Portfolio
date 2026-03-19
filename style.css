@@ -300,15 +300,14 @@ section {
 
 .achievement-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 22px; max-width: 1200px; width: 100%;
+  gap: 36px; max-width: 1200px; width: 100%;
 }
 
 .ach-card {
   border: 2px solid rgba(255,215,0,0.28); background: rgba(5,5,16,0.94);
   padding: 26px; position: relative; overflow: hidden;
   transition: all 0.3s;
-  /* KEY FIX: flex column so button row always stays at bottom */
-  display: flex; flex-direction: column;
+  cursor: pointer;
 }
 .ach-card::before {
   content: 'ACHIEVEMENT UNLOCKED';
@@ -321,18 +320,50 @@ section {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0; transition: opacity 0.3s;
 }
-.ach-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,215,0,0.18); }
-.ach-card:hover::after { opacity: 1; }
+.ach-card:hover,
+.ach-card.expanded { border-color: var(--gold); box-shadow: 0 0 30px rgba(255,215,0,0.18); }
+.ach-card:hover::after,
+.ach-card.expanded::after { opacity: 1; }
 
-/* Card content area grows, pushes buttons down */
-.ach-content { flex: 1; display: flex; flex-direction: column; }
+/* Base content -- always visible */
+.ach-content { display: flex; flex-direction: column; gap: 6px; }
 
-.ach-icon  { font-size: 32px; margin-bottom: 10px; display: block; }
-.ach-name  { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); margin-bottom: 4px; line-height: 1.75; }
-.ach-tech  { font-size: 21px; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; }
-.ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; margin-bottom: 12px; }
+.ach-icon  { font-size: 32px; margin-bottom: 4px; display: block; }
+.ach-name  { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); line-height: 1.75; }
+.ach-tech  { font-size: 21px; color: var(--gold); letter-spacing: 1px; }
+.ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; }
 
-.ach-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+/* Expandable bullet section */
+.ach-expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.42s ease,
+    opacity 0.35s ease,
+    margin-top 0.42s ease;
+  margin-top: 0;
+}
+.ach-expand-inner { overflow: hidden; }
+
+/* Desktop hover expansion -- short entry delay prevents accidental triggers */
+@media (hover: hover) {
+  .ach-card:hover .ach-expand {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 14px;
+    transition-delay: 0.12s;
+  }
+}
+
+/* Touch/click expansion via JS .expanded class */
+.ach-card.expanded .ach-expand {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 14px;
+}
+
+.ach-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .ach-bullets li {
   font-size: 19px; color: rgba(232,232,255,0.62); padding-left: 14px;
   position: relative; line-height: 1.5;
@@ -340,10 +371,15 @@ section {
 .ach-bullets li::before { content: '•'; position: absolute; left: 0; color: var(--gold); }
 .ach-bullets b { color: var(--gold); }
 
-/* Button row always pinned to bottom via margin-top: auto */
+/* Divider between base and bullets */
+.ach-expand-inner .ach-bullets {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,215,0,0.15);
+}
+
 .ach-actions {
   display: flex; gap: 10px; flex-wrap: wrap;
-  margin-top: auto; padding-top: 18px;
+  padding-top: 16px;
 }
 .ach-btn {
   display: inline-flex; align-items: center; gap: 6px;
@@ -351,11 +387,11 @@ section {
   padding: 9px 13px; cursor: pointer; transition: all 0.2s;
   text-decoration: none; background: transparent; border: none;
 }
-.ach-btn-github { color: var(--blue);  border: 1px solid rgba(0,200,255,0.4); }
+.ach-btn-github  { color: var(--blue);  border: 1px solid rgba(0,200,255,0.4); }
 .ach-btn-github:hover  { background: var(--blue);  color: var(--bg); box-shadow: 0 0 12px rgba(0,200,255,0.3); }
 .ach-btn-website { color: var(--green); border: 1px solid rgba(0,255,159,0.4); }
 .ach-btn-website:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 12px rgba(0,255,159,0.3); }
-.ach-btn-video  { color: var(--pink);  border: 1px solid rgba(255,45,120,0.4); }
+.ach-btn-video   { color: var(--pink);  border: 1px solid rgba(255,45,120,0.4); }
 .ach-btn-video:hover   { background: var(--pink);  color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.3); }
 
 /* ── Skills / Character Stats ─────────────────────────── */
