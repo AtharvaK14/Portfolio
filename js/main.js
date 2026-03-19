@@ -114,30 +114,36 @@ document.addEventListener('click', e => {
   if (nav && !nav.contains(e.target)) closeBurger();
 });
 
-// ── Project card touch/click expand ─────────────────────
+// ── card touch/click expand ─────────────────────
 (function () {
-  // Only wire click-to-expand on non-hover devices
-  // On hover devices the CSS :hover handles it; clicks still work as bonus
-  document.querySelectorAll('.ach-card').forEach(card => {
-    card.addEventListener('click', function (e) {
-      // Don't collapse when clicking a button/link inside the card
-      if (e.target.closest('.ach-btn')) return;
+  // Covers both project cards and quest cards
+  const toggleTargets = [
+    { selector: '.ach-card',  ignore: '.ach-btn' },
+    { selector: '.q-body',    ignore: null        }
+  ];
 
-      const isExpanded = card.classList.contains('expanded');
+  toggleTargets.forEach(({ selector, ignore }) => {
+    document.querySelectorAll(selector).forEach(card => {
+      card.addEventListener('click', function (e) {
+        if (ignore && e.target.closest(ignore)) return;
 
-      // Collapse any other open card first
-      document.querySelectorAll('.ach-card.expanded').forEach(c => {
-        if (c !== card) c.classList.remove('expanded');
+        const isExpanded = card.classList.contains('expanded');
+
+        // Collapse siblings of same type
+        document.querySelectorAll(selector + '.expanded').forEach(c => {
+          if (c !== card) c.classList.remove('expanded');
+        });
+
+        card.classList.toggle('expanded', !isExpanded);
       });
-
-      card.classList.toggle('expanded', !isExpanded);
     });
   });
 
-  // Tap outside collapses all
+  // Tap outside collapses everything
   document.addEventListener('click', function (e) {
-    if (!e.target.closest('.ach-card')) {
-      document.querySelectorAll('.ach-card.expanded').forEach(c => c.classList.remove('expanded'));
+    if (!e.target.closest('.ach-card') && !e.target.closest('.q-body')) {
+      document.querySelectorAll('.ach-card.expanded, .q-body.expanded')
+        .forEach(c => c.classList.remove('expanded'));
     }
   });
 })();

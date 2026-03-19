@@ -280,6 +280,27 @@ section {
 }
 .q-body:hover { border-color: var(--pink); box-shadow: 0 0 24px rgba(255,45,120,0.14); }
 
+.q-body { cursor: pointer; }
+
+.q-expand {
+  display: grid; grid-template-rows: 0fr;
+  opacity: 0; margin-top: 0;
+  transition: grid-template-rows 0.42s ease, opacity 0.35s ease, margin-top 0.42s ease;
+}
+.q-expand-inner { overflow: hidden; }
+.q-expand-inner .q-bullets { padding-top: 12px; border-top: 1px solid rgba(255,45,120,0.15); }
+
+@media (hover: hover) {
+  .q-body:hover .q-expand { grid-template-rows: 1fr; opacity: 1; margin-top: 10px; transition-delay: 0.12s; }
+}
+.q-body.expanded .q-expand { grid-template-rows: 1fr; opacity: 1; margin-top: 10px; }
+
+.q-body.expanded .q-expand {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 10px;
+}
+
 .q-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
 .q-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--white); }
 .q-date  { font-size: 20px; color: rgba(232,232,255,0.42); white-space: nowrap; }
@@ -301,6 +322,7 @@ section {
 .achievement-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 36px; max-width: 1200px; width: 100%;
+  align-items: start;
 }
 
 .ach-card {
