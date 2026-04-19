@@ -16,11 +16,11 @@ revealEls.forEach(el => revObs.observe(el));
 
 // ── Skill bar animation ───────────────────────────────────
 const TIER_MAP = [
-  { max: 40,  label: 'FAMILIAR',   pct: 22  },
-  { max: 60,  label: 'PROFICIENT', pct: 46  },
-  { max: 75,  label: 'ADVANCED',   pct: 68  },
-  { max: 88,  label: 'EXPERT',     pct: 85  },
-  { max: 100, label: 'MASTER',     pct: 97  },
+  { max: 40, label: 'FAMILIAR', pct: 22 },
+  { max: 60, label: 'PROFICIENT', pct: 46 },
+  { max: 75, label: 'ADVANCED', pct: 68 },
+  { max: 88, label: 'EXPERT', pct: 85 },
+  { max: 100, label: 'MASTER', pct: 97 },
 ];
 
 function getTier(val) {
@@ -34,11 +34,11 @@ const skillObs = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting && !skillsAnimated) {
     skillsAnimated = true;
     document.querySelectorAll('.skill-fill').forEach((fill, i) => {
-      const raw  = parseInt(fill.dataset.raw, 10);
+      const raw = parseInt(fill.dataset.raw, 10);
       const tier = getTier(raw);
       setTimeout(() => {
         fill.style.width = tier.pct + '%';
-        const row   = fill.closest('.skill-row');
+        const row = fill.closest('.skill-row');
         const badge = row && row.querySelector('.skill-tier');
         if (badge) badge.textContent = tier.label;
       }, i * 65);
@@ -81,9 +81,9 @@ window.addEventListener('scroll', () => {
 
 // ── Burger menu ───────────────────────────────────────────
 function toggleBurger() {
-  const nav   = document.getElementById('main-nav');
+  const nav = document.getElementById('main-nav');
   const links = document.getElementById('navLinks');
-  const btn   = document.getElementById('burgerBtn');
+  const btn = document.getElementById('burgerBtn');
   if (!links || !btn) return;
 
   const isOpen = links.classList.toggle('open');
@@ -97,7 +97,7 @@ function toggleBurger() {
 
 function closeBurger() {
   const links = document.getElementById('navLinks');
-  const btn   = document.getElementById('burgerBtn');
+  const btn = document.getElementById('burgerBtn');
   if (!links) return;
   links.classList.remove('open');
   if (btn) { btn.classList.remove('open'); btn.innerHTML = '&#9776;'; }
@@ -119,6 +119,25 @@ function toggleQuest(qBody) {
 
 // ── Project data store ────────────────────────────────────
 const PROJECT_DATA = {
+
+  'dual-e2e': {
+    icon: '&#9874;',
+    title: 'DUAL-FRAMEWORK E2E TEST SUITE',
+    tech: 'TypeScript · Playwright · Cypress · GitHub Actions · Node.js',
+    url: 'portfolio://projects/dual-framework-e2e-test-suite',
+    desc: 'Side-by-side Playwright and Cypress implementation of 22 identical E2E scenarios against SauceDemo with measured framework comparison.',
+    bullets: [
+      '<b>22 test scenarios</b> covering login, inventory, cart, and full checkout flows — implemented identically in both frameworks using TypeScript',
+      '<b>Page Object Model</b> architecture with 4 POM classes per framework (Login, Inventory, Cart, Checkout), keeping test logic separate from page interaction code',
+      'Playwright suite runs across <b>3 browser engines</b> (Chromium, Firefox, WebKit) for <b>66 total executions</b>; Cypress runs on Electron/Chrome with video recording',
+      '<b>GitHub Actions</b> CI/CD pipeline runs both suites in parallel on every push with automated artifact uploads (HTML reports, screenshots, videos)',
+      'Framework comparison document with <b>measured execution times</b>, setup effort, cross-browser support matrix, and evidence-based recommendations',
+    ],
+    actions: [
+      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress' },
+    ],
+  },
+
   'api-framework': {
     icon: '&#9881;',
     title: 'API TEST AUTOMATION FRAMEWORK',
@@ -227,7 +246,7 @@ function openProjectModal(id) {
 
   // Populate title bar
   document.getElementById('projModalTitle').textContent = data.title;
-  document.getElementById('projModalUrl').textContent   = data.url;
+  document.getElementById('projModalUrl').textContent = data.url;
 
   // Build content HTML
   const bulletsHtml = data.bullets
