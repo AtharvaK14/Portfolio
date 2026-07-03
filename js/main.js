@@ -108,14 +108,143 @@ document.addEventListener('click', e => {
   if (nav && !nav.contains(e.target)) closeBurger();
 });
 
-// ── Quest expand / collapse ───────────────────────────────
-// Desktop: CSS :hover handles it. JS .expanded class handles
-// touch taps (and also desktop clicks as a convenience toggle).
-function toggleQuest(qBody) {
-  // If the click came from a link inside the body, don't toggle
-  if (!qBody || qBody.tagName !== 'DIV') return;
-  qBody.classList.toggle('expanded');
+// ── Experience journey: click a level node, detail panel updates ──
+// Replaces the old hover/tap accordion. Order is chronological
+// (oldest -> newest), internships nested as sub-levels (2.1, 3.1)
+// under the nearest preceding full-time role.
+const EXPERIENCE_DATA = {
+
+  expleo: {
+    level: '1',
+    now: false,
+    title: 'QA Engineer',
+    company: 'EXPLEO Group | Pune, India',
+    date: 'OCT 2019 -- FEB 2020',
+    summary: 'Mobile QA for a 100K+ user iOS app; 300+ test cases across 15+ devices.',
+    context: 'Global quality engineering company for enterprise mobile applications serving 100K+ users',
+    bullets: [
+      'Designed and ran <b>300+ test cases</b> across <b>15+ iOS devices</b> via <b>Xcode</b> and <b>TestFlight</b>, reducing defect escape rate from <b>12%</b> to <b>3%</b> for an app serving 100K+ users',
+      'Traced crash log stack traces in <b>Xcode</b> to root cause, delivering structured defect reports through <b>JIRA</b> and <b>TestRail</b> that cut bug resolution time by <b>25%</b>',
+    ],
+  },
+
+  ubisoft: {
+    level: '2',
+    now: false,
+    title: 'Software Development Engineer in Test',
+    company: 'UBISOFT ENTERTAINMENT | Pune, India',
+    date: 'MAR 2020 -- MAR 2021',
+    summary: "SDET across 2 titles serving 40M+ users; built the team's Selenium/PyTest framework and BitBucket CI/CD gates.",
+    context: 'Global video game publisher serving millions of players across PC, console, and mobile',
+    bullets: [
+      'Led <b>smoke testing</b> for the desktop platform across 2 titles serving <b>40M+</b> users, cutting execution time from <b>1 hour to 30 minutes</b> through test automation',
+      "Wrote automated test scripts with <b>parameterized fixtures</b> and session-scoped state for the team's new <b>Selenium/PyTest</b> framework, raising test coverage from <b>60%</b> to <b>82%</b>",
+      'Configured <b>Selenium</b> suites and smoke tests as quality gates in <b>BitBucket CI/CD pipelines</b>, reducing regression cycles from <b>10 to 8 days</b>',
+      'Tested across desktop, console <b>(PS4/PS5 dev kits)</b>, and mobile, running <b>performance profiling</b>, platform compliance checks, and peripheral hardware validation (racing rigs), reducing inter-platform defects by <b>35%</b>',
+      'Owned the full <b>defect lifecycle</b> in <b>JIRA</b>: triage, root cause analysis, and closure across platform teams under <b>Agile/Scrum</b>',
+    ],
+  },
+
+  oasis: {
+    level: '2.5',
+    now: false,
+    sub: true,
+    title: 'Web Dev & Testing Intern',
+    company: 'OASIS INFOBYTE | Pune, India',
+    date: 'FEB 2022 -- MAR 2022',
+    summary: 'Built web apps with Jest CI/CD automation, hitting 85% code coverage.',
+    context: 'Digital solutions company specializing in web development and UI/UX for SMBs',
+    bullets: [
+      'Performed API testing using <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code coverage</b> via Jest automation',
+      'Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b>',
+      'Documented the full technology stack, enabling faster onboarding and consistent build processes',
+    ],
+  },
+
+  mtu: {
+    level: '3',
+    now: false,
+    title: 'Research Assistant',
+    company: 'Michigan Technological University | Houghton, MI',
+    date: 'JUN 2025 -- JUN 2026',
+    summary: 'Automated financial data pipelines and evaluation frameworks for research, cutting manual effort 40%.',
+    context: '',
+    bullets: [
+      'Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.',
+      'Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.',
+      'Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.',
+      'Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.',
+    ],
+  },
+
+  infyra: {
+    level: '3.5',
+    now: true,
+    sub: true,
+    title: 'Software Developer Intern',
+    company: 'Infyra LLC | Sheridan, WY',
+    date: 'JUN 2026 -- PRESENT',
+    summary: 'Backend REST APIs, ETL pipelines, and ML model validation in a production environment.',
+    context: '',
+    bullets: [
+      'Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.',
+      'Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.',
+      'Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.',
+      'Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.',
+    ],
+  },
+
+};
+
+let activeExpId = 'infyra';
+
+function renderExperience(id) {
+  const data = EXPERIENCE_DATA[id];
+  const panel = document.getElementById('journeyDetail');
+  if (!data || !panel) return;
+  activeExpId = id;
+
+  document.querySelectorAll('.journey-stop').forEach(el => {
+    el.classList.toggle('active', el.dataset.exp === id);
+  });
+
+  const contextHtml = data.context
+    ? `<div class="q-context">${data.context}</div>`
+    : '';
+  const bulletsHtml = data.bullets.map(b => `<li>${b}</li>`).join('');
+
+  panel.style.opacity = '0';
+  setTimeout(() => {
+    panel.classList.toggle('now-active', !!data.now);
+    panel.innerHTML = `
+      <div class="q-head">
+        <span class="q-title">${data.title}</span>
+        <span class="q-date">${data.date}</span>
+      </div>
+      <div class="q-company">${data.company}</div>
+      <p class="q-summary">${data.summary}</p>
+      <div class="q-details-inner">
+        ${contextHtml}
+        <ul class="q-bullets">${bulletsHtml}</ul>
+      </div>
+    `;
+    panel.style.opacity = '1';
+  }, 120);
 }
+
+function selectExperience(id, el) {
+  renderExperience(id);
+  if (el && el.scrollIntoView) {
+    el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+}
+
+function scrollJourney(dir) {
+  const strip = document.getElementById('journeyStrip');
+  if (strip) strip.scrollBy({ left: dir * 260, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => renderExperience(activeExpId));
 
 // ── Project data store ────────────────────────────────────
 const PROJECT_DATA = {

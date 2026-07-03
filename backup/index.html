@@ -4,141 +4,675 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <title>Atharva Kadam | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <section id="header">
-    <div class="header container">
-      <div class="nav-bar">
-        <div class="brand">
-          <a href="#indiek">
-            <h1><span>A</span>tharva <span>K</span>adam</h1>
-          </a>
-        </div>
-        <div class="nav-list">
-          <ul>
-            <li><a href="#indiek">Home</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="indiek">
-    <div class="indiek container">
-      <div>
-        <h1>Hello, <span></span></h1>
-        <h1>My Name is <span></span></h1>
-        <h1>ATHARVA<span></span></h1>
+  <canvas id="bg-canvas"></canvas>
+
+  <nav id="main-nav">
+    <div class="nav-brand"><span>A</span>THARVA <span>K</span>ADAM</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" onclick="closeBurger()">HOME</a></li>
+      <li><a href="#about" onclick="closeBurger()">ABOUT</a></li>
+      <li><a href="#experience" onclick="closeBurger()">EXPERIENCE</a></li>
+      <li><a href="#project" onclick="closeBurger()">PROJECTS</a></li>
+      <li><a href="#skills" onclick="closeBurger()">SKILLS</a></li>
+      <li><a href="#education" onclick="closeBurger()">EDUCATION</a></li>
+      <li><a href="#footer" onclick="closeBurger()">CONTACT</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()" aria-label="Menu">&#9776;</button>
+      <div class="nav-controls">
+        <button class="nav-btn track-btn" onclick="cycleTrack()" title="Next track">
+          <span class="btn-icon">&#9197;</span><span class="btn-text"> NEXT</span>
+        </button>
+        <button class="nav-btn" id="musicBtn" onclick="toggleMusic()">
+          <span class="btn-icon" id="musicIcon">&#9835;</span><span class="btn-text" id="musicText"> BGM: OFF</span>
+        </button>
       </div>
     </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-boot">// PLAYER PROFILE LOADED -- PRESS START //</div>
+    <h1 class="hero-name">ATHARVA<br>KADAM</h1>
+    <div class="hero-subtitle">SDET &amp; Aspiring Software Engineer</div>
+    <div class="hero-tags">
+      <span class="tag">~2 YRS EXPERIENCE</span>
+      <span class="tag">EX-UBISOFT</span>
+      <span class="tag">SYRACUSE, NY</span>
+      <span class="tag">M.S. COMPUTER SCIENCE</span>
+    </div>
+    <div class="scroll-hint">-- SCROLL TO CONTINUE --</div>
   </section>
 
   <section id="about">
-    <div class="about container">
-      <div class="col-left">
-        <div class="about-img">
-          <img src="files/img-2.jpg" alt="img">
+    <div class="section-header">
+      <h2 class="section-title">CHARACTER SHEET</h2>
+      <span class="section-subtitle">// ABOUT ME</span>
+    </div>
+    <div class="char-sheet reveal">
+      <div class="char-portrait-col">
+        <div class="portrait-frame">
+          <img src="files/AtharvaKadam.jpg" alt="Atharva Kadam">
+        </div>
+        <div class="char-info-block">
+          <div><span class="lbl">ROLE: </span>SDET -- SWE</div>
+          <div><span class="lbl">SPEC: </span>Playwright | Cypress | Selenium | CI/CD</div>
+          <div><span class="lbl">LEVEL: </span>Entry-Mid</div>
+          <div><span class="lbl">BASE: </span>Syracuse, NY</div>
+          <div><span class="lbl">STATUS: </span><span style="color:var(--green)">AVAILABLE</span></div>
         </div>
       </div>
-      <div class="col-right">
-        <h1 class="section-title">About <span>me</span></h1>
-        <h2>Graduate Student | Computer Science</h2>
-        <p>Graduate student in Computer Science at Michigan Technological University with a strong background in software testing, game development, and application design. Experienced in quality assurance, debugging, and user-centric application development, with hands-on expertise in JIRA, Unreal Engine 5, and web technologies. Passionate about game development, interactive applications, and creating seamless user experiences.</p>
-        <a href="files/Atharva Kadam Resume.pdf" target="_blank" class="cta">Download Resume</a> 
+      <div class="char-stats-panel">
+        <div>
+          <div class="char-name-heading">ATHARVA KADAM</div>
+          <div class="char-class">SDET | QA Engineer | Python, Selenium, Playwright, Cypress, PyTest | REST API Testing
+            | CI/CD | GitHub Actions | M.S. Computer Science</div>
+        </div>
+        <p class="char-bio">SDET with 2+ years of experience building test automation for software serving 40M+
+          users. Built Selenium/PyTest frameworks, Playwright/Cypress end-to-end suites, and CI/CD quality gates at
+          Ubisoft and Expleo. M.S. in Computer Science from Michigan Tech. Open to SDET, QA Automation, and QA Engineer
+          roles anywhere in the US.</p>
+        <div class="attr-grid">
+          <div class="attr"><span class="attr-lbl">AUTOMATION</span><span class="attr-val">Playwright, Cypress,
+              Selenium</span>
+          </div>
+          <div class="attr"><span class="attr-lbl">PLATFORMS</span><span class="attr-val">Desktop, Mobile, Console,
+              Web</span></div>
+          <div class="attr"><span class="attr-lbl">EDUCATION</span><span class="attr-val">M.S. CS -- Michigan
+              Tech</span></div>
+          <div class="attr"><span class="attr-lbl">OPEN TO</span><span class="attr-val">SDET &amp; S/W Engineer
+              Roles</span></div>
+        </div>
+        <a href="files/Atharva_Kadam_Resume.pdf" target="_blank" class="resume-btn">DOWNLOAD RESUME</a>
       </div>
     </div>
   </section>
 
-  <section id="team">
-    <div class="team container">
-      <div class="Team-top">
-        <h1 class="section-title"><span>Professional </span>Experience</h1>
-      </div>
-      
-      <div class="Team-bottom">
-        <div class="Team-item">
-        <h2>TEACHING ASSISTANT</h2><br>
-          <h1>Michigan Technological University</h1><br>
-          <p>Graded 100+ assignments with 98% accuracy, improving student performance by 30% through targeted support strategies.
-            </p>
+  <!-- ── Experience: base always visible, details expand on hover / tap ── -->
+  <section id="experience">
+    <div class="section-header">
+      <h2 class="section-title">QUEST LOG</h2>
+      <span class="section-subtitle">// WORK EXPERIENCE</span>
+    </div>
+    <div class="quest-log">
+
+      <div class="quest-item reveal">
+        <div class="q-line"></div>
+        <div class="q-body" onclick="toggleQuest(this)">
+          <div class="q-head">
+            <span class="q-title">Software Developer Intern</span>
+            <span class="q-date">Jun 2026 -- Present</span>
+          </div>
+          <div class="q-company">Infyra LLC | Sheridan, WY</div>
+          <p class="q-summary">Contributing to backend REST API development and data pipeline analysis in a production environment, with hands-on exposure to PostgreSQL, MongoDB, and automated ETL workflows. Assisting with technical KPI reporting and ML model validation under senior engineer supervision.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context"></div>
+              <ul class="q-bullets">
+                <li>Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.</li>
+                <li>Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.</li>
+                <li>Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.</li>
+                <li>Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
-        <div class="Team-item">
-          <h2>Junior Game Tester</h2>
-          <h1>Ubisoft Entertainment</h1>
-          <p>Performed smoke and regression testing, identified critical blockers, and managed bug tracking using JIRA in Agile environments.</p>
-        </div>
-        
-        <div class="Team-item">
-          <h2>Game Tester</h2>
-          <h1>Expleo India Infosystem</h1>
-          <p>Conducted manual testing, identified software issues, and created detailed reports for developers to optimize game performance.</p>
-        </div>
-      </div>
-    </div>  
-  </section>
-  
-  <section id="research">
-    <div class="research container">
-      <div class="Team-top">
-        <h1 class="section-title"><span>Featured </span>Projects</h1>
       </div>
 
-      <div class="research-bottom">
-
-        <div class="research-item">
-          <h2>VR Carnival Experience</h2><br>
-          <p>Developed an interactive VR carnival with physics-based mini-games using Unreal Engine 5.</p>
+      <div class="quest-item reveal">
+        <div class="q-line"></div>
+        <div class="q-body" onclick="toggleQuest(this)">
+          <div class="q-head">
+            <span class="q-title">Research Assistant</span>
+            <span class="q-date">Jun 2025 -- Jun 2026</span>
+          </div>
+          <div class="q-company">Michigan Technological University | Houghton, MI</div>
+          <p class="q-summary">Built automated Python data pipelines to collect, clean, and analyze structured financial datasets on Linux and Windows,cutting manual preprocessing effort by 40%. Designed KPI-driven evaluation frameworks to measure model performance, improving experiment comparability and accelerating research decisions by 35%.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context"></div>
+              <ul class="q-bullets">
+                <li>Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.</li>
+                <li>Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.</li>
+                <li>Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.</li>
+                <li>Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.</li>
+              </ul>
+            </div>
+          </div>
         </div>
-    
-        <div class="research-item">
-          <h2>Post-Fire Assessment App</h2><br>
-          <p>Created a mobile application for logging and managing post-fire ash data, improving assessment efficiency.</p>
-        </div>
-        
-        <div class="research-item">
-          <h2>Rubber Ducky Chatbot</h2><br>
-          <p>Created a mobile application for logging and managing post-fire ash data, improving assessment efficiency.</p>
-        </div>
-
       </div>
+
+      <div class="quest-item reveal">
+        <div class="q-line"></div>
+        <div class="q-body" onclick="toggleQuest(this)">
+          <div class="q-head">
+            <span class="q-title">Software Development Engineer in Test</span>
+            <span class="q-date">MAR 2020 -- MAR 2021</span>
+          </div>
+          <div class="q-company">UBISOFT ENTERTAINMENT | Pune, India</div>
+          <p class="q-summary">Worked on 2 titles with 40M+ combined users. Led desktop smoke testing, cutting execution
+            from 1 hour to 30 minutes. Wrote the initial test scripts for the team's Selenium/PyTest framework
+            (parameterized fixtures, session-scoped state), raising coverage from 60% to 82%. Configured those suites as
+            CI/CD quality gates in BitBucket, shortening regression cycles from 10 to 8 days. Ran cross-platform testing
+            on desktop, console (PS4/PS5 dev kits), and mobile, including performance profiling and peripheral hardware
+            validation, reducing inter-platform defects by 35%.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Global video game publisher serving millions of players across PC, console, and
+                mobile</div>
+              <ul class="q-bullets">
+                <li>Led <b>smoke testing</b> for the desktop platform across 2 titles serving <b>40M+</b> users, cutting
+                  execution time from <b>1 hour to 30 minutes</b> through test automation</li>
+                <li>Wrote automated test scripts with <b>parameterized fixtures</b> and session-scoped state for the
+                  team’s new <b>Selenium/PyTest</b> framework, raising test coverage from <b>60%</b> to <b>82%</b></li>
+                <li>Configured <b>Selenium</b> suites and smoke tests as quality gates in <b>BitBucket CI/CD
+                    pipelines</b>, reducing regression cycles from <b>10 to 8 days</b></li>
+                <li>Tested across desktop, console <b>(PS4/PS5 dev kits)</b>, and mobile, running <b>performance
+                    profiling</b>, platform compliance checks, and peripheral hardware validation (racing rigs),
+                  reducing inter-platform defects by
+                  <b>35%</b>
+                </li>
+                <li>Owned the full <b>defect lifecycle</b> in <b>JIRA</b>: triage, root cause analysis, and closure
+                  across platform teams under <b>Agile/Scrum</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quest-item reveal">
+        <div class="q-line"></div>
+        <div class="q-body" onclick="toggleQuest(this)">
+          <div class="q-head">
+            <span class="q-title">QA Engineer</span>
+            <span class="q-date">OCT 2019 -- FEB 2020</span>
+          </div>
+          <div class="q-company">EXPLEO Group | Pune, India</div>
+          <p class="q-summary">Mobile QA for a consumer iOS app with 100K+ users. Designed and ran 300+ test cases
+            across 15+ physical devices via Xcode and TestFlight. Traced crash logs to root cause and delivered reports
+            through JIRA and TestRail. Defect escape rate went from 12% to 3%, bug resolution time dropped 25%.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Global quality engineering company for enterprise mobile applications serving 100K+
+                users</div>
+              <ul class="q-bullets">
+                <li>Designed and ran <b>300+ test cases</b> across <b>15+ iOS devices</b> via <b>Xcode</b> and
+                  <b>TestFlight</b>, reducing defect escape rate from <b>12%</b> to <b>3%</b> for an app serving 100K+
+                  users
+                </li>
+                <li>Traced crash log stack traces in <b>Xcode</b> to root cause, delivering structured defect reports through
+                  <b>JIRA</b> and <b>TestRail</b> that cut bug resolution time by <b>25%</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quest-item reveal">
+        <div class="q-line"></div>
+        <div class="q-body" onclick="toggleQuest(this)">
+          <div class="q-head">
+            <span class="q-title">Web Dev &amp; Testing Intern</span>
+            <span class="q-date">FEB 2022 -- MAR 2022</span>
+          </div>
+          <div class="q-company">OASIS INFOBYTE | Pune, India</div>
+          <p class="q-summary">Built and tested web applications in HTML/CSS/JavaScript. Set up Jest automation in
+            GitHub Actions CI/CD, hitting 85% code coverage.</p>
+          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
+          <div class="q-details">
+            <div class="q-details-inner">
+              <div class="q-context">Digital solutions company specializing in web development and UI/UX for SMBs</div>
+              <ul class="q-bullets">
+                <li>Performed API testing using <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code
+                    coverage</b> via Jest automation</li>
+                <li>Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b></li>
+                <li>Documented the full technology stack, enabling faster onboarding and consistent build processes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section id="contact">
-    <div class="contact container">
-      <div>
-        <h1 class="section-title">Contact <span>Info</span></h1>
+  <!-- ── Projects: simplified cards — click opens detail modal ── -->
+  <section id="project">
+    <div class="section-header">
+      <h2 class="section-title">ACHIEVEMENTS UNLOCKED</h2>
+      <span class="section-subtitle">// PROJECTS</span>
+    </div>
+    <div class="achievement-grid">
+
+      <div class="ach-card reveal" onclick="openProjectModal('dual-e2e')">
+        <div class="ach-content">
+          <span class="ach-icon">&#9874;</span>
+          <div class="ach-name">DUAL-FRAMEWORK E2E TEST SUITE</div>
+          <div class="ach-tech">TypeScript · Playwright · Cypress · GitHub Actions</div>
+          <p class="ach-desc">Side-by-side Playwright and Cypress implementation of 22 identical E2E scenarios against
+            SauceDemo with measured framework comparison.</p>
+        </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github"
+            href="https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('dual-e2e')">DETAILS</button>
+        </div>
       </div>
 
-      
-      <div class="contact-items">
-        <div class="social-icon">
-          <div class="social-item">
-            <a href="mailto:aakadam2@mtu.edu"><img src="https://img.icons8.com/?size=100&id=EgRndDDLh8kS&format=png&color=000000" /></a>
-          </div>
+      <div class="ach-card reveal" onclick="openProjectModal('api-framework')">
+        <div class="ach-content">
+          <span class="ach-icon">&#9881;</span>
+          <div class="ach-name">API TEST AUTOMATION FRAMEWORK</div>
+          <div class="ach-tech">Python · PyTest · GitHub Actions · Allure</div>
+          <p class="ach-desc">Production-grade API test framework targeting the GitHub REST API with contract
+            validation, SLA enforcement, and live report deployment.</p>
         </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/api-quality-gate" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('api-framework')">DETAILS</button>
+        </div>
+      </div>
 
-        <div class="social-icon">
-          <div class="social-item">
-            <img src="https://img.icons8.com/?size=100&id=WV326xpsBMyb&format=png&color=000000"/><h2>(906)-767-8852</h2>
-          </div>
+      <div class="ach-card reveal" onclick="openProjectModal('vr-carnival')">
+        <div class="ach-content">
+          <span class="ach-icon">&#127918;</span>
+          <div class="ach-name">VR CARNIVAL EXPERIENCE</div>
+          <div class="ach-tech">Unreal Engine 5 · Blueprint · C++</div>
+          <p class="ach-desc">Immersive VR carnival with interactive mini-games using physics-based mechanics and
+            Blueprint scripting.</p>
         </div>
+        <div class="ach-actions">
+          <button class="ach-btn ach-btn-video" onclick="event.stopPropagation(); openVideo()">WATCH DEMO</button>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('vr-carnival')">DETAILS</button>
+        </div>
+      </div>
 
-        <div class="social-icon">
-          <div class="social-item">
-            <a href="https://www.linkedin.com/in/atharva-kadam-indie/"><img src="https://img.icons8.com/?size=100&id=13930&format=png&color=000000" /></a>
-          </div>
+      <div class="ach-card reveal" onclick="openProjectModal('rubber-ducky')">
+        <div class="ach-content">
+          <span class="ach-icon">&#129414;</span>
+          <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
+          <div class="ach-tech">Python · JavaScript · Node.js</div>
+          <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and
+            duck-themed personality.</p>
         </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/" target="_blank"
+            onclick="event.stopPropagation()">LIVE SITE</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('rubber-ducky')">DETAILS</button>
+        </div>
+      </div>
+
+      <div class="ach-card reveal" onclick="openProjectModal('post-fire')">
+        <div class="ach-content">
+          <span class="ach-icon">&#128293;</span>
+          <div class="ach-name">POST-FIRE ASSESSMENT APP</div>
+          <div class="ach-tech">HTML · CSS · JavaScript</div>
+          <p class="ach-desc">Mobile web app helping field teams log wildfire ash data with real-time storage for
+            scientific assessments.</p>
+        </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App"
+            target="_blank" onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('post-fire')">DETAILS</button>
+        </div>
+      </div>
+
+      <div class="ach-card reveal" onclick="openProjectModal('pneumonia')">
+        <div class="ach-content">
+          <span class="ach-icon">&#129753;</span>
+          <div class="ach-name">PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING</div>
+          <div class="ach-tech">Python · TensorFlow · Keras</div>
+          <p class="ach-desc">Deep learning model detecting pneumonia in chest X-ray images to aid early clinical
+            diagnosis.</p>
+        </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github"
+            href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('pneumonia')">DETAILS</button>
+        </div>
+      </div>
+
+      <div class="ach-card reveal" onclick="openProjectModal('college-erp')">
+        <div class="ach-content">
+          <span class="ach-icon">&#127979;</span>
+          <div class="ach-name">COLLEGE ERP SYSTEM</div>
+          <div class="ach-tech">FastAPI · Next.js 14 · PostgreSQL · Docker</div>
+          <p class="ach-desc">Full-stack ERP with role-based portals for Admins, Teachers, and Students across 57 REST
+            API endpoints.</p>
+        </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <a class="ach-btn ach-btn-website" href="https://college-erp-system-one.vercel.app/login" target="_blank"
+            onclick="event.stopPropagation()">LIVE SITE</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('college-erp')">DETAILS</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
+  <section id="skills">
+    <div class="section-header">
+      <h2 class="section-title">CHARACTER STATS</h2>
+      <span class="section-subtitle">// TECHNICAL SKILLS</span>
+    </div>
+    <div class="proficiency-legend reveal">
+      <div class="legend-item">
+        <div class="legend-swatch l1"></div>FAMILIAR
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch l2"></div>PROFICIENT
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch l3"></div>ADVANCED
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch l4"></div>EXPERT
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch l5"></div>MASTER
+      </div>
+    </div>
+    <div class="skills-grid" id="skillsGrid">
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">LANGUAGES</div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Python</span><span class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="70"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">JavaScript / TypeScript</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="75"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">HTML / CSS</span><span class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="78"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">SQL / MySQL / MongoDB</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="60"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">C / C++ / C#</span><span class="skill-tier"></span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="75"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">PLATFORM EXPERTISE</div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">iOS / Android Mobile</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="80"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Console -- Xbox / PlayStation</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="90"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Web / Cross-Platform</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="75"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">PC / Desktop</span><span class="skill-tier"></span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="87"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">AUTOMATION &amp; TOOLS</div>
+
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Playwrigh</span><span class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="60"></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Cypress</span><span class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="60"></div>
+          </div>
+        </div>
+
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Selenium WebDriver</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="70"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">PyTest</span><span class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="60"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">CI/CD -- GitHub Actions / BitBucket</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="75"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">JIRA / TestRail</span><span class="skill-tier"></span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="80"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Postman / API Testing</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="70"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Xcode / TestFlight</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="70"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title">METHODS &amp; PRACTICES</div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Test Planning &amp; Strategy</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="92"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Agile / Scrum</span><span class="skill-tier"></span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="90"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Root Cause Analysis</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="88"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Performance &amp; Load Testing</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="80"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span class="skill-name">Regression &amp; Smoke Testing</span><span
+              class="skill-tier"></span></div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-raw="93"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-header">
+      <h2 class="section-title">PLAYER HISTORY</h2>
+      <span class="section-subtitle">// EDUCATION</span>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">MASTER OF SCIENCE -- COMPUTER SCIENCE</div>
+          <div class="edu-school">Michigan Technological University</div>
+          <div class="edu-location">Houghton, MI</div>
+        </div>
+        <div class="edu-date">AUG 2023 -- APR 2025</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">BACHELOR OF TECHNOLOGY -- COMPUTER ENGINEERING</div>
+          <div class="edu-school">Pune University</div>
+          <div class="edu-location">Pune, India</div>
+        </div>
+        <div class="edu-date">JUN 2021 -- MAY 2023</div>
+      </div>
+    </div>
+
+    <div class="edu-rift-row reveal">
+      <div class="rift-instruction">
+        <div class="rift-instr-text">&#9658; FLY YOUR JET<br>INTO THE PORTAL<br>TO START THE<br>MINI-GAME</div>
+        <button class="rift-mobile-btn touch-only" onclick="window.startGame && window.startGame()">
+          &#9658; TAP TO PLAY
+        </button>
+      </div>
+      <canvas id="rift-gate" width="128" height="176" onclick="window.startGame && window.startGame()"
+        title="Enter the rift"></canvas>
+    </div>
+  </section>
+
+  <section id="footer">
+    <div class="credits-title">// READY TO JOIN YOUR TEAM -- INSERT COIN //</div>
+    <div class="credits-sub">LET'S BUILD SOMETHING GREAT</div>
+    <div class="contact-row">
+      <a class="contact-card" href="https://www.linkedin.com/in/atharva-kadam2/" target="_blank">
+        <span class="c-icon"><img src="https://img.icons8.com/?size=100&id=ZADJgisVhP37&format=png&color=000000"
+            alt="LinkedIn"></span>
+        <span class="c-label">LINKEDIN</span>
+        <span class="c-val">atharva-kadam2</span>
+      </a>
+      <a class="contact-card" href="mailto:kadam.atharva14@gmail.com" target="_blank">
+        <span class="c-icon"><img src="https://img.icons8.com/?size=100&id=q8RMbBhNTUXD&format=png&color=000000"
+            alt="Email"></span>
+        <span class="c-label">EMAIL</span>
+        <span class="c-val">kadam.atharva14@gmail.com</span>
+      </a>
+      <a class="contact-card" href="files/Atharva_Kadam_Resume.pdf" target="_blank">
+        <span class="c-icon"><img src="https://img.icons8.com/?size=100&id=IuAKaYeWFFmm&format=png&color=000000"
+            alt="Resume"></span>
+        <span class="c-label">RESUME</span>
+        <span class="c-val">Download PDF</span>
+      </a>
+    </div>
+    <div class="copyright">2025 ATHARVA KADAM -- ALL RIGHTS RESERVED</div>
+  </section>
+
+  <!-- ── Video Modal ───────────────────────────────────────── -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeVideo()">X CLOSE</button>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-top:20px;">
+        <iframe id="youtubeFrame" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Project Detail Modal (retro OS window) ────────────── -->
+  <div class="proj-modal-overlay" id="projectModal" onclick="handleProjOverlayClick(event)">
+    <div class="proj-modal-window" id="projModalWindow">
+      <div class="proj-modal-titlebar">
+        <div class="proj-modal-dots">
+          <div class="proj-modal-dot dot-min"></div>
+          <div class="proj-modal-dot dot-max"></div>
+        </div>
+        <span class="proj-modal-titletext" id="projModalTitle">PROJECT DETAILS</span>
+        <button class="proj-modal-close" onclick="closeProjectModal()">&#10005; CLOSE</button>
+      </div>
+      <div class="proj-modal-addressbar">
+        <span class="proj-modal-url-icon">&#9733;</span>
+        <span class="proj-modal-url" id="projModalUrl">portfolio://projects/</span>
+      </div>
+      <div class="proj-modal-content" id="projModalContent">
+        <!-- Populated dynamically by main.js -->
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+  <script src="js/canvas.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/jet.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/portal.js"></script>
 </body>
+
 </html>

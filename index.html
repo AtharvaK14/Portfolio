@@ -102,150 +102,67 @@
       <h2 class="section-title">QUEST LOG</h2>
       <span class="section-subtitle">// WORK EXPERIENCE</span>
     </div>
-    <div class="quest-log">
+    <div class="journey-strip-wrap">
+      <button class="journey-arrow journey-arrow-left" onclick="scrollJourney(-1)" aria-label="Scroll to earlier roles">&#9664;</button>
 
-      <div class="quest-item reveal">
-        <div class="q-line"></div>
-        <div class="q-body" onclick="toggleQuest(this)">
-          <div class="q-head">
-            <span class="q-title">Software Developer Intern</span>
-            <span class="q-date">Jun 2026 -- Present</span>
-          </div>
-          <div class="q-company">Infyra LLC | Sheridan, WY</div>
-          <p class="q-summary">Contributing to backend REST API development and data pipeline analysis in a production environment, with hands-on exposure to PostgreSQL, MongoDB, and automated ETL workflows. Assisting with technical KPI reporting and ML model validation under senior engineer supervision.</p>
-          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
-          <div class="q-details">
-            <div class="q-details-inner">
-              <div class="q-context"></div>
-              <ul class="q-bullets">
-                <li>Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.</li>
-                <li>Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.</li>
-                <li>Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.</li>
-                <li>Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.</li>
-              </ul>
-            </div>
-          </div>
+      <div class="journey-strip" id="journeyStrip">
+        <div class="journey-track">
+
+          <button class="journey-stop" data-exp="expleo" onclick="selectExperience('expleo', this)">
+            <span class="stop-marker">
+              <span class="stop-lv">LV</span>
+              <span class="stop-num">1</span>
+            </span>
+            <span class="stop-title">QA Engineer</span>
+            <span class="stop-company">Expleo</span>
+            <span class="stop-date">OCT 2019 -- FEB 2020</span>
+          </button>
+
+          <button class="journey-stop" data-exp="ubisoft" onclick="selectExperience('ubisoft', this)">
+            <span class="stop-marker">
+              <span class="stop-lv">LV</span>
+              <span class="stop-num">2</span>
+            </span>
+            <span class="stop-title">SDET</span>
+            <span class="stop-company">Ubisoft</span>
+            <span class="stop-date">MAR 2020 -- MAR 2021</span>
+          </button>
+
+          <button class="journey-stop sub" data-exp="oasis" onclick="selectExperience('oasis', this)">
+            <span class="stop-marker">
+              <span class="stop-num">2.5</span>
+            </span>
+            <span class="stop-title">Web Dev Intern</span>
+            <span class="stop-company">Oasis Infobyte</span>
+            <span class="stop-date">FEB -- MAR 2022</span>
+          </button>
+
+          <button class="journey-stop" data-exp="mtu" onclick="selectExperience('mtu', this)">
+            <span class="stop-marker">
+              <span class="stop-lv">LV</span>
+              <span class="stop-num">3</span>
+            </span>
+            <span class="stop-title">Research Assistant</span>
+            <span class="stop-company">Michigan Tech</span>
+            <span class="stop-date">JUN 2025 -- JUN 2026</span>
+          </button>
+
+          <button class="journey-stop sub now active" data-exp="infyra" onclick="selectExperience('infyra', this)">
+            <span class="stop-marker now">
+              <span class="stop-num">3.5</span>
+            </span>
+            <span class="stop-title">SWE Intern</span>
+            <span class="stop-company">Infyra LLC</span>
+            <span class="stop-date">JUN 2026 -- NOW</span>
+          </button>
+
         </div>
       </div>
 
-      <div class="quest-item reveal">
-        <div class="q-line"></div>
-        <div class="q-body" onclick="toggleQuest(this)">
-          <div class="q-head">
-            <span class="q-title">Research Assistant</span>
-            <span class="q-date">Jun 2025 -- Jun 2026</span>
-          </div>
-          <div class="q-company">Michigan Technological University | Houghton, MI</div>
-          <p class="q-summary">Built automated Python data pipelines to collect, clean, and analyze structured financial datasets on Linux and Windows,cutting manual preprocessing effort by 40%. Designed KPI-driven evaluation frameworks to measure model performance, improving experiment comparability and accelerating research decisions by 35%.</p>
-          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
-          <div class="q-details">
-            <div class="q-details-inner">
-              <div class="q-context"></div>
-              <ul class="q-bullets">
-                <li>Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.</li>
-                <li>Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.</li>
-                <li>Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.</li>
-                <li>Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quest-item reveal">
-        <div class="q-line"></div>
-        <div class="q-body" onclick="toggleQuest(this)">
-          <div class="q-head">
-            <span class="q-title">Software Development Engineer in Test</span>
-            <span class="q-date">MAR 2020 -- MAR 2021</span>
-          </div>
-          <div class="q-company">UBISOFT ENTERTAINMENT | Pune, India</div>
-          <p class="q-summary">Worked on 2 titles with 40M+ combined users. Led desktop smoke testing, cutting execution
-            from 1 hour to 30 minutes. Wrote the initial test scripts for the team's Selenium/PyTest framework
-            (parameterized fixtures, session-scoped state), raising coverage from 60% to 82%. Configured those suites as
-            CI/CD quality gates in BitBucket, shortening regression cycles from 10 to 8 days. Ran cross-platform testing
-            on desktop, console (PS4/PS5 dev kits), and mobile, including performance profiling and peripheral hardware
-            validation, reducing inter-platform defects by 35%.</p>
-          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
-          <div class="q-details">
-            <div class="q-details-inner">
-              <div class="q-context">Global video game publisher serving millions of players across PC, console, and
-                mobile</div>
-              <ul class="q-bullets">
-                <li>Led <b>smoke testing</b> for the desktop platform across 2 titles serving <b>40M+</b> users, cutting
-                  execution time from <b>1 hour to 30 minutes</b> through test automation</li>
-                <li>Wrote automated test scripts with <b>parameterized fixtures</b> and session-scoped state for the
-                  team’s new <b>Selenium/PyTest</b> framework, raising test coverage from <b>60%</b> to <b>82%</b></li>
-                <li>Configured <b>Selenium</b> suites and smoke tests as quality gates in <b>BitBucket CI/CD
-                    pipelines</b>, reducing regression cycles from <b>10 to 8 days</b></li>
-                <li>Tested across desktop, console <b>(PS4/PS5 dev kits)</b>, and mobile, running <b>performance
-                    profiling</b>, platform compliance checks, and peripheral hardware validation (racing rigs),
-                  reducing inter-platform defects by
-                  <b>35%</b>
-                </li>
-                <li>Owned the full <b>defect lifecycle</b> in <b>JIRA</b>: triage, root cause analysis, and closure
-                  across platform teams under <b>Agile/Scrum</b></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quest-item reveal">
-        <div class="q-line"></div>
-        <div class="q-body" onclick="toggleQuest(this)">
-          <div class="q-head">
-            <span class="q-title">QA Engineer</span>
-            <span class="q-date">OCT 2019 -- FEB 2020</span>
-          </div>
-          <div class="q-company">EXPLEO Group | Pune, India</div>
-          <p class="q-summary">Mobile QA for a consumer iOS app with 100K+ users. Designed and ran 300+ test cases
-            across 15+ physical devices via Xcode and TestFlight. Traced crash logs to root cause and delivered reports
-            through JIRA and TestRail. Defect escape rate went from 12% to 3%, bug resolution time dropped 25%.</p>
-          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
-          <div class="q-details">
-            <div class="q-details-inner">
-              <div class="q-context">Global quality engineering company for enterprise mobile applications serving 100K+
-                users</div>
-              <ul class="q-bullets">
-                <li>Designed and ran <b>300+ test cases</b> across <b>15+ iOS devices</b> via <b>Xcode</b> and
-                  <b>TestFlight</b>, reducing defect escape rate from <b>12%</b> to <b>3%</b> for an app serving 100K+
-                  users
-                </li>
-                <li>Traced crash log stack traces in <b>Xcode</b> to root cause, delivering structured defect reports through
-                  <b>JIRA</b> and <b>TestRail</b> that cut bug resolution time by <b>25%</b></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quest-item reveal">
-        <div class="q-line"></div>
-        <div class="q-body" onclick="toggleQuest(this)">
-          <div class="q-head">
-            <span class="q-title">Web Dev &amp; Testing Intern</span>
-            <span class="q-date">FEB 2022 -- MAR 2022</span>
-          </div>
-          <div class="q-company">OASIS INFOBYTE | Pune, India</div>
-          <p class="q-summary">Built and tested web applications in HTML/CSS/JavaScript. Set up Jest automation in
-            GitHub Actions CI/CD, hitting 85% code coverage.</p>
-          <div class="q-expand-hint">HOVER OR TAP FOR DETAILS</div>
-          <div class="q-details">
-            <div class="q-details-inner">
-              <div class="q-context">Digital solutions company specializing in web development and UI/UX for SMBs</div>
-              <ul class="q-bullets">
-                <li>Performed API testing using <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code
-                    coverage</b> via Jest automation</li>
-                <li>Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b></li>
-                <li>Documented the full technology stack, enabling faster onboarding and consistent build processes</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <button class="journey-arrow journey-arrow-right" onclick="scrollJourney(1)" aria-label="Scroll to later roles">&#9654;</button>
     </div>
+
+    <div class="journey-detail" id="journeyDetail"></div>
   </section>
 
   <!-- ── Projects: simplified cards — click opens detail modal ── -->
