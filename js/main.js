@@ -382,7 +382,7 @@ const PROJECT_DATA = {
       'Shipped as a web app and, via <b>Capacitor</b>, a native <b>Android</b> app (min API 24) with full JSON backup/restore',
     ],
     actions: [
-      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/tv-time-replacement' },
+      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/WatchTime' },
     ],
   },
 };
