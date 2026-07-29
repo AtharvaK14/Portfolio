@@ -103,7 +103,8 @@
       <span class="section-subtitle">// WORK EXPERIENCE</span>
     </div>
     <div class="journey-strip-wrap">
-      <button class="journey-arrow journey-arrow-left" onclick="scrollJourney(-1)" aria-label="Scroll to earlier roles">&#9664;</button>
+      <button class="journey-arrow journey-arrow-left" onclick="scrollJourney(-1)"
+        aria-label="Scroll to earlier roles">&#9664;</button>
 
       <div class="journey-strip" id="journeyStrip">
         <div class="journey-track">
@@ -159,7 +160,8 @@
         </div>
       </div>
 
-      <button class="journey-arrow journey-arrow-right" onclick="scrollJourney(1)" aria-label="Scroll to later roles">&#9654;</button>
+      <button class="journey-arrow journey-arrow-right" onclick="scrollJourney(1)"
+        aria-label="Scroll to later roles">&#9654;</button>
     </div>
 
     <div class="journey-detail" id="journeyDetail"></div>
@@ -172,6 +174,22 @@
       <span class="section-subtitle">// PROJECTS</span>
     </div>
     <div class="achievement-grid">
+
+      <div class="ach-card reveal" onclick="openProjectModal('watchtime')">
+        <div class="ach-content">
+          <span class="ach-icon">&#128250;</span>
+          <div class="ach-name">WATCHTIME</div>
+          <div class="ach-tech">React · TypeScript · Vite · Dexie.js · Capacitor</div>
+          <p class="ach-desc">Local-first TV and movie tracker built to replace TV Time after its July 2026
+            shutdown -- tracks episodes and movies entirely on-device, with a native Android app.</p>
+        </div>
+        <div class="ach-actions">
+          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/tv-time-replacement" target="_blank"
+            onclick="event.stopPropagation()">GITHUB</a>
+          <button class="ach-btn ach-btn-details"
+            onclick="event.stopPropagation(); openProjectModal('watchtime')">DETAILS</button>
+        </div>
+      </div>
 
       <div class="ach-card reveal" onclick="openProjectModal('dual-e2e')">
         <div class="ach-content">

@@ -366,6 +366,25 @@ const PROJECT_DATA = {
       { label: 'LIVE SITE', cls: 'ach-btn-website', href: 'https://college-erp-system-one.vercel.app/login' },
     ],
   },
+
+  'watchtime': {
+    icon: '&#128250;',
+    title: 'WATCHTIME -- TV TIME REPLACEMENT',
+    tech: 'React · TypeScript · Vite · Dexie.js (IndexedDB) · Capacitor · Android',
+    url: 'portfolio://projects/watchtime',
+    desc: 'Local-first TV and movie tracker built as a replacement for TV Time after its July 2026 shutdown -- tracks episodes and movies entirely on-device, with a native Android app via Capacitor.',
+    bullets: [
+      '<b>Fully local-first</b> -- shows, movies, watch history, and API keys live only in <b>Dexie.js (IndexedDB)</b> on-device; no accounts, no backend server, no ads or tracking',
+      '<b>Watch Next</b> surfaces the next unwatched, released episode per show, plus configurable "Haven\'t Watched For a While" and "Haven\'t Yet Started" views',
+      'Rewatch tracking increments watch time and rewatch counts without inflating episode or progress totals',
+      'Integrates <b>TMDB</b> (metadata/posters), <b>OMDb</b> (IMDb/Rotten Tomatoes ratings), and <b>TVmaze</b> (episode runtimes), each using the user\'s own free API key',
+      '<b>TV Time migration</b> -- imports a user\'s full watch history from TV Time\'s GDPR CSV export or a third-party JSON export, with guided resolution of ambiguous title matches',
+      'Shipped as a web app and, via <b>Capacitor</b>, a native <b>Android</b> app (min API 24) with full JSON backup/restore',
+    ],
+    actions: [
+      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/tv-time-replacement' },
+    ],
+  },
 };
 
 // ── Project modal open / close ────────────────────────────
