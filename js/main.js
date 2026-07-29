@@ -369,7 +369,7 @@ const PROJECT_DATA = {
 
   'watchtime': {
     icon: '&#128250;',
-    title: 'WATCHTIME -- TV TIME REPLACEMENT',
+    title: 'WATCHTIME',
     tech: 'React · TypeScript · Vite · Dexie.js (IndexedDB) · Capacitor · Android',
     url: 'portfolio://projects/watchtime',
     desc: 'Local-first TV and movie tracker built as a replacement for TV Time after its July 2026 shutdown -- tracks episodes and movies entirely on-device, with a native Android app via Capacitor.',
