@@ -167,147 +167,193 @@
     <div class="journey-detail" id="journeyDetail"></div>
   </section>
 
-  <!-- ── Projects: simplified cards — click opens detail modal ── -->
+  <!-- ── Projects: grouped by discipline, dynamic filter, cards open detail modal ── -->
   <section id="project">
     <div class="section-header">
       <h2 class="section-title">ACHIEVEMENTS UNLOCKED</h2>
       <span class="section-subtitle">// PROJECTS</span>
     </div>
-    <div class="achievement-grid">
 
-      <div class="ach-card reveal" onclick="openProjectModal('watchtime')">
-        <div class="ach-content">
-          <span class="ach-icon">&#128250;</span>
-          <div class="ach-name">WATCHTIME</div>
-          <div class="ach-tech">React · TypeScript · Vite · Dexie.js · Capacitor</div>
-          <p class="ach-desc">Local-first TV and movie tracker built to replace TV Time after its July 2026
-            shutdown -- tracks episodes and movies entirely on-device, with a native Android app.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/WatchTime" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('watchtime')">DETAILS</button>
-        </div>
+    <div class="proj-filter" role="group" aria-label="Filter projects by category">
+      <button class="proj-filter-btn active" data-filter="all" aria-pressed="true"
+        onclick="filterProjects('all', this)">ALL <span class="proj-filter-count" data-count-for="all"></span></button>
+      <button class="proj-filter-btn" data-filter="qa" aria-pressed="false"
+        onclick="filterProjects('qa', this)">QA &amp; TEST ENG <span class="proj-filter-count" data-count-for="qa"></span></button>
+      <button class="proj-filter-btn" data-filter="swe" aria-pressed="false"
+        onclick="filterProjects('swe', this)">SOFTWARE ENG <span class="proj-filter-count" data-count-for="swe"></span></button>
+    </div>
+
+    <div class="proj-group" data-group="qa">
+      <div class="proj-group-header">
+        <span class="proj-group-icon">&#128269;</span>
+        <h3 class="proj-group-title">QA &amp; TEST ENGINEERING</h3>
+        <span class="proj-group-count"></span>
       </div>
+      <div class="achievement-grid">
 
-      <div class="ach-card reveal" onclick="openProjectModal('dual-e2e')">
-        <div class="ach-content">
-          <span class="ach-icon">&#9874;</span>
-          <div class="ach-name">DUAL-FRAMEWORK E2E TEST SUITE</div>
-          <div class="ach-tech">TypeScript · Playwright · Cypress · GitHub Actions</div>
-          <p class="ach-desc">Side-by-side Playwright and Cypress implementation of 22 identical E2E scenarios against
-            SauceDemo with measured framework comparison.</p>
+        <div class="ach-card reveal" onclick="openProjectModal('test-observability')">
+          <div class="ach-content">
+            <span class="ach-icon">&#128269;</span>
+            <div class="ach-name">TEST OBSERVABILITY -- AI ROOT-CAUSE AGENT</div>
+            <div class="ach-tech">Python · FastAPI · PostgreSQL · Claude API</div>
+            <p class="ach-desc">Ingests Playwright, Cypress, PyTest, and Selenium results and uses Claude to
+              diagnose why each failure happened -- app bug, flaky test, or environment -- from measured
+              evidence, not the error string alone.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github"
+              href="https://github.com/AtharvaK14/Test-Observability-AI-Root-Cause-Agent" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('test-observability')">DETAILS</button>
+          </div>
         </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github"
-            href="https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('dual-e2e')">DETAILS</button>
+
+        <div class="ach-card reveal" onclick="openProjectModal('dual-e2e')">
+          <div class="ach-content">
+            <span class="ach-icon">&#9874;</span>
+            <div class="ach-name">DUAL-FRAMEWORK E2E TEST SUITE</div>
+            <div class="ach-tech">TypeScript · Playwright · Cypress · GitHub Actions</div>
+            <p class="ach-desc">Side-by-side Playwright and Cypress implementation of 22 identical E2E scenarios
+              against SauceDemo with measured framework comparison.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github"
+              href="https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('dual-e2e')">DETAILS</button>
+          </div>
         </div>
+
+        <div class="ach-card reveal" onclick="openProjectModal('api-framework')">
+          <div class="ach-content">
+            <span class="ach-icon">&#9881;</span>
+            <div class="ach-name">API TEST AUTOMATION FRAMEWORK</div>
+            <div class="ach-tech">Python · PyTest · GitHub Actions · Allure</div>
+            <p class="ach-desc">Production-grade API test framework targeting the GitHub REST API with contract
+              validation, SLA enforcement, and live report deployment.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/api-quality-gate" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('api-framework')">DETAILS</button>
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <div class="ach-card reveal" onclick="openProjectModal('api-framework')">
-        <div class="ach-content">
-          <span class="ach-icon">&#9881;</span>
-          <div class="ach-name">API TEST AUTOMATION FRAMEWORK</div>
-          <div class="ach-tech">Python · PyTest · GitHub Actions · Allure</div>
-          <p class="ach-desc">Production-grade API test framework targeting the GitHub REST API with contract
-            validation, SLA enforcement, and live report deployment.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/api-quality-gate" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('api-framework')">DETAILS</button>
-        </div>
+    <div class="proj-group" data-group="swe">
+      <div class="proj-group-header">
+        <span class="proj-group-icon">&#128187;</span>
+        <h3 class="proj-group-title">SOFTWARE ENGINEERING</h3>
+        <span class="proj-group-count"></span>
       </div>
+      <div class="achievement-grid">
 
-      <div class="ach-card reveal" onclick="openProjectModal('vr-carnival')">
-        <div class="ach-content">
-          <span class="ach-icon">&#127918;</span>
-          <div class="ach-name">VR CARNIVAL EXPERIENCE</div>
-          <div class="ach-tech">Unreal Engine 5 · Blueprint · C++</div>
-          <p class="ach-desc">Immersive VR carnival with interactive mini-games using physics-based mechanics and
-            Blueprint scripting.</p>
+        <div class="ach-card reveal" onclick="openProjectModal('watchtime')">
+          <div class="ach-content">
+            <span class="ach-icon">&#128250;</span>
+            <div class="ach-name">WATCHTIME</div>
+            <div class="ach-tech">React · TypeScript · Vite · Dexie.js · Capacitor</div>
+            <p class="ach-desc">Local-first TV and movie tracker built to replace TV Time after its July 2026
+              shutdown -- tracks episodes and movies entirely on-device, with a native Android app.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/WatchTime" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('watchtime')">DETAILS</button>
+          </div>
         </div>
-        <div class="ach-actions">
-          <button class="ach-btn ach-btn-video" onclick="event.stopPropagation(); openVideo()">WATCH DEMO</button>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('vr-carnival')">DETAILS</button>
+
+        <div class="ach-card reveal" onclick="openProjectModal('vr-carnival')">
+          <div class="ach-content">
+            <span class="ach-icon">&#127918;</span>
+            <div class="ach-name">VR CARNIVAL EXPERIENCE</div>
+            <div class="ach-tech">Unreal Engine 5 · Blueprint · C++</div>
+            <p class="ach-desc">Immersive VR carnival with interactive mini-games using physics-based mechanics and
+              Blueprint scripting.</p>
+          </div>
+          <div class="ach-actions">
+            <button class="ach-btn ach-btn-video" onclick="event.stopPropagation(); openVideo()">WATCH DEMO</button>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('vr-carnival')">DETAILS</button>
+          </div>
         </div>
+
+        <div class="ach-card reveal" onclick="openProjectModal('rubber-ducky')">
+          <div class="ach-content">
+            <span class="ach-icon">&#129414;</span>
+            <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
+            <div class="ach-tech">Python · JavaScript · Node.js</div>
+            <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and
+              duck-themed personality.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/" target="_blank"
+              onclick="event.stopPropagation()">LIVE SITE</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('rubber-ducky')">DETAILS</button>
+          </div>
+        </div>
+
+        <div class="ach-card reveal" onclick="openProjectModal('post-fire')">
+          <div class="ach-content">
+            <span class="ach-icon">&#128293;</span>
+            <div class="ach-name">POST-FIRE ASSESSMENT APP</div>
+            <div class="ach-tech">HTML · CSS · JavaScript</div>
+            <p class="ach-desc">Mobile web app helping field teams log wildfire ash data with real-time storage for
+              scientific assessments.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App"
+              target="_blank" onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('post-fire')">DETAILS</button>
+          </div>
+        </div>
+
+        <div class="ach-card reveal" onclick="openProjectModal('pneumonia')">
+          <div class="ach-content">
+            <span class="ach-icon">&#129753;</span>
+            <div class="ach-name">PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING</div>
+            <div class="ach-tech">Python · TensorFlow · Keras</div>
+            <p class="ach-desc">Deep learning model detecting pneumonia in chest X-ray images to aid early clinical
+              diagnosis.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github"
+              href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('pneumonia')">DETAILS</button>
+          </div>
+        </div>
+
+        <div class="ach-card reveal" onclick="openProjectModal('college-erp')">
+          <div class="ach-content">
+            <span class="ach-icon">&#127979;</span>
+            <div class="ach-name">COLLEGE ERP SYSTEM</div>
+            <div class="ach-tech">FastAPI · Next.js 14 · PostgreSQL · Docker</div>
+            <p class="ach-desc">Full-stack ERP with role-based portals for Admins, Teachers, and Students across
+              57 REST API endpoints.</p>
+          </div>
+          <div class="ach-actions">
+            <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank"
+              onclick="event.stopPropagation()">GITHUB</a>
+            <a class="ach-btn ach-btn-website" href="https://college-erp-system-one.vercel.app/login" target="_blank"
+              onclick="event.stopPropagation()">LIVE SITE</a>
+            <button class="ach-btn ach-btn-details"
+              onclick="event.stopPropagation(); openProjectModal('college-erp')">DETAILS</button>
+          </div>
+        </div>
+
       </div>
-
-      <div class="ach-card reveal" onclick="openProjectModal('rubber-ducky')">
-        <div class="ach-content">
-          <span class="ach-icon">&#129414;</span>
-          <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
-          <div class="ach-tech">Python · JavaScript · Node.js</div>
-          <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and
-            duck-themed personality.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/" target="_blank"
-            onclick="event.stopPropagation()">LIVE SITE</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('rubber-ducky')">DETAILS</button>
-        </div>
-      </div>
-
-      <div class="ach-card reveal" onclick="openProjectModal('post-fire')">
-        <div class="ach-content">
-          <span class="ach-icon">&#128293;</span>
-          <div class="ach-name">POST-FIRE ASSESSMENT APP</div>
-          <div class="ach-tech">HTML · CSS · JavaScript</div>
-          <p class="ach-desc">Mobile web app helping field teams log wildfire ash data with real-time storage for
-            scientific assessments.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App"
-            target="_blank" onclick="event.stopPropagation()">GITHUB</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('post-fire')">DETAILS</button>
-        </div>
-      </div>
-
-      <div class="ach-card reveal" onclick="openProjectModal('pneumonia')">
-        <div class="ach-content">
-          <span class="ach-icon">&#129753;</span>
-          <div class="ach-name">PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING</div>
-          <div class="ach-tech">Python · TensorFlow · Keras</div>
-          <p class="ach-desc">Deep learning model detecting pneumonia in chest X-ray images to aid early clinical
-            diagnosis.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github"
-            href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('pneumonia')">DETAILS</button>
-        </div>
-      </div>
-
-      <div class="ach-card reveal" onclick="openProjectModal('college-erp')">
-        <div class="ach-content">
-          <span class="ach-icon">&#127979;</span>
-          <div class="ach-name">COLLEGE ERP SYSTEM</div>
-          <div class="ach-tech">FastAPI · Next.js 14 · PostgreSQL · Docker</div>
-          <p class="ach-desc">Full-stack ERP with role-based portals for Admins, Teachers, and Students across 57 REST
-            API endpoints.</p>
-        </div>
-        <div class="ach-actions">
-          <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank"
-            onclick="event.stopPropagation()">GITHUB</a>
-          <a class="ach-btn ach-btn-website" href="https://college-erp-system-one.vercel.app/login" target="_blank"
-            onclick="event.stopPropagation()">LIVE SITE</a>
-          <button class="ach-btn ach-btn-details"
-            onclick="event.stopPropagation(); openProjectModal('college-erp')">DETAILS</button>
-        </div>
-      </div>
-
     </div>
   </section>
 

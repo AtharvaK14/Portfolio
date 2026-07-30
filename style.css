@@ -473,6 +473,50 @@ section {
 .ach-btn-details { color: var(--gold); border: 1px solid rgba(255,215,0,0.4); }
 .ach-btn-details:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
 
+/* ── Project category filter + groups ────────────────────── */
+.proj-filter {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 12px; margin-bottom: 46px;
+}
+.proj-filter-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px;
+  font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: 1px;
+  background: transparent; border: 1px solid rgba(255,215,0,0.35);
+  color: rgba(232,232,255,0.6); padding: 10px 16px; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.proj-filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.proj-filter-btn.active {
+  background: var(--gold); border-color: var(--gold); color: var(--bg);
+  box-shadow: 0 0 14px rgba(255,215,0,0.35);
+}
+.proj-filter-count { opacity: 0.7; font-size: 8px; }
+
+.proj-group {
+  max-width: 1200px; width: 100%; margin-bottom: 56px;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.proj-group:last-child { margin-bottom: 0; }
+.proj-group.proj-group-out { opacity: 0; transform: translateY(10px); }
+
+.proj-group-header {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; margin-bottom: 26px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(232,232,255,0.14);
+}
+.proj-group-icon { font-size: 22px; flex-shrink: 0; }
+.proj-group-title {
+  font-family: 'Press Start 2P', monospace; font-size: 13px;
+  letter-spacing: 2px; flex: 1;
+}
+.proj-group[data-group="qa"]  .proj-group-title { color: var(--blue); }
+.proj-group[data-group="swe"] .proj-group-title { color: var(--pink); }
+.proj-group-count {
+  font-family: 'VT323', monospace; font-size: 20px;
+  color: rgba(232,232,255,0.4); letter-spacing: 1px; flex-shrink: 0;
+}
+
 /* ── Project Detail Modal (retro OS window) ──────────────── */
 .proj-modal-overlay {
   display: none;
@@ -832,6 +876,11 @@ section {
   .nav-btn     { font-size: 9px; padding: 7px 10px; }
 
   .achievement-grid { grid-template-columns: 1fr; }
+
+  .proj-filter-btn   { font-size: 8px; padding: 9px 12px; }
+  .proj-group-header { gap: 10px; margin-bottom: 20px; }
+  .proj-group-title  { font-size: 11px; }
+  .proj-group-count  { font-size: 17px; }
 
   .q-date      { white-space: normal; font-size: 15px; }
   .q-head      { flex-direction: column; gap: 4px; }

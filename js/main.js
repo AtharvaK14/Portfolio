@@ -244,7 +244,10 @@ function scrollJourney(dir) {
   if (strip) strip.scrollBy({ left: dir * 260, behavior: 'smooth' });
 }
 
-document.addEventListener('DOMContentLoaded', () => renderExperience(activeExpId));
+document.addEventListener('DOMContentLoaded', () => {
+  renderExperience(activeExpId);
+  initProjectCounts();
+});
 
 // ── Project data store ────────────────────────────────────
 const PROJECT_DATA = {
@@ -385,6 +388,25 @@ const PROJECT_DATA = {
       { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/WatchTime' },
     ],
   },
+
+  'test-observability': {
+    icon: '&#128269;',
+    title: 'TEST OBSERVABILITY -- AI ROOT-CAUSE AGENT',
+    tech: 'Python · FastAPI · SQLAlchemy · PostgreSQL · Claude (Anthropic API) · Docker · GitHub Actions',
+    url: 'portfolio://projects/test-observability-ai-root-cause-agent',
+    desc: 'AI agent that ingests test results from Playwright, Cypress, PyTest, and Selenium, then uses Claude to diagnose why each failure happened -- app bug, flaky test, environment, test data, infrastructure, or external dependency -- backed by measured evidence rather than the error string alone.',
+    bullets: [
+      '<b>167 tests, mypy --strict clean</b> -- verified end-to-end against real Playwright, Cypress, and PyTest output',
+      'Builds real diagnostic evidence per failure -- <b>30-run pass/fail history</b>, commit-range check, cross-framework blast radius, duration-vs-baseline, and error-fingerprint clustering -- before the model forms an opinion',
+      'Agent investigates with <b>5 retrieval tools</b> across up to 4 turns, then returns a <b>schema-validated verdict</b> via a strict tool call instead of parsed text',
+      '<b>Two classifiers</b> scored against seeded ground truth -- a confidence-capped rule-based heuristic (the control group) and Claude -- so accuracy claims are falsifiable, not asserted',
+      'Deterministic, LLM-free <b>hash-based clustering</b> collapses hundreds of red tests into the handful of real underlying problems, cutting analysis cost by orders of magnitude',
+      'Backend and agent are complete and verified end-to-end; the <b>React dashboard is the next milestone</b>',
+    ],
+    actions: [
+      { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/Test-Observability-AI-Root-Cause-Agent' },
+    ],
+  },
 };
 
 // ── Project modal open / close ────────────────────────────
@@ -441,6 +463,43 @@ function handleProjOverlayClick(e) {
   if (e.target === document.getElementById('projectModal')) {
     closeProjectModal();
   }
+}
+
+// ── Project category filter ───────────────────────────────
+function filterProjects(category, btn) {
+  document.querySelectorAll('.proj-filter-btn').forEach(b => {
+    const isActive = b === btn;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', String(isActive));
+  });
+
+  document.querySelectorAll('.proj-group').forEach(group => {
+    const show = category === 'all' || group.dataset.group === category;
+    if (show) {
+      group.hidden = false;
+      requestAnimationFrame(() => group.classList.remove('proj-group-out'));
+    } else {
+      group.classList.add('proj-group-out');
+      setTimeout(() => {
+        if (group.classList.contains('proj-group-out')) group.hidden = true;
+      }, 220);
+    }
+  });
+}
+
+// Counts are derived from the DOM so they can never drift from the actual cards
+function initProjectCounts() {
+  const counts = { all: 0 };
+  document.querySelectorAll('.proj-group').forEach(group => {
+    const n = group.querySelectorAll('.ach-card').length;
+    counts[group.dataset.group] = n;
+    counts.all += n;
+    const header = group.querySelector('.proj-group-count');
+    if (header) header.textContent = '×' + n;
+  });
+  document.querySelectorAll('.proj-filter-count').forEach(el => {
+    el.textContent = '(' + (counts[el.dataset.countFor] || 0) + ')';
+  });
 }
 
 // Escape key closes the project modal (and video modal)
