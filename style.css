@@ -17,6 +17,26 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── Keyboard focus (on-brand, visible) ──────────────────── */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  box-shadow: 0 0 12px rgba(255,215,0,0.5);
+}
+
+/* ── Respect reduced-motion preference ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   background: var(--bg);
   color: var(--white);
@@ -779,9 +799,10 @@ section {
   box-shadow: 0 0 20px rgba(0,255,159,0.16); transform: translateY(-4px);
 }
 .c-icon  { font-size: 28px; }
+.c-icon img { filter: invert(1); } /* icons8 assets are requested black; invert for visibility on the dark theme */
 .c-label { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--green); letter-spacing: 1px; }
 .c-val   { font-size: 20px; color: rgba(232,232,255,0.6); }
-.copyright { font-size: 18px; color: rgba(232,232,255,0.22); letter-spacing: 2px; }
+.copyright { font-size: 18px; color: rgba(232,232,255,0.42); letter-spacing: 2px; }
 
 /* ── Video Modal ──────────────────────────────────────── */
 .modal-overlay {
@@ -838,6 +859,17 @@ section {
   .nav-brand  { font-size: 10px; }
   .btn-text   { display: none; }
 
+  /* Touch targets: keep every control >=44px on touch-primary widths */
+  .burger-btn, .nav-btn {
+    min-width: 44px; min-height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .ach-btn, .resume-btn { min-height: 44px; }
+  .modal-close, .proj-modal-close {
+    min-height: 44px; min-width: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+
   .nav-links.open {
     display: flex; flex-direction: column;
     position: fixed;
@@ -887,7 +919,7 @@ section {
   .attr-grid   { grid-template-columns: 1fr; }
   .char-class  { font-size: 18px; }
 
-  .journey-arrow { width: 32px; height: 32px; font-size: 11px; }
+  .journey-arrow { width: 44px; height: 44px; font-size: 13px; }
   .journey-track { gap: 26px; padding: 40px 14px 10px; }
   .journey-track::before { top: 60px; }
   .journey-stop { width: 120px; }
@@ -947,6 +979,7 @@ section {
   font-family: 'Press Start 2P', monospace;
   font-size: 9px; color: var(--bg);
   background: var(--green); border: none;
+  min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
   padding: 11px 20px; cursor: pointer; letter-spacing: 1px;
   box-shadow: 0 0 16px rgba(0,255,159,0.4);
 }

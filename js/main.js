@@ -49,15 +49,20 @@ const skillObs = new IntersectionObserver((entries) => {
 if (skillGrid) skillObs.observe(skillGrid);
 
 // ── Video modal ───────────────────────────────────────────
+let lastFocusedVideoEl = null;
+
 function openVideo() {
+  lastFocusedVideoEl = document.activeElement;
   document.getElementById('youtubeFrame').src =
     'https://www.youtube.com/embed/DsuzHmdVO_s?autoplay=1';
   document.getElementById('videoModal').classList.add('open');
+  document.querySelector('#videoModal .modal-close')?.focus();
 }
 
 function closeVideo() {
   document.getElementById('youtubeFrame').src = '';
   document.getElementById('videoModal').classList.remove('open');
+  if (lastFocusedVideoEl) { lastFocusedVideoEl.focus(); lastFocusedVideoEl = null; }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -184,13 +189,11 @@ const EXPERIENCE_DATA = {
     title: 'Software Developer Intern',
     company: 'Infyra LLC | Sheridan, WY',
     date: 'JUN 2026 -- PRESENT',
-    summary: 'Backend REST APIs, ETL pipelines, and ML model validation in a production environment.',
+    summary: 'Backend REST APIs, ETL validation, and ML model validation checks in a production environment.',
     context: '',
     bullets: [
-      'Built and iterated AI/ML prototypes using Python, translating research ideas into working systems and validating real-world applicability across multiple experimental runs and datasets.',
-      'Designed evaluation frameworks and KPI-driven benchmarks to measure model performance (accuracy, latency, reliability), improving experiment comparability and decision-making speed by 35%.',
-      'Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by 40% and accelerating iteration cycles.',
-      'Collaborated with researchers and stakeholders to define problem statements, analyze large-scale datasets, and deliver insights that influenced research direction across multiple projects.',
+      'Developed backend <b>REST API endpoints</b> and automated <b>ETL validation</b> against <b>PostgreSQL</b> and <b>MongoDB</b>, adding schema checks that catch pipeline defects before release.',
+      'Automated <b>KPI reporting</b> and <b>ML model validation</b> checks, standardizing how accuracy and latency regressions are surfaced.',
     ],
   },
 
@@ -247,6 +250,7 @@ function scrollJourney(dir) {
 document.addEventListener('DOMContentLoaded', () => {
   renderExperience(activeExpId);
   initProjectCounts();
+  setCopyrightYear();
 });
 
 // ── Project data store ────────────────────────────────────
@@ -410,9 +414,12 @@ const PROJECT_DATA = {
 };
 
 // ── Project modal open / close ────────────────────────────
+let lastFocusedProjEl = null;
+
 function openProjectModal(id) {
   const data = PROJECT_DATA[id];
   if (!data) return;
+  lastFocusedProjEl = document.activeElement;
 
   // Populate title bar
   document.getElementById('projModalTitle').textContent = data.title;
@@ -451,11 +458,13 @@ function openProjectModal(id) {
   // Open overlay (CSS transition handles the window animation)
   document.getElementById('projectModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.querySelector('.proj-modal-close')?.focus();
 }
 
 function closeProjectModal() {
   document.getElementById('projectModal').classList.remove('open');
   document.body.style.overflow = '';
+  if (lastFocusedProjEl) { lastFocusedProjEl.focus(); lastFocusedProjEl = null; }
 }
 
 // Close on backdrop click (not on the window itself)
@@ -502,10 +511,17 @@ function initProjectCounts() {
   });
 }
 
-// Escape key closes the project modal (and video modal)
+// Escape key closes the project modal, video modal, and mobile nav
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeProjectModal();
     closeVideo();
+    closeBurger();
   }
 });
+
+// ── Copyright year: stays correct without a yearly edit ────
+function setCopyrightYear() {
+  const el = document.getElementById('copyYear');
+  if (el) el.textContent = new Date().getFullYear();
+}
