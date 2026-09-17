@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const PROJECT_DATA = {
 
   'dual-e2e': {
-    icon: '&#9874;',
+    icon: 'compare',
     title: 'DUAL-FRAMEWORK E2E TEST SUITE',
     tech: 'TypeScript · Playwright · Cypress · GitHub Actions · Node.js',
     url: 'portfolio://projects/dual-framework-e2e-test-suite',
@@ -275,7 +275,7 @@ const PROJECT_DATA = {
   },
 
   'api-framework': {
-    icon: '&#9881;',
+    icon: 'contract',
     title: 'API TEST AUTOMATION FRAMEWORK',
     tech: 'Python · PyTest · Pydantic v2 · GitHub Actions · Allure',
     url: 'portfolio://projects/api-test-automation-framework',
@@ -292,7 +292,7 @@ const PROJECT_DATA = {
   },
 
   'vr-carnival': {
-    icon: '&#127918;',
+    icon: 'gamepad',
     title: 'VR CARNIVAL EXPERIENCE',
     tech: 'Unreal Engine 5 · Blueprint · C++',
     url: 'portfolio://projects/vr-carnival-experience',
@@ -309,7 +309,7 @@ const PROJECT_DATA = {
   },
 
   'rubber-ducky': {
-    icon: '&#129414;',
+    icon: 'duck',
     title: 'DEBUGGING ASSISTANT CHATBOT',
     tech: 'Python · JavaScript · Node.js',
     url: 'portfolio://projects/rubber-ducky-chatbot',
@@ -326,7 +326,7 @@ const PROJECT_DATA = {
   },
 
   'post-fire': {
-    icon: '&#128293;',
+    icon: 'pin',
     title: 'POST-FIRE ASSESSMENT APP',
     tech: 'HTML · CSS · JavaScript',
     url: 'portfolio://projects/post-fire-assessment-app',
@@ -342,7 +342,7 @@ const PROJECT_DATA = {
   },
 
   'pneumonia': {
-    icon: '&#129753;',
+    icon: 'scan',
     title: 'PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING',
     tech: 'Python · TensorFlow · Keras',
     url: 'portfolio://projects/pneumonia-detection-cnn',
@@ -358,7 +358,7 @@ const PROJECT_DATA = {
   },
 
   'college-erp': {
-    icon: '&#127979;',
+    icon: 'school',
     title: 'COLLEGE ERP SYSTEM',
     tech: 'FastAPI · Next.js 14 · PostgreSQL · Docker',
     url: 'portfolio://projects/college-erp-system',
@@ -375,7 +375,7 @@ const PROJECT_DATA = {
   },
 
   'watchtime': {
-    icon: '&#128250;',
+    icon: 'tv',
     title: 'WATCHTIME',
     tech: 'React · TypeScript · Vite · Dexie.js (IndexedDB) · Capacitor · Android',
     url: 'portfolio://projects/watchtime',
@@ -394,7 +394,7 @@ const PROJECT_DATA = {
   },
 
   'test-observability': {
-    icon: '&#128269;',
+    icon: 'search',
     title: 'TEST OBSERVABILITY -- AI ROOT-CAUSE AGENT',
     tech: 'Python · FastAPI · SQLAlchemy · PostgreSQL · Claude (Anthropic API) · Docker · GitHub Actions',
     url: 'portfolio://projects/test-observability-ai-root-cause-agent',
@@ -441,7 +441,7 @@ function openProjectModal(id) {
 
   document.getElementById('projModalContent').innerHTML = `
     <div class="pmod-header">
-      <span class="pmod-icon">${data.icon}</span>
+      <svg class="pmod-icon" aria-hidden="true"><use href="#i-${data.icon}"/></svg>
       <div class="pmod-header-text">
         <div class="pmod-title">${data.title}</div>
         <div class="pmod-tech">${data.tech}</div>
