@@ -11,11 +11,51 @@
   --gold:  #ffd700;
   --blue:  #00c8ff;
   --white: #e8e8ff;
+
+  /* ── Colour roles ──────────────────────────────────────
+     Every hue has exactly one job. Adding a colour to a
+     component means asking which of these three it is.
+       accent    structure + proper nouns (borders, nav, focus, companies)
+       highlight section titles + the ONE primary action per section
+       now       live state + dismiss (active timeline node, close buttons)
+     Anything else is white at an alpha step below.        */
+  --accent:    var(--green);
+  --highlight: var(--gold);
+  --now:       var(--pink);
+
+  --ink-1: rgba(232,232,255,1);      /* primary text            */
+  --ink-2: rgba(232,232,255,0.82);   /* prose                   */
+  --ink-3: rgba(232,232,255,0.62);   /* secondary / metadata    */
+  --ink-4: rgba(232,232,255,0.55);   /* captions — AA floor     */
+
+  /* ── Type scale ────────────────────────────────────────
+     Press Start 2P sits on a 5x7 pixel grid, so it turns to
+     mush below 10px on fractional-DPI displays. 10px is the
+     floor, not a preference.                               */
+  --ps-xs: 10px;   /* labels, buttons, captions */
+  --ps-sm: 12px;   /* card + item titles        */
+  --ps-md: 16px;   /* group headings, brand     */
+  --ps-lg: 22px;   /* section titles            */
+
+  /* VT323 runs small for its point size — 24px reads as ~16px. */
+  --vt-sm: 18px;   /* dates, captions, labels   */
+  --vt-md: 20px;   /* metadata, list items      */
+  --vt-lg: 24px;   /* body prose                */
+  --vt-xl: 30px;   /* lead-in lines             */
+
+  /* ── Spacing ─────────────────────────────────────────── */
+  --space-section: clamp(72px, 9vw, 120px);
+  --space-gutter:  clamp(20px, 4vw, 40px);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Sections no longer pad themselves to a full screen, so anchor
+     targets need to clear the fixed nav explicitly. */
+  scroll-padding-top: 88px;
+}
 
 /* ── Keyboard focus (on-brand, visible) ──────────────────── */
 a:focus-visible,
@@ -41,7 +81,7 @@ body {
   background: var(--bg);
   color: var(--white);
   font-family: 'VT323', monospace;
-  font-size: 24px;
+  font-size: var(--vt-lg);
   overflow-x: hidden;
   cursor: crosshair;
 }
@@ -80,7 +120,7 @@ nav#main-nav {
 
 .nav-brand {
   font-family: 'Press Start 2P', monospace;
-  font-size: 15px; color: var(--green);
+  font-size: var(--ps-md); color: var(--accent);
   text-shadow: 0 0 12px var(--green);
   white-space: nowrap; flex-shrink: 0;
 }
@@ -91,7 +131,7 @@ nav#main-nav {
 }
 .nav-links a {
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px; color: var(--white);
+  font-size: var(--ps-xs); color: var(--ink-1);
   text-decoration: none; letter-spacing: 1px;
   transition: color 0.2s;
 }
@@ -108,8 +148,8 @@ nav#main-nav {
 /* ── Burger button ───────────────────────────────────── */
 .burger-btn {
   display: none;
-  font-family: 'Press Start 2P', monospace; font-size: 14px;
-  background: transparent; border: 1px solid var(--green);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm);
+  background: transparent; border: 1px solid var(--accent);
   color: var(--green); padding: 7px 11px; cursor: pointer;
   line-height: 1; flex-shrink: 0; transition: all 0.2s;
 }
@@ -117,8 +157,8 @@ nav#main-nav {
 .burger-btn.open { background: var(--green); color: var(--bg); box-shadow: 0 0 14px rgba(0,255,159,0.4); }
 
 .nav-btn {
-  font-family: 'Press Start 2P', monospace; font-size: 11px;
-  background: transparent; border: 1px solid var(--green);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  background: transparent; border: 1px solid var(--accent);
   color: var(--green); padding: 9px 14px; cursor: pointer;
   transition: all 0.2s; white-space: nowrap;
 }
@@ -128,7 +168,7 @@ nav#main-nav {
 }
 .nav-btn.track-btn {
   border-color: rgba(0,255,159,0.4);
-  color: rgba(0,255,159,0.7); font-size: 11px;
+  color: rgba(0,255,159,0.7); font-size: var(--ps-xs);
 }
 .nav-btn.track-btn:hover { border-color: var(--green); color: var(--bg); }
 
@@ -143,19 +183,25 @@ nav#main-nav {
 }
 
 /* ── Sections ─────────────────────────────────────────── */
+/* Sections size to their content. Forcing every one to 100vh left
+   660px of dead space under the hero and 415px under education, and
+   100vh (vs 100dvh) also causes the iOS Safari address-bar jump.
+   Only the hero earns a full screen. */
 section {
   position: relative; z-index: 1;
-  min-height: 100vh; padding: 90px 40px 70px;
+  padding: var(--space-section) var(--space-gutter);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
 }
+
+#hero { min-height: 100dvh; }
 
 .section-header {
   text-align: center; margin-bottom: 48px; width: 100%;
 }
 .section-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(13px, 2vw, 22px); color: var(--gold);
+  font-size: clamp(var(--ps-sm), 2vw, var(--ps-lg)); color: var(--highlight);
   text-shadow: 0 0 20px rgba(255,215,0,0.5); letter-spacing: 3px;
   display: flex; align-items: center; gap: 16px; width: 100%;
 }
@@ -166,8 +212,8 @@ section {
 }
 .section-subtitle {
   display: block; margin-top: 8px;
-  font-family: 'VT323', monospace; font-size: 22px;
-  color: rgba(232,232,255,0.35); letter-spacing: 5px;
+  font-family: 'VT323', monospace; font-size: var(--vt-lg);
+  color: var(--ink-4); letter-spacing: 5px;
   text-transform: uppercase;
 }
 
@@ -177,8 +223,8 @@ section {
   background: linear-gradient(180deg, rgba(0,255,159,0.02) 0%, transparent 100%);
 }
 .hero-boot {
-  font-family: 'Press Start 2P', monospace; font-size: 10px;
-  color: var(--green); letter-spacing: 4px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: var(--accent); letter-spacing: 4px; line-height: 1.8;
   opacity: 0; animation: fade-in 0.8s 0.3s forwards;
 }
 .hero-name {
@@ -191,7 +237,7 @@ section {
   opacity: 0; animation: slide-up 0.8s 0.6s forwards;
 }
 .hero-subtitle {
-  font-size: clamp(22px, 3vw, 32px); color: var(--blue);
+  font-size: clamp(var(--vt-lg), 3vw, 32px); color: var(--accent);
   letter-spacing: 4px;
   opacity: 0; animation: slide-up 0.8s 1s forwards;
 }
@@ -200,19 +246,19 @@ section {
   opacity: 0; animation: fade-in 0.8s 1.4s forwards;
 }
 .tag {
-  font-family: 'Press Start 2P', monospace; font-size: 8px;
-  border: 1px solid var(--green); background: rgba(0,255,159,0.07);
-  color: var(--green); padding: 8px 13px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  border: 1px solid var(--accent); background: rgba(0,255,159,0.07);
+  color: var(--accent); padding: 8px 13px;
 }
 .scroll-hint {
-  font-family: 'Press Start 2P', monospace; font-size: 10px;
-  color: rgba(232,232,255,0.35);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: var(--ink-4); line-height: 1.8;
   animation: bounce 2.4s 2s ease-in-out infinite, fade-in 0.6s 2s forwards;
   opacity: 0;
 }
 
 /* ── About / Character Sheet ──────────────────────────── */
-#about { background: linear-gradient(180deg, transparent, rgba(0,200,255,0.025) 100%); }
+#about { background: linear-gradient(180deg, transparent, rgba(0,255,159,0.022) 100%); }
 
 .char-sheet {
   display: grid; grid-template-columns: 260px 1fr;
@@ -222,47 +268,47 @@ section {
 
 .portrait-frame {
   width: 100%; aspect-ratio: 1;
-  border: 3px solid var(--blue);
-  box-shadow: 0 0 32px rgba(0,200,255,0.32);
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 32px rgba(0,255,159,0.28);
   overflow: hidden; position: relative;
-  background: rgba(0,200,255,0.05);
+  background: rgba(0,255,159,0.05);
 }
 .portrait-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85) contrast(1.08); }
 .portrait-frame::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, transparent 60%, rgba(0,200,255,0.1));
+  background: linear-gradient(135deg, transparent 60%, rgba(0,255,159,0.1));
   pointer-events: none;
 }
 
 .char-info-block {
-  border: 1px solid rgba(0,200,255,0.28);
-  background: rgba(0,200,255,0.05);
-  padding: 14px 16px; font-size: 20px; line-height: 2.1;
+  border: 1px solid rgba(0,255,159,0.22);
+  background: rgba(0,255,159,0.04);
+  padding: 14px 16px; font-size: var(--vt-md); line-height: 2.1;
 }
-.char-info-block .lbl { color: var(--blue); font-size: 17px; }
+.char-info-block .lbl { color: var(--accent); font-size: var(--vt-sm); }
 
 .char-stats-panel { display: flex; flex-direction: column; gap: 18px; }
 
 .char-name-heading {
-  font-family: 'Press Start 2P', monospace; font-size: 15px;
-  color: var(--green); text-shadow: 0 0 12px rgba(0,255,159,0.4);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-md);
+  color: var(--accent); text-shadow: 0 0 12px rgba(0,255,159,0.4);
 }
-.char-class { font-size: 24px; color: var(--gold); letter-spacing: 2px; }
+.char-class { font-size: var(--vt-lg); color: var(--ink-3); letter-spacing: 2px; }
 
 .char-bio {
-  font-size: 22px; line-height: 1.75; color: rgba(232,232,255,0.82);
-  border-left: 3px solid var(--green); padding-left: 16px;
+  font-size: var(--vt-lg); line-height: 1.75; color: var(--ink-2);
+  border-left: 3px solid var(--accent); padding-left: 16px;
 }
 
 .attr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .attr { display: flex; flex-direction: column; gap: 3px; }
-.attr-lbl { font-family: 'Press Start 2P', monospace; font-size: 8px; color: rgba(232,232,255,0.4); letter-spacing: 1px; }
-.attr-val { font-size: 21px; color: var(--gold); }
+.attr-lbl { font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); color: var(--ink-4); letter-spacing: 1px; }
+.attr-val { font-size: var(--vt-md); color: var(--ink-2); }
 
 .resume-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'Press Start 2P', monospace; font-size: 11px;
-  border: 2px solid var(--gold); color: var(--gold);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm);
+  border: 2px solid var(--highlight); color: var(--highlight);
   padding: 12px 22px; text-decoration: none; background: transparent;
   transition: all 0.2s; width: fit-content;
 }
@@ -272,7 +318,7 @@ section {
 }
 
 /* ── Experience / Quest Log ───────────────────────────── */
-#experience { background: linear-gradient(180deg, rgba(255,45,120,0.02), transparent 100%); }
+#experience { background: linear-gradient(180deg, rgba(0,255,159,0.018), transparent 100%); }
 
 /* Journey strip: a horizontal "game map" rail of level nodes.
    Internships render smaller and offset below the rail as sub-levels
@@ -288,25 +334,25 @@ section {
 .journey-arrow {
   flex-shrink: 0;
   width: 40px; height: 40px;
-  background: rgba(255,45,120,0.06);
-  border: 1px solid rgba(255,45,120,0.4);
-  color: var(--pink);
-  font-size: 14px; cursor: pointer;
+  background: rgba(0,255,159,0.06);
+  border: 1px solid rgba(0,255,159,0.35);
+  color: var(--accent);
+  font-size: var(--ps-sm); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
 }
-.journey-arrow:hover { background: var(--pink); color: var(--bg); box-shadow: 0 0 14px rgba(255,45,120,0.4); }
+.journey-arrow:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 14px rgba(0,255,159,0.4); }
 
 .journey-strip {
   flex: 1;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,45,120,0.35) transparent;
+  scrollbar-color: rgba(0,255,159,0.3) transparent;
 }
 .journey-strip::-webkit-scrollbar { height: 6px; }
 .journey-strip::-webkit-scrollbar-track { background: transparent; }
-.journey-strip::-webkit-scrollbar-thumb { background: rgba(255,45,120,0.35); }
+.journey-strip::-webkit-scrollbar-thumb { background: rgba(0,255,159,0.3); }
 
 .journey-track {
   display: flex;
@@ -321,7 +367,7 @@ section {
   position: absolute;
   left: 24px; right: 24px; top: 76px;
   height: 3px;
-  background-image: repeating-linear-gradient(90deg, var(--pink) 0 10px, transparent 10px 22px);
+  background-image: repeating-linear-gradient(90deg, rgba(232,232,255,0.28) 0 10px, transparent 10px 22px);
   opacity: 0.5;
   z-index: 0;
 }
@@ -336,21 +382,21 @@ section {
 
 .stop-marker {
   width: 52px; height: 52px;
-  border: 2px solid var(--pink);
+  border: 2px solid var(--accent);
   background: var(--bg2);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 0 12px rgba(255,45,120,0.35);
+  box-shadow: 0 0 12px rgba(0,255,159,0.22);
   flex-shrink: 0;
   transition: box-shadow 0.2s, transform 0.2s;
 }
-.stop-lv  { font-family: 'Press Start 2P', monospace; font-size: 6px; color: rgba(255,45,120,0.75); letter-spacing: 1px; }
-.stop-num { font-family: 'Press Start 2P', monospace; font-size: 13px; color: var(--pink); margin-top: 4px; }
+.stop-lv  { font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); color: var(--ink-4); letter-spacing: 1px; }
+.stop-num { font-family: 'Press Start 2P', monospace; font-size: var(--ps-md); color: var(--accent); margin-top: 4px; }
 
-.journey-stop.active .stop-marker { box-shadow: 0 0 22px rgba(255,45,120,0.65); transform: scale(1.06); }
+.journey-stop.active .stop-marker { box-shadow: 0 0 22px rgba(0,255,159,0.5); transform: scale(1.06); }
 
-.stop-title   { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--white); line-height: 1.5; text-align: center; }
-.stop-company { font-size: 20px; color: var(--pink); }
-.stop-date    { font-size: 15px; color: rgba(232,232,255,0.4); white-space: nowrap; }
+.stop-title   { font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); color: var(--ink-1); line-height: 1.6; text-align: center; }
+.stop-company { font-size: var(--vt-md); color: var(--accent); }
+.stop-date    { font-size: var(--vt-sm); color: var(--ink-4); white-space: nowrap; }
 
 /* Sub-levels (internships): smaller, blue accent, offset below the main
    rail with a short vertical connector back up to it. */
@@ -363,16 +409,16 @@ section {
   position: absolute;
   top: -62px; left: 50%; width: 3px; height: 62px;
   transform: translateX(-50%);
-  background-image: repeating-linear-gradient(180deg, var(--blue) 0 6px, transparent 6px 12px);
+  background-image: repeating-linear-gradient(180deg, rgba(232,232,255,0.28) 0 6px, transparent 6px 12px);
   opacity: 0.6;
 }
 .journey-stop.sub .stop-marker {
   width: 40px; height: 40px;
-  border-color: var(--blue);
+  border-color: var(--ink-3);
   box-shadow: 0 0 10px rgba(0,200,255,0.35);
 }
-.journey-stop.sub .stop-num { color: var(--blue); font-size: 9px; margin-top: 0; }
-.journey-stop.sub .stop-company { color: var(--blue); font-size: 18px; }
+.journey-stop.sub .stop-num { color: var(--ink-3); font-size: var(--ps-sm); margin-top: 0; }
+.journey-stop.sub .stop-company { color: var(--ink-3); font-size: var(--vt-sm); }
 .journey-stop.sub.active .stop-marker { box-shadow: 0 0 18px rgba(0,200,255,0.6); transform: scale(1.08); }
 
 /* Current role: green, pulsing, overrides the sub/pink defaults */
@@ -395,10 +441,10 @@ section {
    level node is currently selected. */
 .journey-detail {
   max-width: 760px; width: 100%; margin: 36px auto 0;
-  border: 1px solid rgba(255,45,120,0.3); background: rgba(255,45,120,0.04);
+  border: 1px solid rgba(0,255,159,0.25); background: rgba(0,255,159,0.03);
   padding: 26px 30px;
   transition: opacity 0.15s ease, border-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 22px rgba(255,45,120,0.1);
+  box-shadow: 0 0 22px rgba(0,255,159,0.08);
   min-height: 160px;
 }
 .journey-detail.now-active {
@@ -408,12 +454,12 @@ section {
 }
 
 .q-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
-.q-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--white); }
-.q-date  { font-size: 20px; color: rgba(232,232,255,0.42); white-space: nowrap; }
-.q-company { font-size: 24px; color: var(--pink); letter-spacing: 1px; margin-bottom: 10px; }
+.q-title { font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm); color: var(--ink-1); }
+.q-date  { font-size: var(--vt-md); color: var(--ink-4); white-space: nowrap; }
+.q-company { font-size: var(--vt-lg); color: var(--accent); letter-spacing: 1px; margin-bottom: 10px; }
 
 .q-summary {
-  font-size: 21px; color: rgba(232,232,255,0.72); line-height: 1.65;
+  font-size: var(--vt-lg); color: var(--ink-2); line-height: 1.65;
 }
 
 .journey-detail.now-active .q-company { color: var(--green); }
@@ -422,18 +468,18 @@ section {
 
 .q-details-inner {
   padding-top: 14px;
-  border-top: 1px solid rgba(255,45,120,0.15);
+  border-top: 1px solid rgba(232,232,255,0.12);
   margin-top: 14px;
 }
 
-.q-context { font-size: 18px; color: rgba(232,232,255,0.35); margin-bottom: 10px; font-style: italic; }
+.q-context { font-size: var(--vt-sm); color: var(--ink-4); margin-bottom: 10px; font-style: italic; }
 
 .q-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .q-bullets li {
-  font-size: 20px; color: rgba(232,232,255,0.72);
+  font-size: var(--vt-md); color: var(--ink-2);
   padding-left: 20px; position: relative; line-height: 1.55;
 }
-.q-bullets li::before { content: '▶'; position: absolute; left: 0; color: var(--pink); font-size: 10px; top: 3px; }
+.q-bullets li::before { content: '▶'; position: absolute; left: 0; color: var(--accent); font-size: var(--ps-xs); top: 4px; }
 .q-bullets b { color: var(--gold); }
 
 /* ── Projects / Achievements ──────────────────────────── */
@@ -451,13 +497,6 @@ section {
   display: flex; flex-direction: column;
   cursor: pointer;
 }
-.ach-card::before {
-  content: 'ACHIEVEMENT UNLOCKED';
-  position: absolute; top: 8px; right: 10px;
-  font-family: 'Press Start 2P', monospace; font-size: 5px;
-  color: var(--gold); opacity: 0.4; letter-spacing: 1px;
-  pointer-events: none;
-}
 .ach-card::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -468,10 +507,10 @@ section {
 
 .ach-content { flex: 1; display: flex; flex-direction: column; }
 
-.ach-icon  { font-size: 32px; margin-bottom: 10px; display: block; }
-.ach-name  { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); margin-bottom: 4px; line-height: 1.75; }
-.ach-tech  { font-size: 21px; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; }
-.ach-desc  { font-size: 20px; color: rgba(232,232,255,0.76); line-height: 1.6; flex: 1; }
+.ach-icon  { font-size: var(--vt-xl); margin-bottom: 12px; display: block; }
+.ach-name  { font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm); color: var(--ink-1); margin-bottom: 8px; line-height: 1.75; }
+.ach-tech  { font-size: var(--vt-md); color: var(--ink-3); letter-spacing: 1px; margin-bottom: 12px; }
+.ach-desc  { font-size: var(--vt-lg); color: var(--ink-2); line-height: 1.6; flex: 1; }
 
 /* Button row pinned to bottom */
 .ach-actions {
@@ -480,18 +519,20 @@ section {
 }
 .ach-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
   padding: 9px 13px; cursor: pointer; transition: all 0.2s;
   text-decoration: none; background: transparent; border: none;
 }
-.ach-btn-github { color: var(--blue);  border: 1px solid rgba(0,200,255,0.4); }
-.ach-btn-github:hover  { background: var(--blue);  color: var(--bg); box-shadow: 0 0 12px rgba(0,200,255,0.3); }
-.ach-btn-website { color: var(--green); border: 1px solid rgba(0,255,159,0.4); }
-.ach-btn-website:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 12px rgba(0,255,159,0.3); }
-.ach-btn-video  { color: var(--pink);  border: 1px solid rgba(255,45,120,0.4); }
-.ach-btn-video:hover   { background: var(--pink);  color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.3); }
-.ach-btn-details { color: var(--gold); border: 1px solid rgba(255,215,0,0.4); }
-.ach-btn-details:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
+/* Secondary actions share one quiet treatment ... */
+.ach-btn-github,
+.ach-btn-website,
+.ach-btn-video { color: var(--ink-3); border: 1px solid rgba(232,232,255,0.22); }
+.ach-btn-github:hover,
+.ach-btn-website:hover,
+.ach-btn-video:hover { color: var(--accent); border-color: var(--accent); background: rgba(0,255,159,0.08); }
+/* ... so the one primary action per card can carry the highlight. */
+.ach-btn-details { color: var(--highlight); border: 1px solid rgba(255,215,0,0.45); }
+.ach-btn-details:hover { background: var(--highlight); color: var(--bg); box-shadow: 0 0 12px rgba(255,215,0,0.3); }
 
 /* ── Project category filter + groups ────────────────────── */
 .proj-filter {
@@ -501,9 +542,9 @@ section {
 .proj-filter-btn {
   display: inline-flex; align-items: center; gap: 8px;
   min-height: 44px;
-  font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: 1px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); letter-spacing: 1px;
   background: transparent; border: 1px solid rgba(255,215,0,0.35);
-  color: rgba(232,232,255,0.6); padding: 10px 16px; cursor: pointer;
+  color: var(--ink-3); padding: 10px 16px; cursor: pointer;
   transition: all 0.2s ease;
 }
 .proj-filter-btn:hover { border-color: var(--gold); color: var(--gold); }
@@ -511,7 +552,7 @@ section {
   background: var(--gold); border-color: var(--gold); color: var(--bg);
   box-shadow: 0 0 14px rgba(255,215,0,0.35);
 }
-.proj-filter-count { opacity: 0.7; font-size: 8px; }
+.proj-filter-count { opacity: 0.7; font-size: var(--ps-xs); }
 
 .proj-group {
   max-width: 1200px; width: 100%; margin-bottom: 56px;
@@ -525,16 +566,16 @@ section {
   width: 100%; margin-bottom: 26px; padding-bottom: 12px;
   border-bottom: 1px solid rgba(232,232,255,0.14);
 }
-.proj-group-icon { font-size: 22px; flex-shrink: 0; }
+.proj-group-icon { font-size: var(--vt-lg); flex-shrink: 0; }
 .proj-group-title {
-  font-family: 'Press Start 2P', monospace; font-size: 13px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-md);
   letter-spacing: 2px; flex: 1;
 }
-.proj-group[data-group="qa"]  .proj-group-title { color: var(--blue); }
-.proj-group[data-group="swe"] .proj-group-title { color: var(--pink); }
+.proj-group[data-group="qa"]  .proj-group-title,
+.proj-group[data-group="swe"] .proj-group-title { color: var(--ink-2); }
 .proj-group-count {
-  font-family: 'VT323', monospace; font-size: 20px;
-  color: rgba(232,232,255,0.4); letter-spacing: 1px; flex-shrink: 0;
+  font-family: 'VT323', monospace; font-size: var(--vt-md);
+  color: var(--ink-4); letter-spacing: 1px; flex-shrink: 0;
 }
 
 /* ── Project Detail Modal (retro OS window) ──────────────── */
@@ -588,8 +629,8 @@ section {
 .dot-max    { background: rgba(0,255,159,0.3); border: 1px solid rgba(0,255,159,0.4); }
 
 .proj-modal-titletext {
-  font-family: 'Press Start 2P', monospace; font-size: 9px;
-  color: var(--green); letter-spacing: 1px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: var(--accent); letter-spacing: 1px;
   flex: 1; text-align: center;
   text-shadow: 0 0 10px rgba(0,255,159,0.4);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -597,11 +638,11 @@ section {
 
 .proj-modal-close {
   background: transparent; border: 1px solid rgba(255,45,120,0.4);
-  color: var(--pink); font-family: 'Press Start 2P', monospace; font-size: 9px;
+  color: var(--ink-3); font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
   padding: 5px 9px; cursor: pointer; flex-shrink: 0;
   transition: all 0.2s; line-height: 1;
 }
-.proj-modal-close:hover { background: var(--pink); color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.4); }
+.proj-modal-close:hover { background: var(--now); color: var(--bg); box-shadow: 0 0 12px rgba(255,45,120,0.4); }
 
 /* Address bar */
 .proj-modal-addressbar {
@@ -611,9 +652,9 @@ section {
   padding: 7px 16px;
   flex-shrink: 0;
 }
-.proj-modal-url-icon { font-size: 15px; opacity: 0.45; flex-shrink: 0; }
+.proj-modal-url-icon { font-size: var(--vt-sm); opacity: 0.45; flex-shrink: 0; }
 .proj-modal-url {
-  font-family: 'VT323', monospace; font-size: 19px;
+  font-family: 'VT323', monospace; font-size: var(--vt-sm);
   color: rgba(0,255,159,0.5); letter-spacing: 1px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -632,13 +673,13 @@ section {
 
 /* Content elements */
 .pmod-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
-.pmod-icon { font-size: 38px; flex-shrink: 0; line-height: 1; }
+.pmod-icon { font-size: var(--vt-xl); flex-shrink: 0; line-height: 1; }
 .pmod-header-text { display: flex; flex-direction: column; gap: 4px; }
 .pmod-title {
-  font-family: 'Press Start 2P', monospace; font-size: 12px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm);
   color: var(--white); line-height: 1.7;
 }
-.pmod-tech { font-size: 21px; color: var(--gold); letter-spacing: 1px; line-height: 1.5; }
+.pmod-tech { font-size: var(--vt-md); color: var(--ink-3); letter-spacing: 1px; line-height: 1.5; }
 
 .pmod-divider {
   height: 1px; border: none;
@@ -647,13 +688,13 @@ section {
 }
 
 .pmod-desc {
-  font-size: 22px; color: rgba(232,232,255,0.82); line-height: 1.7;
+  font-size: var(--vt-lg); color: var(--ink-2); line-height: 1.7;
   margin-bottom: 18px;
 }
 
 .pmod-bullets-label {
-  font-family: 'Press Start 2P', monospace; font-size: 8px;
-  color: rgba(0,255,159,0.55); letter-spacing: 2px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: rgba(0,255,159,0.7); letter-spacing: 2px;
   margin-bottom: 12px; display: block;
 }
 
@@ -662,12 +703,12 @@ section {
   margin-bottom: 22px;
 }
 .pmod-bullets li {
-  font-size: 20px; color: rgba(232,232,255,0.75);
+  font-size: var(--vt-lg); color: var(--ink-2);
   padding-left: 20px; position: relative; line-height: 1.55;
 }
 .pmod-bullets li::before {
   content: '▶'; position: absolute; left: 0;
-  color: var(--green); font-size: 9px; top: 4px;
+  color: var(--accent); font-size: var(--ps-xs); top: 4px;
 }
 .pmod-bullets b { color: var(--gold); }
 
@@ -696,7 +737,7 @@ section {
 }
 .legend-item {
   display: flex; align-items: center; gap: 8px;
-  font-family: 'Press Start 2P', monospace; font-size: 8px; color: rgba(232,232,255,0.5);
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); color: var(--ink-4);
 }
 .legend-swatch {
   width: 28px; height: 8px;
@@ -716,18 +757,18 @@ section {
 
 .skill-cat { display: flex; flex-direction: column; gap: 14px; }
 .skill-cat-title {
-  font-family: 'Press Start 2P', monospace; font-size: 10px;
-  color: var(--green); letter-spacing: 2px; padding-bottom: 10px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm);
+  color: var(--accent); letter-spacing: 2px; padding-bottom: 10px;
   border-bottom: 1px solid rgba(0,255,159,0.18);
 }
 
 .skill-row { display: flex; flex-direction: column; gap: 4px; }
 .skill-label-row { display: flex; justify-content: space-between; align-items: center; }
-.skill-name { font-size: 18px; color: var(--white); }
+.skill-name { font-size: var(--vt-md); color: var(--ink-1); }
 
 .skill-tier {
-  font-family: 'Press Start 2P', monospace; font-size: 8px;
-  color: var(--green); letter-spacing: 1px;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: var(--accent); letter-spacing: 1px;
 }
 
 .skill-bar {
@@ -759,21 +800,21 @@ section {
 }
 
 /* ── Education ────────────────────────────────────────── */
-#education { background: linear-gradient(180deg, rgba(0,200,255,0.018), transparent 100%); }
+#education { background: linear-gradient(180deg, rgba(0,255,159,0.016), transparent 100%); }
 
 .edu-grid { max-width: 900px; width: 100%; display: flex; flex-direction: column; gap: 22px; }
 .edu-card {
-  border: 1px solid rgba(0,200,255,0.28); background: rgba(0,200,255,0.04);
+  border: 1px solid rgba(0,255,159,0.22); background: rgba(0,255,159,0.03);
   padding: 22px 28px; display: flex; justify-content: space-between;
   align-items: flex-start; flex-wrap: wrap; gap: 12px;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-.edu-card:hover { border-color: var(--blue); box-shadow: 0 0 22px rgba(0,200,255,0.12); }
+.edu-card:hover { border-color: var(--accent); box-shadow: 0 0 22px rgba(0,255,159,0.12); }
 
-.edu-degree { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--white); margin-bottom: 6px; line-height: 1.7; }
-.edu-school { font-size: 24px; color: var(--blue); letter-spacing: 1px; margin-bottom: 4px; }
-.edu-location { font-size: 19px; color: rgba(232,232,255,0.4); }
-.edu-date { font-size: 20px; color: rgba(232,232,255,0.4); white-space: nowrap; text-align: right; }
+.edu-degree { font-family: 'Press Start 2P', monospace; font-size: var(--ps-sm); color: var(--ink-1); margin-bottom: 8px; line-height: 1.7; }
+.edu-school { font-size: var(--vt-lg); color: var(--accent); letter-spacing: 1px; margin-bottom: 4px; }
+.edu-location { font-size: var(--vt-sm); color: var(--ink-4); }
+.edu-date { font-size: var(--vt-md); color: var(--ink-4); white-space: nowrap; text-align: right; }
 
 /* ── Footer / Contact ─────────────────────────────────── */
 #footer {
@@ -782,11 +823,11 @@ section {
 }
 .credits-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(12px, 2vw, 16px);
+  font-size: clamp(var(--ps-sm), 2vw, var(--ps-md)); line-height: 1.8;
   color: var(--green); letter-spacing: 3px;
   text-shadow: 0 0 22px var(--green);
 }
-.credits-sub { font-size: 28px; color: rgba(232,232,255,0.5); letter-spacing: 4px; }
+.credits-sub { font-size: var(--vt-xl); color: var(--ink-3); letter-spacing: 4px; }
 .contact-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 .contact-card {
   display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -798,11 +839,11 @@ section {
   border-color: var(--green); background: rgba(0,255,159,0.09);
   box-shadow: 0 0 20px rgba(0,255,159,0.16); transform: translateY(-4px);
 }
-.c-icon  { font-size: 28px; }
+.c-icon  { font-size: var(--vt-xl); }
 .c-icon img { filter: invert(1); } /* icons8 assets are requested black; invert for visibility on the dark theme */
-.c-label { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--green); letter-spacing: 1px; }
-.c-val   { font-size: 20px; color: rgba(232,232,255,0.6); }
-.copyright { font-size: 18px; color: rgba(232,232,255,0.42); letter-spacing: 2px; }
+.c-label { font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs); color: var(--accent); letter-spacing: 1px; }
+.c-val   { font-size: var(--vt-md); color: var(--ink-3); }
+.copyright { font-size: var(--vt-sm); color: var(--ink-4); letter-spacing: 2px; }
 
 /* ── Video Modal ──────────────────────────────────────── */
 .modal-overlay {
@@ -817,10 +858,10 @@ section {
 }
 .modal-close {
   position: absolute; top: 12px; right: 14px;
-  font-family: 'Press Start 2P', monospace; font-size: 9px;
-  color: var(--white); cursor: pointer; background: none; border: none;
+  font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+  color: var(--ink-1); cursor: pointer; background: none; border: none;
 }
-.modal-close:hover { color: var(--pink); }
+.modal-close:hover { color: var(--now); }
 
 /* ── Scroll reveal ────────────────────────────────────── */
 .reveal {
@@ -856,7 +897,7 @@ section {
 @media (max-width: 768px) {
   .burger-btn { display: block; }
   .nav-links  { display: none; }
-  .nav-brand  { font-size: 10px; }
+  .nav-brand  { font-size: var(--ps-sm); }
   .btn-text   { display: none; }
 
   /* Touch targets: keep every control >=44px on touch-primary widths */
@@ -887,8 +928,8 @@ section {
   .nav-links.open a {
     display: block;
     padding: 14px 22px;
-    font-family: 'Press Start 2P', monospace; font-size: 9px;
-    letter-spacing: 2px; color: var(--white);
+    font-family: 'Press Start 2P', monospace; font-size: var(--ps-xs);
+    letter-spacing: 2px; color: var(--ink-1);
     text-decoration: none;
     border-bottom: 1px solid rgba(0,255,159,0.1);
     transition: color 0.15s, background 0.15s;
@@ -902,24 +943,24 @@ section {
 }
 
 @media (max-width: 640px) {
-  section      { padding: 80px 16px 50px; }
+
   nav#main-nav { padding: 10px 12px; }
-  .hero-name   { font-size: 22px; }
-  .nav-btn     { font-size: 9px; padding: 7px 10px; }
+  .hero-name   { font-size: clamp(24px, 8vw, 34px); }
+  .nav-btn     { padding: 7px 10px; }
 
   .achievement-grid { grid-template-columns: 1fr; }
 
-  .proj-filter-btn   { font-size: 8px; padding: 9px 12px; }
+  .proj-filter-btn   { padding: 9px 12px; }
   .proj-group-header { gap: 10px; margin-bottom: 20px; }
-  .proj-group-title  { font-size: 11px; }
-  .proj-group-count  { font-size: 17px; }
+  .proj-group-title  { font-size: var(--ps-sm); }
+  .proj-group-count  { font-size: var(--vt-sm); }
 
-  .q-date      { white-space: normal; font-size: 15px; }
+  .q-date      { white-space: normal; font-size: var(--vt-sm); }
   .q-head      { flex-direction: column; gap: 4px; }
   .attr-grid   { grid-template-columns: 1fr; }
-  .char-class  { font-size: 18px; }
+  .char-class  { font-size: var(--vt-md); }
 
-  .journey-arrow { width: 44px; height: 44px; font-size: 13px; }
+  .journey-arrow { width: 44px; height: 44px; font-size: var(--ps-sm); }
   .journey-track { gap: 26px; padding: 40px 14px 10px; }
   .journey-track::before { top: 60px; }
   .journey-stop { width: 120px; }
@@ -927,38 +968,37 @@ section {
   .journey-stop.sub::before { top: -46px; height: 46px; }
   .stop-marker { width: 40px; height: 40px; }
   .journey-stop.sub .stop-marker { width: 32px; height: 32px; }
-  .stop-title   { font-size: 7px; }
-  .stop-company { font-size: 17px; }
-  .stop-date    { font-size: 13px; }
+
+  .stop-company { font-size: var(--vt-sm); }
+
   .journey-detail { padding: 18px 18px; }
 
   .contact-row  { flex-direction: column; align-items: center; }
   .contact-card { width: 100%; max-width: 320px; }
 
   .hero-tags   { gap: 8px; }
-  .tag         { font-size: 7px; padding: 7px 10px; }
+  .tag         { padding: 7px 10px; }
 
   .proj-modal-content { padding: 18px 16px; }
-  .pmod-title { font-size: 10px; }
-  .proj-modal-titletext { font-size: 7px; }
+  .pmod-title { font-size: var(--ps-xs); }
+
 }
 
 @media (max-width: 380px) {
   .nav-btn.track-btn { display: none; }
-  .nav-brand         { font-size: 9px; }
+  .nav-brand         { font-size: var(--ps-xs); }
 }
 
 /* ── Rift portal ─────────────────────────────────────────── */
 #education { position: relative; }
 
 .edu-rift-row {
-  position: absolute;
-  bottom: 48px;
-  right: clamp(32px, 5vw, 80px);
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 28px;
-  margin: 0; padding: 0;
+  width: 100%; max-width: 900px;
+  margin-top: 40px; padding: 0;
 }
 
 .rift-instruction {
@@ -967,7 +1007,7 @@ section {
 }
 .rift-instr-text {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px; color: rgba(0,255,159,0.55);
+  font-size: var(--ps-xs); color: rgba(0,255,159,0.7);
   line-height: 2.2; text-align: right; letter-spacing: 1px;
 }
 
@@ -977,7 +1017,7 @@ section {
 
 .rift-mobile-btn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px; color: var(--bg);
+  font-size: var(--ps-xs); color: var(--bg);
   background: var(--green); border: none;
   min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
   padding: 11px 20px; cursor: pointer; letter-spacing: 1px;
@@ -1012,10 +1052,5 @@ section {
 }
 
 @media (max-width: 900px) {
-  .edu-rift-row {
-    position: relative; bottom: auto; right: auto;
-    justify-content: flex-end;
-    width: 100%; max-width: 900px;
-    margin-top: 36px; padding-right: 8px;
-  }
+  .edu-rift-row { margin-top: 32px; padding-right: 8px; }
 }
