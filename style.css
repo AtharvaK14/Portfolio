@@ -310,31 +310,48 @@ footer#footer {
   opacity: 0;
 }
 
-/* Proof panel. The hero keeps to white + accent so the name stays the
-   one bold thing; the numbers earn attention by being specific, not by
-   taking a third colour. */
+/* Arcade status bar rather than a bordered panel: three equal cards is
+   the most generic layout available, and a single HUD strip both suits
+   an arcade page better and costs less vertical space in the hero. The
+   flanking rules are the same device .section-title uses, so the hero
+   and the section heads share a vocabulary. */
 .hero-hud {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  border: 1px solid rgba(0,255,159,0.22);
-  background: rgba(0,255,159,0.03);
-  padding: var(--space-4) var(--space-2);
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-4);
+  width: 100%; max-width: var(--measure);
   margin:0;
 }
-.hud-stat {
-  display: flex; flex-direction: column; align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-1) var(--space-5);
+.hero-hud::before,
+.hero-hud::after {
+  content: ''; flex: 1; height: 2px; min-width: var(--space-6);
+  background: linear-gradient(90deg, transparent, rgba(0,255,159,0.45), transparent);
 }
-.hud-stat + .hud-stat { border-left: 1px solid rgba(0,255,159,0.18); }
+.hud-stat {
+  display: flex; align-items: baseline; gap: var(--space-2);
+  padding:0 var(--space-4);
+  white-space: nowrap;
+}
+.hud-stat + .hud-stat { border-left: 1px solid rgba(0,255,159,0.22); }
 .hud-val {
   font-family: 'Press Start 2P', monospace;
-  font-size: var(--ps-md); color: var(--accent);
+  font-size: var(--ps-sm); color: var(--accent);
   text-shadow: 0 0 14px rgba(0,255,159,0.35);
 }
 .hud-lbl {
   font-family: 'Press Start 2P', monospace;
   font-size: var(--ps-xs); color: var(--ink-4);
-  letter-spacing: 1px; line-height: 1.8; margin:0;
+  letter-spacing: 1px; margin:0;
+}
+
+/* Under ~1024px the one-line bar no longer fits, so each stat stacks its
+   value over its label and the flanking rules come off. */
+@media (max-width: 1024px) {
+  .hero-hud { gap: var(--space-2); max-width: 100%; }
+  .hero-hud::before, .hero-hud::after { display: none; }
+  .hud-stat {
+    flex-direction: column; align-items: center; gap: var(--space-1);
+    padding:0 var(--space-4);
+  }
 }
 
 @media (max-width: 640px) {
@@ -342,11 +359,17 @@ footer#footer {
      slashes; 2px plus balanced wrapping keeps it to two. */
   .hero-boot { letter-spacing: 2px; text-wrap: balance; }
 
-  .hero-hud { flex-direction: column; width: 100%; max-width: 320px; }
-  .hud-stat { padding: var(--space-3) var(--space-5); }
+  /* The bar can't hold three deltas at phone width, so it stacks and the
+     flanking rules come off. */
+  .hero-hud { flex-direction: column; gap:0; max-width: 320px; }
+  .hero-hud::before, .hero-hud::after { display: none; }
+  .hud-stat {
+    flex-direction: column; align-items: center; gap: var(--space-1);
+    padding: var(--space-3) 0; width: 100%;
+  }
   .hud-stat + .hud-stat {
     border-left: none;
-    border-top: 1px solid rgba(0,255,159,0.18);
+    border-top: 1px solid rgba(0,255,159,0.22);
   }
 }
 
