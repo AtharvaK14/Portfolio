@@ -386,7 +386,7 @@ const PROJECT_DATA = {
       'Rewatch tracking increments watch time and rewatch counts without inflating episode or progress totals',
       'Integrates <b>TMDB</b> (metadata/posters), <b>OMDb</b> (IMDb/Rotten Tomatoes ratings), and <b>TVmaze</b> (episode runtimes), each using the user\'s own free API key',
       '<b>TV Time migration</b> -- imports a user\'s full watch history from TV Time\'s GDPR CSV export or a third-party JSON export, with guided resolution of ambiguous title matches',
-      'Shipped as a web app and, via <b>Capacitor</b>, a native <b>Android</b> app (min API 24) with full JSON backup/restore',
+      'Builds as a web app and, via <b>Capacitor</b>, a native <b>Android</b> app (min API 24) with full JSON backup/restore',
     ],
     actions: [
       { label: 'GITHUB', cls: 'ach-btn-github', href: 'https://github.com/AtharvaK14/WatchTime' },
