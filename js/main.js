@@ -32,6 +32,30 @@
   // ── Copyright year ──
   const yr = $('#copyYear'); if (yr) yr.textContent = new Date().getFullYear();
 
+  // ── Top bar fit: step down until brand, tabs and status don't touch ──
+  // Level 0 shows everything; 1 hides the location and Q/E hints; 2 hides
+  // the music label; 3 moves the tabs onto their own row.
+  const top = $('#top');
+  function fitTop() {
+    if (!top) return;
+    const inner = $('.top-in', top), brand = $('.brand', top), tabsEl = $('#tabs'), right = $('.top-r', top);
+    const fits = () => {
+      if (inner.scrollWidth > inner.clientWidth + 1) return false;
+      const b = brand.getBoundingClientRect(), t = tabsEl.getBoundingClientRect(), r = right.getBoundingClientRect();
+      return t.left >= b.right + 12 && t.right <= r.left - 12;
+    };
+    for (let level = 0; level <= 3; level++) {
+      top.classList.toggle('fit-1', level >= 1);
+      top.classList.toggle('fit-2', level >= 2);
+      top.classList.toggle('fit-3', level >= 3);
+      if (level === 3 || fits()) break;
+    }
+  }
+  fitTop();
+  addEventListener('resize', fitTop);
+  if (document.fonts) document.fonts.ready.then(fitTop);
+  window.fitTop = fitTop;
+
   // ── Tab bar follows the section in view ──
   const tabLinks = $$('#tabs a');
   if ('IntersectionObserver' in window) {
@@ -106,6 +130,11 @@
     });
     const start = Math.max(0, tiles.findIndex(t => t.getAttribute('aria-selected') === 'true'));
     selectRole(start, false);
+    // On phones the tiles scroll sideways; bring the selected (latest) role into view
+    // by moving only the strip, never the page.
+    const showTile = () => { if (tl.scrollWidth > tl.clientWidth) tl.scrollLeft = tiles[start].offsetLeft - tl.offsetLeft - (tl.clientWidth - tiles[start].offsetWidth) / 2; };
+    showTile();
+    if (document.fonts) document.fonts.ready.then(showTile);
     addEventListener('resize', () => placeRail(tiles.findIndex(t => t.getAttribute('aria-selected') === 'true')));
     if (document.fonts) document.fonts.ready.then(() => placeRail(tiles.findIndex(t => t.getAttribute('aria-selected') === 'true')));
   }
@@ -196,8 +225,8 @@
   // ── Music switch (engine lives in music.js; off by default) ──
   const mBtn = $('#musicBtn'), tBtn = $('#trackBtn');
   if (mBtn && typeof window.toggleMusic === 'function') {
-    mBtn.addEventListener('click', () => { window.toggleMusic(); mBtn.setAttribute('aria-pressed', String(mBtn.classList.contains('on'))); });
-    tBtn.addEventListener('click', () => window.cycleTrack());
+    mBtn.addEventListener('click', () => { window.toggleMusic(); mBtn.setAttribute('aria-pressed', String(mBtn.classList.contains('on'))); fitTop(); });
+    tBtn.addEventListener('click', () => { window.cycleTrack(); fitTop(); });
   } else if (mBtn) { mBtn.closest('.bgm').hidden = true; }
 
   // ── Keyboard shortcuts (single keys, with an off switch per WCAG 2.1.4) ──
