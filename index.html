@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://atharvak14.github.io/Portfolio/">
 
   <link rel="icon" href="files/favicon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#050510">
+  <meta name="theme-color" content="#0E0E17">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://atharvak14.github.io/Portfolio/">
@@ -30,758 +30,496 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    // One short load sequence on first paint; skipped for reduced-motion users.
+    if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('boot');
+  </script>
 </head>
 
 <body>
 
-  <!-- Pixel-grid icon set. Inlined rather than referenced as an external
-       file so same-document <use> works everywhere. -->
+  <!-- Icon set: geometric line icons drawn for this site. -->
   <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true" focusable="false">
-    <symbol id="i-search" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M5 1h6v1h-6zM4 2h2v1h-2zM10 2h2v1h-2zM3 3h2v1h-2zM11 3h2v1h-2zM3 4h1v1h-1zM12 4h1v1h-1zM3 5h1v1h-1zM12 5h1v1h-1zM3 6h2v1h-2zM11 6h2v1h-2zM4 7h2v1h-2zM10 7h2v1h-2zM5 8h6v1h-6zM7 9h5v1h-5zM8 10h5v1h-5zM9 11h4v1h-4zM10 12h3v1h-3z" />
-    </symbol>
-    <symbol id="i-compare" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M2 2h12v1h-12zM2 3h1v1h-1zM7 3h2v1h-2zM13 3h1v1h-1zM2 4h1v1h-1zM7 4h2v1h-2zM13 4h1v1h-1zM2 5h1v1h-1zM4 5h2v1h-2zM7 5h2v1h-2zM10 5h2v1h-2zM13 5h1v1h-1zM2 6h1v1h-1zM7 6h2v1h-2zM13 6h1v1h-1zM2 7h1v1h-1zM4 7h2v1h-2zM7 7h2v1h-2zM10 7h2v1h-2zM13 7h1v1h-1zM2 8h1v1h-1zM7 8h2v1h-2zM13 8h1v1h-1zM2 9h1v1h-1zM4 9h2v1h-2zM7 9h2v1h-2zM10 9h2v1h-2zM13 9h1v1h-1zM2 10h1v1h-1zM7 10h2v1h-2zM13 10h1v1h-1zM2 11h12v1h-12z" />
-    </symbol>
-    <symbol id="i-contract" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M7 1h2v1h-2zM5 2h6v1h-6zM3 3h12v1h-12zM3 4h1v1h-1zM14 4h1v1h-1zM3 5h1v1h-1zM13 5h2v1h-2zM3 6h1v1h-1zM12 6h2v1h-2zM3 7h1v1h-1zM5 7h2v1h-2zM11 7h2v1h-2zM3 8h1v1h-1zM6 8h2v1h-2zM10 8h2v1h-2zM3 9h1v1h-1zM7 9h4v1h-4zM3 10h1v1h-1zM8 10h2v1h-2zM3 11h1v1h-1zM14 11h1v1h-1zM3 12h1v1h-1zM14 12h1v1h-1zM3 13h12v1h-12z" />
-    </symbol>
-    <symbol id="i-tv" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M5 1h1v1h-1zM10 1h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM7 3h2v1h-2zM2 4h12v1h-12zM2 5h1v1h-1zM13 5h1v1h-1zM2 6h1v1h-1zM13 6h1v1h-1zM2 7h1v1h-1zM13 7h1v1h-1zM2 8h1v1h-1zM13 8h1v1h-1zM2 9h1v1h-1zM13 9h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM2 11h12v1h-12zM3 12h2v1h-2zM11 12h2v1h-2z" />
-    </symbol>
-    <symbol id="i-gamepad" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M2 3h12v1h-12zM1 4h2v1h-2zM13 4h2v1h-2zM1 5h1v1h-1zM5 5h1v1h-1zM10 5h2v1h-2zM14 5h1v1h-1zM1 6h1v1h-1zM4 6h3v1h-3zM14 6h1v1h-1zM1 7h1v1h-1zM5 7h1v1h-1zM10 7h2v1h-2zM14 7h1v1h-1zM1 8h1v1h-1zM14 8h1v1h-1zM1 9h2v1h-2zM13 9h2v1h-2zM2 10h12v1h-12z" />
-    </symbol>
-    <symbol id="i-duck" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M5 2h5v1h-5zM4 3h2v1h-2zM9 3h2v1h-2zM4 4h1v1h-1zM6 4h1v1h-1zM10 4h1v1h-1zM4 5h1v1h-1zM10 5h5v1h-5zM4 6h2v1h-2zM10 6h1v1h-1zM15 6h1v1h-1zM5 7h5v1h-5zM15 7h1v1h-1zM3 8h11v1h-11zM2 9h2v1h-2zM13 9h2v1h-2zM2 10h1v1h-1zM14 10h1v1h-1zM2 11h2v1h-2zM13 11h2v1h-2zM3 12h11v1h-11z" />
-    </symbol>
-    <symbol id="i-pin" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M6 2h4v1h-4zM5 3h2v1h-2zM9 3h2v1h-2zM4 4h2v1h-2zM10 4h2v1h-2zM4 5h1v1h-1zM6 5h4v1h-4zM11 5h1v1h-1zM4 6h1v1h-1zM6 6h4v1h-4zM11 6h1v1h-1zM4 7h2v1h-2zM10 7h2v1h-2zM5 8h2v1h-2zM9 8h2v1h-2zM6 9h4v1h-4zM7 10h2v1h-2zM8 11h1v1h-1zM2 13h12v1h-12z" />
-    </symbol>
-    <symbol id="i-scan" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M2 1h3v1h-3zM11 1h3v1h-3zM2 2h1v1h-1zM13 2h1v1h-1zM2 3h1v1h-1zM13 3h1v1h-1zM5 5h6v1h-6zM4 6h1v1h-1zM11 6h1v1h-1zM4 7h1v1h-1zM6 7h4v1h-4zM11 7h1v1h-1zM4 8h1v1h-1zM6 8h4v1h-4zM11 8h1v1h-1zM4 9h1v1h-1zM11 9h1v1h-1zM5 10h6v1h-6zM2 12h1v1h-1zM13 12h1v1h-1zM2 13h1v1h-1zM13 13h1v1h-1zM2 14h3v1h-3zM11 14h3v1h-3z" />
-    </symbol>
-    <symbol id="i-school" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M7 1h2v1h-2zM6 2h4v1h-4zM5 3h6v1h-6zM4 4h8v1h-8zM2 5h12v1h-12zM2 6h1v1h-1zM13 6h1v1h-1zM2 7h1v1h-1zM4 7h2v1h-2zM7 7h2v1h-2zM10 7h2v1h-2zM13 7h1v1h-1zM2 8h1v1h-1zM13 8h1v1h-1zM2 9h1v1h-1zM4 9h2v1h-2zM7 9h2v1h-2zM10 9h2v1h-2zM13 9h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM2 11h1v1h-1zM7 11h2v1h-2zM13 11h1v1h-1zM2 12h1v1h-1zM7 12h2v1h-2zM13 12h1v1h-1zM2 13h12v1h-12z" />
-    </symbol>
-    <symbol id="i-code" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M2 2h12v1h-12zM2 3h1v1h-1zM13 3h1v1h-1zM2 4h1v1h-1zM5 4h2v1h-2zM9 4h2v1h-2zM13 4h1v1h-1zM2 5h1v1h-1zM4 5h2v1h-2zM10 5h2v1h-2zM13 5h1v1h-1zM2 6h1v1h-1zM5 6h2v1h-2zM9 6h2v1h-2zM13 6h1v1h-1zM2 7h1v1h-1zM13 7h1v1h-1zM2 8h12v1h-12zM1 9h14v1h-14z" />
-    </symbol>
-    <symbol id="i-person" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M6 2h4v1h-4zM5 3h1v1h-1zM10 3h1v1h-1zM5 4h1v1h-1zM10 4h1v1h-1zM6 5h4v1h-4zM3 7h10v1h-10zM2 8h1v1h-1zM13 8h1v1h-1zM2 9h1v1h-1zM13 9h1v1h-1zM2 10h1v1h-1zM13 10h1v1h-1zM2 11h1v1h-1zM13 11h1v1h-1zM2 12h1v1h-1zM13 12h1v1h-1zM3 13h10v1h-10z" />
-    </symbol>
-    <symbol id="i-mail" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M2 2h12v1h-12zM2 3h2v1h-2zM12 3h2v1h-2zM2 4h1v1h-1zM4 4h2v1h-2zM10 4h2v1h-2zM13 4h1v1h-1zM2 5h1v1h-1zM6 5h4v1h-4zM13 5h1v1h-1zM2 6h1v1h-1zM7 6h2v1h-2zM13 6h1v1h-1zM2 7h1v1h-1zM13 7h1v1h-1zM2 8h1v1h-1zM13 8h1v1h-1zM2 9h12v1h-12z" />
-    </symbol>
-    <symbol id="i-doc" viewBox="0 0 16 16">
-      <path fill="currentColor"
-        d="M3 1h8v1h-8zM3 2h1v1h-1zM10 2h2v1h-2zM3 3h1v1h-1zM10 3h1v1h-1zM12 3h1v1h-1zM3 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM3 5h1v1h-1zM10 5h4v1h-4zM3 6h1v1h-1zM5 6h4v1h-4zM13 6h1v1h-1zM3 7h1v1h-1zM13 7h1v1h-1zM3 8h1v1h-1zM5 8h4v1h-4zM13 8h1v1h-1zM3 9h1v1h-1zM13 9h1v1h-1zM3 10h1v1h-1zM5 10h4v1h-4zM13 10h1v1h-1zM3 11h1v1h-1zM13 11h1v1h-1zM3 12h10v1h-10z" />
-    </symbol>
+    <symbol id="ic-user" viewBox="0 0 24 24"><path d="M8.5 8a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0-7 0M4 21v-2.5L7 15.5h10l3 3V21"/></symbol>
+    <symbol id="ic-journal" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5zM9 8.5h6M9 12.5h6M9 16.5h3.5"/></symbol>
+    <symbol id="ic-grid" viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h4l3 3v4h-7z"/></symbol>
+    <symbol id="ic-chip" viewBox="0 0 24 24"><path d="M7 7h10v10H7zM10 10h4v4h-4zM9.5 3v4M14.5 3v4M9.5 17v4M14.5 17v4M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></symbol>
+    <symbol id="ic-msg" viewBox="0 0 24 24"><path d="M3 5h18v11H9.5L5 20v-4H3z"/></symbol>
+    <symbol id="ic-ext" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11" stroke-width="2.6"/></symbol>
+    <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 3l9.5 17h-19zM12 10v4.5M12 16.5v1.5"/></symbol>
+    <symbol id="ic-play" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z"/></symbol>
+    <symbol id="ic-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16.5 9.5a4 4 0 0 1 0 5M19 7a7.5 7.5 0 0 1 0 10"/></symbol>
+    <symbol id="ic-next" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM17 5v14"/></symbol>
   </svg>
 
-  <canvas id="bg-canvas"></canvas>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <nav id="main-nav">
-    <div class="nav-brand"><span>A</span>THARVA <span>K</span>ADAM</div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#hero" onclick="closeBurger()">HOME</a></li>
-      <li><a href="#about" onclick="closeBurger()">ABOUT</a></li>
-      <li><a href="#experience" onclick="closeBurger()">EXPERIENCE</a></li>
-      <li><a href="#project" onclick="closeBurger()">PROJECTS</a></li>
-      <li><a href="#skills" onclick="closeBurger()">SKILLS</a></li>
-      <li><a href="#education" onclick="closeBurger()">EDUCATION</a></li>
-      <li><a href="#footer" onclick="closeBurger()">CONTACT</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()" aria-label="Menu">&#9776;</button>
-      <div class="nav-controls">
-        <button class="nav-btn track-btn" onclick="cycleTrack()" title="Next track">
-          <span class="btn-icon">&#9197;</span><span class="btn-text"> NEXT</span>
-        </button>
-        <button class="nav-btn" id="musicBtn" onclick="toggleMusic()">
-          <span class="btn-icon" id="musicIcon">&#9835;</span><span class="btn-text" id="musicText"> BGM: OFF</span>
-        </button>
+  <header class="top" id="top">
+    <div class="top-in">
+      <a class="brand" href="#home"><span class="brand-mark ch ch-tr" aria-hidden="true">AK</span><span class="brand-t"><b>Atharva Kadam</b><small>SDET · Software engineer</small></span></a>
+      <nav class="tabs" aria-label="Sections" id="tabs">
+        <kbd aria-hidden="true">Q</kbd>
+        <a href="#about"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg>About</a>
+        <a href="#experience"><svg class="ic" aria-hidden="true"><use href="#ic-journal"/></svg>Experience</a>
+        <a href="#projects"><svg class="ic" aria-hidden="true"><use href="#ic-grid"/></svg>Projects</a>
+        <a href="#skills"><svg class="ic" aria-hidden="true"><use href="#ic-chip"/></svg>Skills</a>
+        <a href="#contact"><svg class="ic" aria-hidden="true"><use href="#ic-msg"/></svg>Contact</a>
+        <kbd aria-hidden="true">E</kbd>
+      </nav>
+      <div class="top-r">
+        <span class="status"><i aria-hidden="true"></i>Available<span class="status-loc">· Celoron, NY</span></span>
+        <span class="bgm">
+          <button type="button" class="bgm-btn" id="musicBtn" aria-pressed="false" title="Background music"><svg class="ic" aria-hidden="true"><use href="#ic-sound"/></svg><span id="musicText"> BGM: OFF</span></button>
+          <button type="button" class="bgm-btn track-btn" id="trackBtn" title="Next track" aria-label="Next track"><svg class="ic" aria-hidden="true"><use href="#ic-next"/></svg></button>
+        </span>
       </div>
     </div>
-  </nav>
+  </header>
 
   <main id="main">
-    <section id="hero">
-      <div class="hero-boot">// PLAYER PROFILE LOADED -- PRESS START //</div>
-      <h1 class="hero-name">ATHARVA<br>KADAM</h1>
-      <div class="hero-subtitle">SDET &amp; Aspiring Software Engineer</div>
-      <dl class="hero-hud">
-        <div class="hud-stat">
-          <dt class="hud-val">12% -&gt; 3%</dt>
-          <dd class="hud-lbl">DEFECT ESCAPE</dd>
+
+    <!-- ── Hero ── -->
+    <section class="hero" id="home">
+      <div class="ruler" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker"><span class="tag">SDET</span><span class="tag ghost">Software engineer</span><span class="tag ghost">M.S. CS · Michigan Tech</span></p>
+          <h1 class="name"><span>Atharva</span><span>Kadam</span></h1>
+          <p class="lede">I build test automation for software used by <b>40M+ players</b>: Selenium and PyTest frameworks, Playwright and Cypress suites, and CI quality gates that stop a bad build before it ships.</p>
+          <div class="ctas">
+            <a class="btn ch ch-tr is-act" href="#projects"><kbd aria-hidden="true">P</kbd>See projects</a>
+            <a class="btn ch ch-tr" href="files/Atharva_Kadam_Resume.pdf" target="_blank" rel="noopener" data-resume><kbd aria-hidden="true">R</kbd>Résumé (PDF)</a>
+          </div>
+          <p class="motto">Only builds that pass the gate ship to production.</p>
         </div>
-        <div class="hud-stat">
-          <dt class="hud-val">1H -&gt; 30M</dt>
-          <dd class="hud-lbl">SMOKE SUITE</dd>
-        </div>
-        <div class="hud-stat">
-          <dt class="hud-val">10 -&gt; 8 DAYS</dt>
-          <dd class="hud-lbl">REGRESSION</dd>
-        </div>
+        <figure class="pc">
+          <div class="pc-f ch ch-br">
+            <div class="pc-img"><img src="files/AtharvaKadam.jpg" alt="Atharva Kadam" width="600" height="600"><span class="pc-g" aria-hidden="true"></span></div>
+            <span class="pc-ret" aria-hidden="true"></span>
+          </div>
+          <figcaption><span class="pc-ic" aria-hidden="true"><svg class="ic"><use href="#ic-user"/></svg></span><b>Atharva Kadam</b><i aria-hidden="true"></i></figcaption>
+          <p class="pc-s"><i aria-hidden="true"></i>Open to SDET, QA automation and SWE roles</p>
+        </figure>
+      </div>
+      <dl class="stats">
+        <div class="stat"><dt>Defect escape rate</dt><dd><b>12<i>→</i>3%</b><em>Expleo · iOS app, 100K+ users</em><u style="--p:.75"></u></dd></div>
+        <div class="stat"><dt>Smoke suite runtime</dt><dd><b>60<i>→</i>30m</b><em>Ubisoft · desktop, 2 titles</em><u style="--p:.5"></u></dd></div>
+        <div class="stat"><dt>Test coverage</dt><dd><b>60<i>→</i>82%</b><em>Ubisoft · Selenium/PyTest</em><u style="--p:.82"></u></dd></div>
+        <div class="stat"><dt>Regression cycle</dt><dd><b>10<i>→</i>8d</b><em>Ubisoft · BitBucket CI gates</em><u style="--p:.2"></u></dd></div>
       </dl>
-      <div class="hero-tags">
-        <span class="tag">~2 YRS EXPERIENCE</span>
-        <span class="tag">EX-UBISOFT</span>
-        <span class="tag">Celoron, NY</span>
-        <span class="tag">M.S. COMPUTER SCIENCE</span>
-      </div>
-      <div class="scroll-hint">-- SCROLL TO CONTINUE --</div>
     </section>
 
-    <section id="about">
-      <div class="section-header">
-        <h2 class="section-title">CHARACTER SHEET</h2>
-        <span class="section-subtitle">// ABOUT ME</span>
-      </div>
-      <div class="char-sheet reveal">
-        <div class="char-portrait-col">
-          <div class="portrait-frame">
-            <img src="files/AtharvaKadam.jpg" alt="Atharva Kadam">
-          </div>
-          <div class="char-info-block">
-            <div><span class="lbl">ROLE: </span>SDET -- SWE</div>
-            <div><span class="lbl">SPEC: </span>Playwright | Cypress | Selenium | CI/CD</div>
-            <div><span class="lbl">LEVEL: </span>Entry-Mid</div>
-            <div><span class="lbl">BASE: </span>Celoron, NY</div>
-            <div><span class="lbl">STATUS: </span><span style="color:var(--green)">AVAILABLE</span></div>
+    <!-- ── About ── -->
+    <section class="sec" id="about">
+      <div class="sh"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg><h2><small>Character</small>About</h2><span class="sh-meta">2+ yrs automation · 2 degrees</span></div>
+      <div class="about">
+        <div class="bio ch ch-br">
+          <p class="quote">Good testing is a decision about what ships. I build the automation that makes that decision <b>fast</b>.</p>
+          <p class="lbl">Overview</p>
+          <p>SDET with 2+ years of experience building test automation for software serving 40M+ users. At Ubisoft I wrote tests for the team's new <b>Selenium/PyTest</b> framework and wired suites into <b>BitBucket CI/CD</b> as quality gates. Since then I've built <b>Playwright and Cypress</b> end-to-end suites and an API quality-gate framework of my own.</p>
+          <p>The work started hands-on: 300+ test cases across 15+ iOS devices at Expleo, then PS4/PS5 dev kits and racing-rig peripherals at Ubisoft. That's where the root-cause habit comes from.</p>
+          <div class="edu">
+            <div><b>M.S. Computer Science</b><span>Michigan Technological University · Houghton, MI</span><time>Aug 2023 – Apr 2025</time></div>
+            <div><b>B.Tech Computer Engineering</b><span>Pune University · Pune, India</span><time>Jun 2020 – May 2023</time></div>
           </div>
         </div>
-        <div class="char-stats-panel">
-          <div>
-            <div class="char-name-heading">ATHARVA KADAM</div><br>
-            <div class="char-class">SDET | QA Engineer | Python, Selenium, Playwright, Cypress, PyTest | REST API
-              Testing
-              | CI/CD | GitHub Actions</div>
-          </div>
-          <p class="char-bio">SDET with 2+ years of experience building test automation for software serving 40M+
-            users. Built Selenium/PyTest frameworks, Playwright/Cypress end-to-end suites, and CI/CD quality gates at
-            Ubisoft and Expleo. M.S. in Computer Science from Michigan Tech. Open to SDET, QA Automation, and QA
-            Engineer
-            roles anywhere in the US.</p>
-          <div class="attr-grid">
-            <div class="attr"><span class="attr-lbl">AUTOMATION</span><span class="attr-val">Playwright, Cypress,
-                Selenium</span>
-            </div>
-            <div class="attr"><span class="attr-lbl">PLATFORMS</span><span class="attr-val">Desktop, Mobile, Console,
-                Web</span></div>
-            <div class="attr"><span class="attr-lbl">EDUCATION</span><span class="attr-val">M.S. CS -- Michigan
-                Tech</span></div>
-            <div class="attr"><span class="attr-lbl">OPEN TO</span><span class="attr-val">SDET &amp; S/W Engineer
-                Roles</span></div>
-          </div>
-          <a href="files/Atharva_Kadam_Resume.pdf" target="_blank" class="resume-btn">DOWNLOAD RESUME</a>
-        </div>
+        <dl class="attrs">
+          <div class="attr ch ch-tr"><dt>Role</dt><dd>SDET · Software engineer</dd></div>
+          <div class="attr ch ch-tr"><dt>Focus</dt><dd>Test automation, CI quality gates</dd></div>
+          <div class="attr ch ch-tr"><dt>Automation</dt><dd>Playwright · Cypress · Selenium · PyTest</dd></div>
+          <div class="attr ch ch-tr"><dt>Platforms</dt><dd>PC · console · mobile · web</dd></div>
+          <div class="attr ch ch-tr"><dt>Base</dt><dd>Celoron, NY</dd></div>
+          <div class="attr ch ch-tr"><dt>Open to</dt><dd>SDET, QA automation, SWE · anywhere in the US</dd></div>
+        </dl>
       </div>
     </section>
 
-    <!-- ── Experience: base always visible, details expand on hover / tap ── -->
-    <section id="experience">
-      <div class="section-header">
-        <h2 class="section-title">QUEST LOG</h2>
-        <span class="section-subtitle">// WORK EXPERIENCE</span>
+    <!-- ── Experience ── -->
+    <section class="sec" id="experience">
+      <div class="sh"><svg class="ic" aria-hidden="true"><use href="#ic-journal"/></svg><h2><small>Journal</small>Experience</h2><span class="sh-meta">5 roles · 2 degrees · 2019 — now</span></div>
+      <div class="axis" id="axis" aria-hidden="true"></div>
+      <div class="tiles" id="tiles" role="tablist" aria-label="Roles">
+        <button type="button" class="tile ch ch-tr" role="tab" id="tab-expleo" aria-controls="xp-expleo" aria-selected="false" tabindex="-1" data-s="2019-10" data-e="2020-02" data-short="Expleo"><span class="d">Oct 2019 – Feb 2020</span><b>Expleo</b><span class="r">QA Engineer</span><span class="s">Mobile QA for a 100K+ user iOS app: 300+ test cases across 15+ devices.</span></button>
+        <button type="button" class="tile ch ch-tr" role="tab" id="tab-ubisoft" aria-controls="xp-ubisoft" aria-selected="true" tabindex="0" data-s="2020-03" data-e="2021-03" data-short="Ubisoft"><span class="d">Mar 2020 – Mar 2021</span><b>Ubisoft</b><span class="r">SDET</span><span class="s">SDET across 2 titles serving 40M+ users. Built tests for the team's Selenium/PyTest framework and BitBucket CI/CD gates.</span></button>
+        <button type="button" class="tile ch ch-tr" role="tab" id="tab-oasis" aria-controls="xp-oasis" aria-selected="false" tabindex="-1" data-s="2022-02" data-e="2022-03" data-short="Oasis"><span class="d">Feb – Mar 2022</span><b>Oasis Infobyte</b><span class="r">Web Dev &amp; Testing Intern</span><span class="s">Built web apps with Jest CI/CD automation, reaching 85% code coverage.</span></button>
+        <button type="button" class="tile ch ch-tr" role="tab" id="tab-mtu" aria-controls="xp-mtu" aria-selected="false" tabindex="-1" data-s="2025-06" data-e="2026-06" data-short="Michigan Tech"><span class="d">Jun 2025 – Jun 2026</span><b>Michigan Tech</b><span class="r">Research Assistant</span><span class="s">Automated financial data pipelines and evaluation frameworks for research, cutting manual effort 40%.</span></button>
+        <button type="button" class="tile ch ch-tr" role="tab" id="tab-infyra" aria-controls="xp-infyra" aria-selected="false" tabindex="-1" data-s="2026-06" data-e="now" data-short="Infyra"><span class="d">Jun 2026 – Present</span><b>Infyra</b><span class="r">Software Developer Intern</span><span class="s">Backend REST APIs, ETL validation and ML model validation checks in a production environment.</span><span class="chip">Active</span></button>
+        <span class="railmark" id="railmark" aria-hidden="true"></span>
       </div>
-      <div class="journey-strip-wrap">
-        <button class="journey-arrow journey-arrow-left" onclick="scrollJourney(-1)"
-          aria-label="Scroll to earlier roles">&#9664;</button>
 
-        <div class="journey-strip" id="journeyStrip">
-          <div class="journey-track">
-
-            <button class="journey-stop" data-exp="expleo" onclick="selectExperience('expleo', this)">
-              <span class="stop-marker">
-                <span class="stop-lv">LV</span>
-                <span class="stop-num">1</span>
-              </span>
-              <span class="stop-title">QA Engineer</span>
-              <span class="stop-company">Expleo</span>
-              <span class="stop-date">OCT 2019 -- FEB 2020</span>
-            </button>
-
-            <button class="journey-stop" data-exp="ubisoft" onclick="selectExperience('ubisoft', this)">
-              <span class="stop-marker">
-                <span class="stop-lv">LV</span>
-                <span class="stop-num">2</span>
-              </span>
-              <span class="stop-title">SDET</span>
-              <span class="stop-company">Ubisoft</span>
-              <span class="stop-date">MAR 2020 -- MAR 2021</span>
-            </button>
-
-            <button class="journey-stop sub" data-exp="oasis" onclick="selectExperience('oasis', this)">
-              <span class="stop-marker">
-                <span class="stop-num">2.5</span>
-              </span>
-              <span class="stop-title">Web Dev Intern</span>
-              <span class="stop-company">Oasis Infobyte</span>
-              <span class="stop-date">FEB -- MAR 2022</span>
-            </button>
-
-            <button class="journey-stop" data-exp="mtu" onclick="selectExperience('mtu', this)">
-              <span class="stop-marker">
-                <span class="stop-lv">LV</span>
-                <span class="stop-num">3</span>
-              </span>
-              <span class="stop-title">Research Assistant</span>
-              <span class="stop-company">Michigan Tech</span>
-              <span class="stop-date">JUN 2025 -- JUN 2026</span>
-            </button>
-
-            <button class="journey-stop sub now active" data-exp="infyra" onclick="selectExperience('infyra', this)">
-              <span class="stop-marker now">
-                <span class="stop-num">3.5</span>
-              </span>
-              <span class="stop-title">SWE Intern</span>
-              <span class="stop-company">Infyra LLC</span>
-              <span class="stop-date">JUN 2026 -- NOW</span>
-            </button>
-
-          </div>
+      <div class="xd-wrap" id="xd-wrap">
+        <div class="xd ch ch-br" role="tabpanel" id="xp-expleo" aria-labelledby="tab-expleo" hidden>
+          <div><p class="lbl">Oct 2019 – Feb 2020</p><h3>QA Engineer</h3><p class="xd-org">Expleo Group · Pune, India</p><p>Mobile QA for a 100K+ user iOS app: 300+ test cases across 15+ devices.</p><p class="xd-ctx">Global quality engineering company for enterprise mobile applications.</p></div>
+          <ul class="ul">
+            <li>Designed and ran <b>300+ test cases</b> across <b>15+ iOS devices</b> via <b>Xcode</b> and <b>TestFlight</b>, cutting defect escape rate from <b>12%</b> to <b>3%</b> for an app serving 100K+ users.</li>
+            <li>Traced crash-log stack traces in <b>Xcode</b> to root cause and delivered structured defect reports through <b>JIRA</b> and <b>TestRail</b>, cutting bug resolution time by <b>25%</b>.</li>
+          </ul>
         </div>
-
-        <button class="journey-arrow journey-arrow-right" onclick="scrollJourney(1)"
-          aria-label="Scroll to later roles">&#9654;</button>
-      </div>
-
-      <div class="journey-detail" id="journeyDetail" aria-live="polite"></div>
-    </section>
-
-    <!-- ── Projects: grouped by discipline, dynamic filter, cards open detail modal ── -->
-    <section id="project">
-      <div class="section-header">
-        <h2 class="section-title">ACHIEVEMENTS UNLOCKED</h2>
-        <span class="section-subtitle">// PROJECTS</span>
-      </div>
-
-      <div class="proj-filter" role="group" aria-label="Filter projects by category">
-        <button class="proj-filter-btn active" data-filter="all" aria-pressed="true"
-          onclick="filterProjects('all', this)">ALL <span class="proj-filter-count"
-            data-count-for="all"></span></button>
-        <button class="proj-filter-btn" data-filter="qa" aria-pressed="false" onclick="filterProjects('qa', this)">QA
-          &amp; TEST ENG <span class="proj-filter-count" data-count-for="qa"></span></button>
-        <button class="proj-filter-btn" data-filter="swe" aria-pressed="false"
-          onclick="filterProjects('swe', this)">SOFTWARE ENG <span class="proj-filter-count"
-            data-count-for="swe"></span></button>
-      </div>
-
-      <div class="proj-group" data-group="qa">
-        <div class="proj-group-header">
-          <svg class="proj-group-icon" aria-hidden="true">
-            <use href="#i-search" />
-          </svg>
-          <h3 class="proj-group-title">QA &amp; TEST ENGINEERING</h3>
-          <span class="proj-group-count"></span>
+        <div class="xd ch ch-br" role="tabpanel" id="xp-ubisoft" aria-labelledby="tab-ubisoft">
+          <div><p class="lbl">Mar 2020 – Mar 2021</p><h3>Software Development Engineer in Test</h3><p class="xd-org">Ubisoft Entertainment · Pune, India</p><p>SDET across 2 titles serving 40M+ users. Built tests for the team's Selenium/PyTest framework and BitBucket CI/CD gates.</p><p class="xd-ctx">Global video game publisher serving players across PC, console and mobile.</p></div>
+          <ul class="ul">
+            <li>Led <b>smoke testing</b> for the desktop platform across 2 titles serving <b>40M+</b> users, cutting execution time from <b>1 hour to 30 minutes</b> through test automation.</li>
+            <li>Wrote automated test scripts with <b>parameterized fixtures</b> and session-scoped state for the team's new <b>Selenium/PyTest</b> framework, raising test coverage from <b>60%</b> to <b>82%</b>.</li>
+            <li>Configured <b>Selenium</b> suites and smoke tests as quality gates in <b>BitBucket CI/CD pipelines</b>, reducing regression cycles from <b>10 to 8 days</b>.</li>
+            <li>Tested across desktop, console <b>(PS4/PS5 dev kits)</b> and mobile: <b>performance profiling</b>, platform compliance checks and peripheral hardware validation (racing rigs), reducing inter-platform defects by <b>35%</b>.</li>
+            <li>Owned the full <b>defect lifecycle</b> in <b>JIRA</b>: triage, root cause analysis and closure across platform teams under <b>Agile/Scrum</b>.</li>
+          </ul>
         </div>
-        <div class="achievement-grid">
-
-          <div class="ach-card reveal" onclick="openProjectModal('test-observability')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-search" />
-              </svg>
-              <div class="ach-name">TEST OBSERVABILITY -- AI ROOT-CAUSE AGENT</div>
-              <div class="ach-tech">Python · FastAPI · PostgreSQL · Claude API</div>
-              <p class="ach-desc">Ingests Playwright, Cypress, PyTest, and Selenium results and uses Claude to
-                diagnose why each failure happened -- app bug, flaky test, or environment -- from measured
-                evidence, not the error string alone.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github"
-                href="https://github.com/AtharvaK14/Test-Observability-AI-Root-Cause-Agent" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('test-observability')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('dual-e2e')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-compare" />
-              </svg>
-              <div class="ach-name">DUAL-FRAMEWORK E2E TEST SUITE</div>
-              <div class="ach-tech">TypeScript · Playwright · Cypress · GitHub Actions</div>
-              <p class="ach-desc">Side-by-side Playwright and Cypress implementation of 22 identical E2E scenarios
-                against SauceDemo with measured framework comparison.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github"
-                href="https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('dual-e2e')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('api-framework')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-contract" />
-              </svg>
-              <div class="ach-name">API TEST AUTOMATION FRAMEWORK</div>
-              <div class="ach-tech">Python · PyTest · GitHub Actions · Allure</div>
-              <p class="ach-desc">Production-grade API test framework targeting the GitHub REST API with contract
-                validation, SLA enforcement, and live report deployment.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/api-quality-gate" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('api-framework')">DETAILS</button>
-            </div>
-          </div>
-
+        <div class="xd ch ch-br" role="tabpanel" id="xp-oasis" aria-labelledby="tab-oasis" hidden>
+          <div><p class="lbl">Feb – Mar 2022</p><h3>Web Dev &amp; Testing Intern</h3><p class="xd-org">Oasis Infobyte · Pune, India</p><p>Built web apps with Jest CI/CD automation, reaching 85% code coverage.</p><p class="xd-ctx">Digital solutions company specializing in web development and UI/UX for small businesses.</p></div>
+          <ul class="ul">
+            <li>Performed API testing with <b>Postman</b> and built <b>3+ web applications</b> with <b>85% code coverage</b> via Jest automation.</li>
+            <li>Implemented unit and integration testing within <b>GitHub Actions CI/CD pipelines</b>.</li>
+            <li>Documented the full technology stack, enabling faster onboarding and consistent build processes.</li>
+          </ul>
         </div>
-      </div>
-
-      <div class="proj-group" data-group="swe">
-        <div class="proj-group-header">
-          <svg class="proj-group-icon" aria-hidden="true">
-            <use href="#i-code" />
-          </svg>
-          <h3 class="proj-group-title">SOFTWARE ENGINEERING</h3>
-          <span class="proj-group-count"></span>
+        <div class="xd ch ch-br" role="tabpanel" id="xp-mtu" aria-labelledby="tab-mtu" hidden>
+          <div><p class="lbl">Jun 2025 – Jun 2026</p><h3>Research Assistant</h3><p class="xd-org">Michigan Technological University · Houghton, MI</p><p>Automated financial data pipelines and evaluation frameworks for research, cutting manual effort 40%.</p></div>
+          <ul class="ul">
+            <li>Built and iterated AI/ML prototypes in Python, turning research ideas into working systems and validating them across multiple experimental runs and datasets.</li>
+            <li>Designed evaluation frameworks and KPI-driven benchmarks (accuracy, latency, reliability), improving experiment comparability and decision-making speed by <b>35%</b>.</li>
+            <li>Developed automated data pipelines for experimentation and analysis, reducing manual preprocessing and evaluation effort by <b>40%</b>.</li>
+            <li>Worked with researchers and stakeholders to define problem statements, analyze large datasets and deliver insights that shaped research direction.</li>
+          </ul>
         </div>
-        <div class="achievement-grid">
-
-          <div class="ach-card reveal" onclick="openProjectModal('watchtime')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-tv" />
-              </svg>
-              <div class="ach-name">WATCHTIME</div>
-              <div class="ach-tech">React · TypeScript · Vite · Dexie.js · Capacitor</div>
-              <p class="ach-desc">Local-first TV and movie tracker built to replace TV Time after its July 2026
-                shutdown -- tracks episodes and movies entirely on-device, with a native Android app.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/WatchTime" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('watchtime')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('vr-carnival')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-gamepad" />
-              </svg>
-              <div class="ach-name">VR CARNIVAL EXPERIENCE</div>
-              <div class="ach-tech">Unreal Engine 5 · Blueprint · C++</div>
-              <p class="ach-desc">Immersive VR carnival with interactive mini-games using physics-based mechanics and
-                Blueprint scripting.</p>
-            </div>
-            <div class="ach-actions">
-              <button class="ach-btn ach-btn-video" onclick="event.stopPropagation(); openVideo()">WATCH DEMO</button>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('vr-carnival')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('rubber-ducky')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-duck" />
-              </svg>
-              <div class="ach-name">DEBUGGING ASSISTANT CHATBOT</div>
-              <div class="ach-tech">Python · JavaScript · Node.js</div>
-              <p class="ach-desc">Interactive chatbot helping programmers debug code with a conversational AI and
-                duck-themed personality.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot"
-                target="_blank" onclick="event.stopPropagation()">GITHUB</a>
-              <a class="ach-btn ach-btn-website" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/"
-                target="_blank" onclick="event.stopPropagation()">LIVE SITE</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('rubber-ducky')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('post-fire')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-pin" />
-              </svg>
-              <div class="ach-name">POST-FIRE ASSESSMENT APP</div>
-              <div class="ach-tech">HTML · CSS · JavaScript</div>
-              <p class="ach-desc">Mobile web app helping field teams log wildfire ash data with real-time storage for
-                scientific assessments.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App"
-                target="_blank" onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('post-fire')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('pneumonia')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-scan" />
-              </svg>
-              <div class="ach-name">PNEUMONIA DETECTION -- CNN + TRANSFER LEARNING</div>
-              <div class="ach-tech">Python · TensorFlow · Keras</div>
-              <p class="ach-desc">Deep learning model detecting pneumonia in chest X-ray images to aid early clinical
-                diagnosis.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github"
-                href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('pneumonia')">DETAILS</button>
-            </div>
-          </div>
-
-          <div class="ach-card reveal" onclick="openProjectModal('college-erp')">
-            <div class="ach-content">
-              <svg class="ach-icon" aria-hidden="true">
-                <use href="#i-school" />
-              </svg>
-              <div class="ach-name">COLLEGE ERP SYSTEM</div>
-              <div class="ach-tech">FastAPI · Next.js 14 · PostgreSQL · Docker</div>
-              <p class="ach-desc">Full-stack ERP with role-based portals for Admins, Teachers, and Students across
-                57 REST API endpoints.</p>
-            </div>
-            <div class="ach-actions">
-              <a class="ach-btn ach-btn-github" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank"
-                onclick="event.stopPropagation()">GITHUB</a>
-              <a class="ach-btn ach-btn-website" href="https://college-erp-system-one.vercel.app/login" target="_blank"
-                onclick="event.stopPropagation()">LIVE SITE</a>
-              <button class="ach-btn ach-btn-details"
-                onclick="event.stopPropagation(); openProjectModal('college-erp')">DETAILS</button>
-            </div>
-          </div>
-
+        <div class="xd ch ch-br" role="tabpanel" id="xp-infyra" aria-labelledby="tab-infyra" hidden>
+          <div><p class="lbl">Jun 2026 – Present</p><h3>Software Developer Intern</h3><p class="xd-org">Infyra LLC · Sheridan, WY</p><p>Backend REST APIs, ETL validation and ML model validation checks in a production environment.</p></div>
+          <ul class="ul">
+            <li>Developed backend <b>REST API endpoints</b> and automated <b>ETL validation</b> against <b>PostgreSQL</b> and <b>MongoDB</b>, adding schema checks that catch pipeline defects before release.</li>
+            <li>Automated <b>KPI reporting</b> and <b>ML model validation</b> checks, standardizing how accuracy and latency regressions are surfaced.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="skills">
-      <div class="section-header">
-        <h2 class="section-title">CHARACTER STATS</h2>
-        <span class="section-subtitle">// TECHNICAL SKILLS</span>
-      </div>
-      <div class="proficiency-legend reveal">
-        <div class="legend-item">
-          <div class="legend-swatch l1"></div>FAMILIAR
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch l2"></div>PROFICIENT
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch l3"></div>ADVANCED
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch l4"></div>EXPERT
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch l5"></div>MASTER
-        </div>
-      </div>
-      <div class="skills-grid" id="skillsGrid">
-
-        <div class="skill-cat">
-          <div class="skill-cat-title">LANGUAGES</div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Python</span><span class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="70"></div>
-            </div>
+    <!-- ── Projects ── -->
+    <section class="sec" id="projects">
+      <div class="sh"><svg class="ic" aria-hidden="true"><use href="#ic-grid"/></svg><h2><small>Codex</small>Projects</h2><span class="sh-meta"><span data-count="all">9</span> entries · QA and software</span></div>
+      <div class="codex">
+        <div>
+          <div class="filters" role="group" aria-label="Filter projects" id="filters">
+            <button type="button" class="f ch ch-tr" data-f="all" aria-pressed="true">All <span data-count="all">9</span></button>
+            <button type="button" class="f ch ch-tr" data-f="qa" aria-pressed="false">QA &amp; test <span data-count="qa">3</span></button>
+            <button type="button" class="f ch ch-tr" data-f="swe" aria-pressed="false">Software <span data-count="swe">6</span></button>
           </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">JavaScript / TypeScript</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="75"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">HTML / CSS</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="78"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">SQL / MySQL / MongoDB</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="60"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">C / C++ / C#</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="75"></div>
-            </div>
-          </div>
+          <ul class="plist" id="plist">
+            <li class="pg" data-cat="qa" aria-hidden="true">QA &amp; test engineering<span data-count="qa">3</span></li>
+            <li data-cat="qa"><button type="button" class="pi ch ch-tr" data-p="obs" aria-controls="pd-obs" aria-pressed="false"><span class="pi-top"><b>Test Observability: AI Root-Cause Agent</b><span class="st repo">Repo</span></span><span class="pi-s">Uses Claude to explain why each test failed: app bug, flaky test or environment.</span><span class="pi-t">Python · FastAPI · PostgreSQL · Claude API</span></button></li>
+            <li data-cat="qa"><button type="button" class="pi ch ch-tr" data-p="dual" aria-controls="pd-dual" aria-pressed="true"><span class="pi-top"><b>Dual-Framework E2E Test Suite</b><span class="st repo">Repo</span></span><span class="pi-s">The same 22 E2E scenarios in Playwright and Cypress, measured side by side.</span><span class="pi-t">TypeScript · Playwright · Cypress · GitHub Actions</span></button></li>
+            <li data-cat="qa"><button type="button" class="pi ch ch-tr" data-p="api" aria-controls="pd-api" aria-pressed="false"><span class="pi-top"><b>API Test Automation Framework</b><span class="st repo">Repo</span></span><span class="pi-s">PyTest framework for the GitHub REST API with contract and SLA checks.</span><span class="pi-t">Python · PyTest · Pydantic · GitHub Actions · Allure</span></button></li>
+            <li class="pg" data-cat="swe" aria-hidden="true">Software engineering<span data-count="swe">6</span></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="watch" aria-controls="pd-watch" aria-pressed="false"><span class="pi-top"><b>WatchTime</b><span class="st repo">Repo</span></span><span class="pi-s">Local-first TV and movie tracker with a native Android app.</span><span class="pi-t">React · TypeScript · Vite · Dexie.js · Capacitor</span></button></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="vr" aria-controls="pd-vr" aria-pressed="false"><span class="pi-top"><b>VR Carnival Experience</b><span class="st demo">Demo</span></span><span class="pi-s">Unreal Engine 5 carnival with physics-based mini-games.</span><span class="pi-t">Unreal Engine 5 · Blueprint · C++</span></button></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="duck" aria-controls="pd-duck" aria-pressed="false"><span class="pi-top"><b>Debugging Assistant Chatbot</b><span class="st live">Live</span></span><span class="pi-s">Chatbot that helps programmers debug by talking the problem through.</span><span class="pi-t">Python · JavaScript · Node.js</span></button></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="fire" aria-controls="pd-fire" aria-pressed="false"><span class="pi-top"><b>Post-Fire Assessment App</b><span class="st repo">Repo</span></span><span class="pi-s">Mobile web app for logging wildfire ash data in the field.</span><span class="pi-t">HTML · CSS · JavaScript</span></button></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="pneu" aria-controls="pd-pneu" aria-pressed="false"><span class="pi-top"><b>Pneumonia Detection: CNN + Transfer Learning</b><span class="st repo">Repo</span></span><span class="pi-s">CNN with transfer learning that flags pneumonia in chest X-rays.</span><span class="pi-t">Python · TensorFlow · Keras</span></button></li>
+            <li data-cat="swe"><button type="button" class="pi ch ch-tr" data-p="erp" aria-controls="pd-erp" aria-pressed="false"><span class="pi-top"><b>College ERP System</b><span class="st live">Live</span></span><span class="pi-s">Full-stack ERP with admin, teacher and student portals across 57 endpoints.</span><span class="pi-t">FastAPI · Next.js 14 · PostgreSQL · Docker</span></button></li>
+          </ul>
         </div>
 
-        <div class="skill-cat">
-          <div class="skill-cat-title">PLATFORM EXPERTISE</div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">iOS / Android Mobile</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="80"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Console -- Xbox / PlayStation</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="90"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Web / Cross-Platform</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="75"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">PC / Desktop</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="87"></div>
-            </div>
-          </div>
+        <div class="pd-wrap" id="pd-wrap">
+          <article class="pd ch ch-tr" id="pd-obs" data-cat="qa" hidden>
+            <p class="lbl">QA &amp; test engineering <span class="st repo">Repo</span></p>
+            <h3>Test Observability: AI Root-Cause Agent</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>3</b><span>Failure verdicts: app bug, flaky test, environment</span></div>
+            <p>Ingests Playwright, Cypress, PyTest and Selenium results and uses Claude to diagnose why each failure happened (app bug, flaky test, environment, test data, infrastructure or external dependency) from measured evidence, not the error string alone.</p>
+            <ul class="chips"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>PostgreSQL</li><li>Claude API</li><li>Docker</li><li>GitHub Actions</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li><b>167 tests, mypy --strict clean</b>, verified end to end against real Playwright, Cypress and PyTest output.</li>
+              <li>Builds diagnostic evidence per failure (<b>30-run pass/fail history</b>, commit-range check, cross-framework blast radius, duration against baseline, error-fingerprint clustering) before the model forms an opinion.</li>
+              <li>The agent investigates with <b>5 retrieval tools</b> across up to 4 turns, then returns a <b>schema-validated verdict</b> through a strict tool call instead of parsed text.</li>
+              <li><b>Two classifiers</b> scored against seeded ground truth: a confidence-capped rule-based heuristic as the control group, and Claude. Accuracy claims are falsifiable, not asserted.</li>
+              <li>Deterministic, LLM-free <b>hash-based clustering</b> collapses hundreds of red tests into the handful of real underlying problems.</li>
+              <li>Backend and agent are complete; the <b>React dashboard is the next milestone</b>.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/Test-Observability-AI-Root-Cause-Agent" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-dual" data-cat="qa">
+            <p class="lbl">QA &amp; test engineering <span class="st repo">Repo</span></p>
+            <h3>Dual-Framework E2E Test Suite</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>22×2</b><span>Identical scenarios in two frameworks</span></div>
+            <p>The same 22 end-to-end scenarios implemented side by side in Playwright and Cypress against SauceDemo, with a measured comparison of the two frameworks.</p>
+            <ul class="chips"><li>TypeScript</li><li>Playwright</li><li>Cypress</li><li>GitHub Actions</li><li>Node.js</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li><b>22 test scenarios</b> covering login, inventory, cart and full checkout, implemented identically in both frameworks in TypeScript.</li>
+              <li><b>Page Object Model</b> architecture with 4 POM classes per framework (Login, Inventory, Cart, Checkout), keeping test logic separate from page interaction code.</li>
+              <li>The Playwright suite runs across <b>3 browser engines</b> (Chromium, Firefox, WebKit) for <b>66 total executions</b>; Cypress runs on Electron/Chrome with video recording.</li>
+              <li>A <b>GitHub Actions</b> pipeline runs both suites in parallel on every push, with HTML reports, screenshots and videos uploaded as artifacts.</li>
+              <li>A framework comparison with <b>measured execution times</b>, setup effort, a cross-browser support matrix and evidence-based recommendations.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/Dual-Framework-E2E-Test-Suite-Playwright-Cypress" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-api" data-cat="qa" hidden>
+            <p class="lbl">QA &amp; test engineering <span class="st repo">Repo</span></p>
+            <h3>API Test Automation Framework</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>53</b><span>Tests across functional, error and performance checks</span></div>
+            <p>Production-grade API test framework targeting the GitHub REST API, with contract validation, SLA enforcement and a live report deployment.</p>
+            <ul class="chips"><li>Python</li><li>PyTest</li><li>Pydantic v2</li><li>GitHub Actions</li><li>Allure</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li><b>53 test cases</b> across functional, error-handling and performance checks, with a modular fixture architecture and centralized test data.</li>
+              <li><b>Pydantic v2 schema validation</b> and per-endpoint SLAs (800ms / 1200ms) through a custom <b>perf_timer</b> fixture, going beyond status-code checks.</li>
+              <li>Adversarial coverage: <b>404 and 401</b> cases, plus auth contrast tests confirming authenticated versus anonymous client behaviour.</li>
+              <li>A two-stage <b>GitHub Actions</b> pipeline (smoke on push, parallel regression nightly with pytest-xdist) publishing Allure reports to <b>GitHub Pages</b>.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/api-quality-gate" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-watch" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st repo">Repo</span></p>
+            <h3>WatchTime</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>0</b><span>Servers: every episode is tracked on-device</span></div>
+            <p>Local-first TV and movie tracker built to replace TV Time after its July 2026 shutdown. Tracks episodes and movies entirely on-device, with a native Android app through Capacitor.</p>
+            <ul class="chips"><li>React</li><li>TypeScript</li><li>Vite</li><li>Dexie.js</li><li>Capacitor</li><li>Android</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li><b>Fully local-first</b>: shows, movies, watch history and API keys live only in <b>Dexie.js (IndexedDB)</b> on the device. No accounts, no backend, no ads or tracking.</li>
+              <li><b>Watch Next</b> surfaces the next unwatched, released episode per show, plus configurable "Haven't watched for a while" and "Haven't yet started" views.</li>
+              <li>Rewatch tracking increments watch time and rewatch counts without inflating episode or progress totals.</li>
+              <li>Integrates <b>TMDB</b> (metadata, posters), <b>OMDb</b> (IMDb and Rotten Tomatoes ratings) and <b>TVmaze</b> (episode runtimes), each with the user's own free API key.</li>
+              <li><b>TV Time migration</b> imports a full watch history from TV Time's GDPR CSV export or a third-party JSON export, with guided resolution of ambiguous matches.</li>
+              <li>Builds as a web app and, through <b>Capacitor</b>, a native <b>Android</b> app (min API 24) with full JSON backup and restore.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/WatchTime" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-vr" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st demo">Demo</span></p>
+            <h3>VR Carnival Experience</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>UE5</b><span>Physics-driven mini-games in VR</span></div>
+            <p>Immersive VR carnival with interactive mini-games built on physics-based mechanics and Blueprint scripting.</p>
+            <ul class="chips"><li>Unreal Engine 5</li><li>Blueprint</li><li>C++</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li>Led development of an immersive VR environment with physics-based gameplay, collision detection and spatial audio.</li>
+              <li>Implemented 2 interactive mini-games with real-time score tracking; <b>95% user engagement</b>.</li>
+              <li>Created Blueprint scripting for game logic and player movement, reducing development time by <b>40%</b>.</li>
+              <li>Found and fixed stability issues through structured gameplay and performance testing.</li>
+            </ul></details>
+            <div class="actions"><button type="button" class="btn ch ch-tr" data-video="DsuzHmdVO_s"><svg class="ic" aria-hidden="true"><use href="#ic-play"/></svg>Watch demo</button></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-duck" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st live">Live</span></p>
+            <h3>Debugging Assistant Chatbot</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>100+</b><span>Debugging rules across Python, JS and C/C++</span></div>
+            <p>Interactive chatbot that helps programmers debug code through conversation, with a rubber-duck personality.</p>
+            <ul class="chips"><li>Python</li><li>JavaScript</li><li>Node.js</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li>A regex-based rule engine with <b>100+ debugging rules</b> across Python, JavaScript/Node.js and C/C++.</li>
+              <li>Deployed as both a web app and a Node.js CLI sharing one rule file, so updates reach both with no duplication.</li>
+              <li>Automated testing reaches a <b>90% success rate</b> in error detection across 50+ error types.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/Rubber-Ducky-Chatbot" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a><a class="btn ch ch-tr" href="https://atharvak14.github.io/Rubber-Ducky-Chatbot/" target="_blank" rel="noopener">Live site <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-fire" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st repo">Repo</span></p>
+            <h3>Post-Fire Assessment App</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>60%</b><span>Better data accuracy from validated field forms</span></div>
+            <p>Mobile web app that helps field teams log wildfire ash data, with real-time storage for scientific assessments.</p>
+            <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li>A responsive web app for real-time wildfire environmental data capture by field teams.</li>
+              <li>UI with form validation and local storage, improving data accuracy by <b>60%</b>.</li>
+              <li>JSON parsing and offline persistence through browser storage APIs.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/Post-Fire-Assessment-App" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-pneu" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st repo">Repo</span></p>
+            <h3>Pneumonia Detection: CNN + Transfer Learning</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>CNN</b><span>Transfer learning on chest X-rays</span></div>
+            <p>Deep learning model that detects pneumonia in chest X-ray images to support early clinical diagnosis.</p>
+            <ul class="chips"><li>Python</li><li>TensorFlow</li><li>Keras</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li>Trained a CNN with batch normalization, ReLU activation and max pooling on chest X-ray datasets.</li>
+              <li>Applied transfer learning with pre-trained models to improve performance on limited medical data.</li>
+              <li>Designed to reduce diagnostic workload and improve early detection for clinicians.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/Pneumonia-Detection-using-CNN-and-Transfer-Learning" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
+
+          <article class="pd ch ch-tr" id="pd-erp" data-cat="swe" hidden>
+            <p class="lbl">Software engineering <span class="st live">Live</span></p>
+            <h3>College ERP System</h3>
+            <div class="readout"><i class="brackets" aria-hidden="true"></i><b>57</b><span>REST endpoints across 3 role-based portals</span></div>
+            <p>Full-stack ERP with role-based portals for admins, teachers and students across 57 REST API endpoints.</p>
+            <ul class="chips"><li>FastAPI</li><li>Next.js 14</li><li>PostgreSQL</li><li>Docker</li></ul>
+            <details class="more"><summary>Details</summary><ul class="ul">
+              <li>Role-based portals with <b>JWT auth, OAuth2 refresh tokens</b>, bcrypt hashing and a CORS-protected API.</li>
+              <li>Attendance calendar, CIE/SEE marks entry and <b>automated CGPA</b> with 75% threshold alerts.</li>
+              <li>Deployed on <b>Vercel, Render and Neon PostgreSQL</b> with Docker Compose and async SQLAlchemy.</li>
+            </ul></details>
+            <div class="actions"><a class="btn ch ch-tr" href="https://github.com/AtharvaK14/College-ERP-System" target="_blank" rel="noopener">GitHub <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a><a class="btn ch ch-tr" href="https://college-erp-system-one.vercel.app/login" target="_blank" rel="noopener">Live site <svg class="ic" aria-hidden="true"><use href="#ic-ext"/></svg></a></div>
+          </article>
         </div>
-
-        <div class="skill-cat">
-          <div class="skill-cat-title">AUTOMATION &amp; TOOLS</div>
-
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Playwright</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="60"></div>
-            </div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Cypress</span><span class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="60"></div>
-            </div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Selenium WebDriver</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="70"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">PyTest</span><span class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="60"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">CI/CD -- GitHub Actions / BitBucket</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="75"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">JIRA / TestRail</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="80"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Postman / API Testing</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="70"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Xcode / TestFlight</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="70"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="skill-cat">
-          <div class="skill-cat-title">METHODS &amp; PRACTICES</div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Test Planning &amp; Strategy</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="92"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Agile / Scrum</span><span class="skill-tier"></span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="90"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Root Cause Analysis</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="88"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Performance &amp; Load Testing</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="80"></div>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label-row"><span class="skill-name">Regression &amp; Smoke Testing</span><span
-                class="skill-tier"></span></div>
-            <div class="skill-bar">
-              <div class="skill-fill" data-raw="93"></div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <section id="education">
-      <div class="section-header">
-        <h2 class="section-title">PLAYER HISTORY</h2>
-        <span class="section-subtitle">// EDUCATION</span>
-      </div>
-      <div class="edu-grid">
-        <div class="edu-card reveal">
-          <div>
-            <div class="edu-degree">MASTER OF SCIENCE -- COMPUTER SCIENCE</div>
-            <div class="edu-school">Michigan Technological University</div>
-            <div class="edu-location">Houghton, MI</div>
-          </div>
-          <div class="edu-date">AUG 2023 -- APR 2025</div>
+    <!-- ── Skills ── -->
+    <section class="sec" id="skills">
+      <div class="sh"><svg class="ic" aria-hidden="true"><use href="#ic-chip"/></svg><h2><small>Attributes</small>Skills</h2><span class="sh-meta">4 groups · 22 skills</span></div>
+      <div class="skills">
+        <div class="sk ch ch-tr">
+          <h3>Automation &amp; tools<span>8</span></h3>
+          <ul>
+            <li><span class="n">Selenium WebDriver</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">Playwright</span><span class="seg" data-l="2"></span></li>
+            <li><span class="n">Cypress</span><span class="seg" data-l="2"></span></li>
+            <li><span class="n">PyTest</span><span class="seg" data-l="2"></span></li>
+            <li><span class="n">CI/CD · GitHub Actions, BitBucket</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">JIRA / TestRail</span><span class="seg" data-l="4"></span></li>
+            <li><span class="n">Postman / API testing</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">Xcode / TestFlight</span><span class="seg" data-l="3"></span></li>
+          </ul>
+          <p class="ev"><b>Where:</b> Ubisoft Selenium/PyTest framework and BitBucket gates · JIRA and TestRail at Expleo · Dual-Framework E2E suite</p>
         </div>
-        <div class="edu-card reveal">
-          <div>
-            <div class="edu-degree">BACHELOR OF TECHNOLOGY -- COMPUTER ENGINEERING</div>
-            <div class="edu-school">Pune University</div>
-            <div class="edu-location">Pune, India</div>
-          </div>
-          <div class="edu-date">JUN 2020 -- MAY 2023</div>
+        <div class="sk ch ch-tr">
+          <h3>Methods &amp; practice<span>5</span></h3>
+          <ul>
+            <li><span class="n">Regression &amp; smoke testing</span><span class="seg" data-l="5"></span></li>
+            <li><span class="n">Test planning &amp; strategy</span><span class="seg" data-l="5"></span></li>
+            <li><span class="n">Agile / Scrum</span><span class="seg" data-l="5"></span></li>
+            <li><span class="n">Root cause analysis</span><span class="seg" data-l="4"></span></li>
+            <li><span class="n">Performance &amp; load testing</span><span class="seg" data-l="4"></span></li>
+          </ul>
+          <p class="ev"><b>Where:</b> 300+ test cases at Expleo · smoke and regression ownership at Ubisoft</p>
+        </div>
+        <div class="sk ch ch-tr">
+          <h3>Languages<span>5</span></h3>
+          <ul>
+            <li><span class="n">Python</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">JavaScript / TypeScript</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">HTML / CSS</span><span class="seg" data-l="4"></span></li>
+            <li><span class="n">C / C++ / C#</span><span class="seg" data-l="3"></span></li>
+            <li><span class="n">SQL / MySQL / MongoDB</span><span class="seg" data-l="2"></span></li>
+          </ul>
+          <p class="ev"><b>Where:</b> Research pipelines at Michigan Tech · ETL validation at Infyra · College ERP</p>
+        </div>
+        <div class="sk ch ch-tr">
+          <h3>Platforms<span>4</span></h3>
+          <ul>
+            <li><span class="n">Console · Xbox / PlayStation</span><span class="seg" data-l="5"></span></li>
+            <li><span class="n">PC / desktop</span><span class="seg" data-l="4"></span></li>
+            <li><span class="n">iOS / Android</span><span class="seg" data-l="4"></span></li>
+            <li><span class="n">Web / cross-platform</span><span class="seg" data-l="3"></span></li>
+          </ul>
+          <p class="ev"><b>Where:</b> PS4/PS5 dev kits and racing rigs at Ubisoft · 15+ iOS devices at Expleo</p>
         </div>
       </div>
+      <p class="scale" aria-hidden="true"><span>Scale</span><span class="seg" data-l="1"></span>Familiar<span class="seg" data-l="3"></span>Advanced<span class="seg" data-l="5"></span>Master</p>
+    </section>
 
-      <div class="edu-rift-row reveal">
-        <div class="rift-instruction">
-          <div class="rift-instr-text">&#9658; FLY YOUR JET<br>INTO THE PORTAL<br>TO START THE<br>MINI-GAME</div>
-          <button class="rift-mobile-btn touch-only" onclick="window.startGame && window.startGame()">
-            &#9658; TAP TO PLAY
-          </button>
+    <!-- ── Access point (mini-game) ── -->
+    <section class="sec" id="game" aria-labelledby="ap-title">
+      <div class="ap">
+        <div class="ap-copy">
+          <p class="ap-k"><i aria-hidden="true"></i>Access point detected</p>
+          <h2 class="ap-t" id="ap-title">Build 2026.11 is stuck at the quality gate.</h2>
+          <p class="ap-d">Jack in to decode it: a short code-matrix puzzle where you pick codes in alternating rows and columns to pass three checks. It takes about a minute, and works with mouse, touch or keyboard.</p>
+          <p class="ap-meta" aria-hidden="true">AP-07 · QA gate · signal stable</p>
         </div>
-        <canvas id="rift-gate" width="128" height="176" tabindex="0" role="button"
-          aria-label="Enter the rift to play the mini-game" onclick="window.startGame && window.startGame()"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); window.startGame && window.startGame();}"
-          title="Enter the rift"></canvas>
+        <div class="ap-stage">
+          <div class="ap-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="ap-dev ch ch-tr" aria-hidden="true">
+            <div class="ap-dev-h"><span>AP-07</span><span class="ap-led"></span></div>
+            <div class="ap-screen"><div class="ap-scroll">3A 7F C4 E2 0B 9D<br>E2 0B 9D 3A C4 7F<br>9D C4 3A 7F E2 0B<br>0B E2 7F 9D 3A C4<br>C4 9D E2 0B 7F 3A<br>7F 3A 0B C4 9D E2<br>3A 7F C4 E2 0B 9D<br>E2 0B 9D 3A C4 7F<br>9D C4 3A 7F E2 0B<br>0B E2 7F 9D 3A C4<br>C4 9D E2 0B 7F 3A<br>7F 3A 0B C4 9D E2</div></div>
+            <div class="ap-port"><span></span><span></span><span></span><span></span></div>
+            <div class="ap-dev-f">QA gate · port open</div>
+          </div>
+          <span class="ap-lead" aria-hidden="true"></span>
+          <button type="button" class="ap-jack" id="ap-jack" aria-haspopup="dialog"><kbd aria-hidden="true">J</kbd><span>Jack in</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section class="sec" id="contact">
+      <div class="sh"><svg class="ic" aria-hidden="true"><use href="#ic-msg"/></svg><h2><small>Messages</small>Contact</h2><span class="sh-meta">Reply by email or LinkedIn</span></div>
+      <div class="dlg">
+        <div class="dlg-h ch ch-tr"><svg class="ic" aria-hidden="true"><use href="#ic-alert"/></svg><b>Atharva Kadam</b><span>New role: SDET / SWE</span></div>
+        <div class="dlg-body ch ch-br">
+          <p class="dlg-time">Celoron, NY · open to roles anywhere in the US</p>
+          <div class="dlg-card">
+            <p>Looking for:<span>SDET, QA automation or software engineer roles</span></p>
+            <p>Bring me in for:<span>Test frameworks, E2E and API suites, CI quality gates</span></p>
+            <p>Fastest reply:<span>Email</span></p>
+          </div>
+        </div>
+        <ol class="choices" id="choices">
+          <li><a class="choice ch ch-tr is-sel" href="mailto:kadam.atharva14@gmail.com"><span class="code" aria-hidden="true">0010 8440<br>8540 5423<br>0152 0030</span><span>Email me: <span class="em">kadam.atharva14@gmail.com</span></span></a></li>
+          <li><a class="choice ch ch-tr" href="https://www.linkedin.com/in/atharva-kadam2/" target="_blank" rel="noopener"><span class="code" aria-hidden="true">0020 8440<br>8540 5423<br>0152 0031</span><span>Connect on LinkedIn</span></a></li>
+          <li><a class="choice ch ch-tr" href="files/Atharva_Kadam_Resume.pdf" target="_blank" rel="noopener"><span class="code" aria-hidden="true">0030 8440<br>8540 5423<br>0152 0032</span><span>Download the résumé (PDF)</span></a></li>
+          <li><a class="choice ch ch-tr" href="https://github.com/AtharvaK14" target="_blank" rel="noopener" data-github><span class="code" aria-hidden="true">0040 8440<br>8540 5423<br>0152 0033</span><span>Browse the code on GitHub</span></a></li>
+        </ol>
+        <div class="hints" aria-hidden="true"><span><kbd>↕</kbd>Choose</span><span><kbd>↵</kbd>Open</span><span><kbd>B</kbd>Back to top</span></div>
       </div>
     </section>
 
   </main>
 
-  <footer id="footer">
-    <div class="credits-title">// READY TO JOIN YOUR TEAM -- INSERT COIN //</div>
-    <div class="credits-sub">LET'S BUILD SOMETHING GREAT</div>
-    <div class="contact-row">
-      <a class="contact-card" href="https://www.linkedin.com/in/atharva-kadam2/" target="_blank">
-        <span class="c-icon"><svg class="c-icon-svg" aria-hidden="true">
-            <use href="#i-person" />
-          </svg></span>
-        <span class="c-label">LINKEDIN</span>
-        <span class="c-val">atharva-kadam2</span>
-      </a>
-      <a class="contact-card" href="mailto:kadam.atharva14@gmail.com" target="_blank">
-        <span class="c-icon"><svg class="c-icon-svg" aria-hidden="true">
-            <use href="#i-mail" />
-          </svg></span>
-        <span class="c-label">EMAIL</span>
-        <span class="c-val">kadam.atharva14@gmail.com</span>
-      </a>
-      <a class="contact-card" href="files/Atharva_Kadam_Resume.pdf" target="_blank">
-        <span class="c-icon"><svg class="c-icon-svg" aria-hidden="true">
-            <use href="#i-doc" />
-          </svg></span>
-        <span class="c-label">RESUME</span>
-        <span class="c-val">Download PDF</span>
-      </a>
+  <footer class="foot">
+    <div class="foot-in">
+      <div class="foot-keys" aria-hidden="true"><span><kbd>Q</kbd><kbd>E</kbd>Section</span><span><kbd>R</kbd>Résumé</span><span><kbd>G</kbd>GitHub</span><span><kbd>J</kbd>Jack in</span><span><kbd>B</kbd>Top</span></div>
+      <button type="button" class="kb" id="kb" aria-pressed="true">Keyboard shortcuts: <b>On</b></button>
+      <small>© <span id="copyYear">2026</span> Atharva Kadam · hand-built in HTML, CSS and JS</small>
     </div>
-    <div class="copyright">&#169; <span id="copyYear">2025</span> ATHARVA KADAM -- ALL RIGHTS RESERVED</div>
   </footer>
 
-  <!-- ── Video Modal ───────────────────────────────────────── -->
-  <div class="modal-overlay" id="videoModal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeVideo()">&#10005; CLOSE</button>
-      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin-top:20px;">
-        <iframe id="youtubeFrame" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
-          style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-      </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ── Demo video ── -->
+  <div class="vmodal" id="vmodal" role="dialog" aria-modal="true" aria-label="VR Carnival demo video" hidden>
+    <div class="vmodal-box ch ch-tr">
+      <div class="vmodal-h"><b>VR Carnival · demo</b><button type="button" class="btn ch ch-tr" id="vclose"><kbd aria-hidden="true">Esc</kbd>Close</button></div>
+      <div class="vmodal-frame"><iframe id="vframe" title="VR Carnival demo" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
     </div>
   </div>
 
-  <!-- ── Project Detail Modal (retro OS window) ────────────── -->
-  <div class="proj-modal-overlay" id="projectModal" onclick="handleProjOverlayClick(event)">
-    <div class="proj-modal-window" id="projModalWindow">
-      <div class="proj-modal-titlebar">
-        <div class="proj-modal-dots">
-          <div class="proj-modal-dot dot-min"></div>
-          <div class="proj-modal-dot dot-max"></div>
+  <!-- ── Gate Decode (jack-in overlay) ── -->
+  <div class="gdx" id="gdx" role="dialog" aria-modal="true" aria-labelledby="gdx-title" hidden>
+    <div class="gdx-in">
+      <header class="gdx-top">
+        <span class="gdx-ap" aria-hidden="true">AP-07</span>
+        <h2 id="gdx-title">Gate Decode</h2>
+        <button type="button" class="gdx-tm" id="gdx-tm" aria-pressed="true">Timer: <b>40s</b></button>
+        <button type="button" class="btn ch ch-tr gdx-x" id="gdx-x"><kbd aria-hidden="true">Esc</kbd>Disconnect</button>
+      </header>
+      <div class="gdx-boot" aria-hidden="true">
+        <p class="gdx-l">&gt; Connecting to access point AP-07</p>
+        <p class="gdx-l">&gt; Reading the quality gate for build 2026.11</p>
+        <p class="gdx-l">&gt; 3 checks failing · code matrix loaded</p>
+        <div class="gdx-bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="gdx-l gdx-ok">Connected</p>
+      </div>
+      <div class="gdx-body" id="gdx-body">
+        <div class="gd">
+          <div class="gd-matrix ch ch-tr">
+            <div class="gd-h"><b>Code matrix</b><span id="gd-hint">Pick any code in the top row</span></div>
+            <div class="gd-timer" id="gd-timer"><span>Time</span><div class="gd-tbar"><i id="gd-tfill"></i></div><b id="gd-tnum">40.0</b></div>
+            <div class="gd-gw"><span class="gd-band" id="gd-band" aria-hidden="true"></span><div class="gd-grid" id="gd-grid" role="group" aria-label="Code matrix, 5 by 5"></div></div>
+            <div class="gd-banner" id="gd-banner" hidden><div class="gd-bn-t"><b id="gd-bn-h"></b><span class="gd-chev" aria-hidden="true">&rsaquo;&rsaquo;&rsaquo;&rsaquo;&rsaquo;&rsaquo;</span></div><p id="gd-bn-p"></p></div>
+          </div>
+          <div class="gd-side">
+            <div class="gd-brief ch ch-tr"><p><b>Build 2026.11 is stuck at the quality gate.</b> Fill the buffer with codes from the matrix so each check below appears in order. Pass all three to ship it.</p></div>
+            <div class="gd-buf ch ch-tr"><div class="gd-h"><b>Buffer</b><span id="gd-count">0 / 6</span></div><ol class="gd-slots" id="gd-slots" aria-label="Buffer"></ol></div>
+            <div class="gd-seq ch ch-br"><div class="gd-h"><b>Checks</b><span>Codes must appear in this order</span></div><ul id="gd-seqs"></ul></div>
+            <p class="gd-out" id="gd-out" aria-live="polite"></p>
+            <div class="gd-ctl"><button type="button" class="btn ch ch-tr" id="gd-new">New matrix</button><button type="button" class="btn ch ch-tr" id="gd-reset">Restart this one</button></div>
+          </div>
         </div>
-        <span class="proj-modal-titletext" id="projModalTitle">PROJECT DETAILS</span>
-        <button class="proj-modal-close" onclick="closeProjectModal()">&#10005; CLOSE</button>
-      </div>
-      <div class="proj-modal-addressbar">
-        <span class="proj-modal-url-icon">&#9733;</span>
-        <span class="proj-modal-url" id="projModalUrl">portfolio://projects/</span>
-      </div>
-      <div class="proj-modal-content" id="projModalContent">
-        <!-- Populated dynamically by main.js -->
+        <p class="gd-rules"><b>How it works:</b> start anywhere in the top row. After that, picks alternate direction: the next code comes from the column of your last pick, the one after from that code's row, and so on. The highlighted band shows where you can pick. The timer starts with your first pick.</p>
       </div>
     </div>
   </div>
 
-  <script src="js/canvas.js" defer></script>
   <script src="js/music.js" defer></script>
   <script src="js/main.js" defer></script>
-  <script src="js/jet.js" defer></script>
-  <script src="js/game.js" defer></script>
-  <script src="js/portal.js" defer></script>
+  <script src="js/gate.js" defer></script>
 </body>
 
 </html>
